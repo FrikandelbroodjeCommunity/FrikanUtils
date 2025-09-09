@@ -10,20 +10,25 @@ namespace FrikanUtils.Utilities;
 public static class PositionUtilities
 {
     /// <summary>
-    /// Get all positions in order to create a circle around <c>vector3.zero</c>.
-    /// The radius gets determined by the amount of positions on the circle, attempting to space them out at a similar distance for each count.
+    /// Get all offsets in order to create a cricle.
+    /// Will approximate the radius by using the distance between points on the circle.
     /// </summary>
     /// <param name="count">The amount of positions on the circle</param>
-    /// <param name="radiusMultiplier">The multiplier applied to the count to get the radius</param>
-    /// <param name="minRadius">The minimum radius of the circle</param>
-    /// <param name="maxRadius">The maximum radius of the circle</param>
-    /// <returns>Enumerable for each of the positions</returns>
-    public static IEnumerable<PositionAndRotation> GetCirclePositions(int count, float radiusMultiplier = 0.5f,
-        float minRadius = 0.0f, float maxRadius = float.MaxValue)
-    {
-        var radius = Math.Min(Math.Max(radiusMultiplier * count, minRadius), maxRadius);
-        var angle = 360f / count;
+    /// <param name="distance">Distance between points on the circle</param>
+    /// <returns>Positions and rotations of objects on the circle</returns>
+    public static IEnumerable<PositionAndRotation> GetAutoCirclePositions(int count, float distance)
+        => GetCirclePositions(count, count * distance / (2 * Mathf.PI));
 
+
+    /// <summary>
+    /// Get all offsets in order to create a circle.
+    /// </summary>
+    /// <param name="count">Amount of points on the circle</param>
+    /// <param name="radius">Radius of the circle</param>
+    /// <returns>Positions and rotations of objects on the circle</returns>
+    public static IEnumerable<PositionAndRotation> GetCirclePositions(int count, float radius)
+    {
+        var angle = 360f / count;
         for (var i = 0; i < count; i++)
         {
             var currentAngle = angle * i;

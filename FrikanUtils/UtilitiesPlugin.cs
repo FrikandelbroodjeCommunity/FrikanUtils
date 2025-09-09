@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using FrikanUtils.FileSystem;
+using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
 using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
-using MEC;
 
 namespace FrikanUtils;
 
@@ -32,11 +32,13 @@ public class UtilitiesPlugin : Plugin<Config>
         FileHandler.RegisterProvider(new LocalFileProvider());
 
         ServerEvents.WaitingForPlayers += Reset;
+        SSSEventHandler.RegisterEvents();
     }
 
     public override void Disable()
     {
         ServerEvents.WaitingForPlayers -= Reset;
+        SSSEventHandler.UnregisterEvents();
     }
 
     private static void Reset()

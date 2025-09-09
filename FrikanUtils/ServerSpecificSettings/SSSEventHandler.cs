@@ -7,15 +7,15 @@ using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings;
 
-public static class SSSEventHandler
+internal static class SSSEventHandler
 {
-    public static void RegisterEvents()
+    internal static void RegisterEvents()
     {
         PlayerEvents.Joined += OnPlayerJoined;
         PlayerEvents.Left += OnPlayerLeft;
     }
 
-    public static void UnregisterEvents()
+    internal static void UnregisterEvents()
     {
         PlayerEvents.Joined -= OnPlayerJoined;
         PlayerEvents.Left -= OnPlayerLeft;
