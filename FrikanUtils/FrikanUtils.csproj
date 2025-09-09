@@ -87,6 +87,13 @@
         <Compile Include="FileSystem\FileHandler.cs"/>
         <Compile Include="FileSystem\BaseFileProvider.cs" />
         <Compile Include="FileSystem\LocalFileProvider.cs" />
+        <Compile Include="CustomDummyActions\ActionExecutable.cs" />
+        <Compile Include="CustomDummyActions\DummyModuleBase.cs" />
+        <Compile Include="CustomDummyActions\ModuleAction.cs" />
+        <Compile Include="CustomDummyActions\Patches\CachePatch.cs" />
+        <Compile Include="CustomDummyActions\Patches\ExecuteDummyPatch.cs" />
+        <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs" />
+        <Compile Include="CustomDummyActions\RAHandler.cs" />
         <Compile Include="Keycard\CustomKeycard.cs" />
         <Compile Include="Keycard\CustomKeycardEventHandler.cs" />
         <Compile Include="Keycard\CustomKeycardPatches.cs" />
@@ -114,6 +121,7 @@
         <Compile Include="ServerSpecificSettings\SSSHandler.cs" />
         <Compile Include="UtilitiesPlugin.cs"/>
         <Compile Include="Utilities\ColorUtilities.cs" />
+        <Compile Include="Utilities\CommandUtilities.cs" />
         <Compile Include="Utilities\KeycardUtilities.cs" />
         <Compile Include="Utilities\ListUtilities.cs" />
         <Compile Include="Utilities\PermissionUtilities.cs" />
