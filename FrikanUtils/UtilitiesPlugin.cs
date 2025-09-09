@@ -7,6 +7,8 @@ using FrikanUtils.Utilities;
 using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
+using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace FrikanUtils;
 
@@ -23,6 +25,8 @@ public class UtilitiesPlugin : Plugin<Config>
     internal static List<string> ServerSettingIds => Instance.Config.ServerSettingIds;
     internal static string NoSettingsList => Instance.Config.NoSettingsText;
 
+    private GameObject _handlerObject;
+
     internal static void Save() => Instance.SaveConfig();
 
     public override void Enable()
@@ -35,6 +39,10 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.WaitingForPlayers += Reset;
         CustomKeycardEventHandler.RegisterEvents();
         SSSEventHandler.RegisterEvents();
+
+        _handlerObject = new GameObject("FrikanUtils Handler Object");
+        Object.DontDestroyOnLoad(_handlerObject);
+        _handlerObject.AddComponent<RainbowKeycardHandler>();
     }
 
     public override void Disable()
@@ -42,6 +50,8 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.WaitingForPlayers -= Reset;
         CustomKeycardEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
+
+        Object.Destroy(_handlerObject);
     }
 
     private static void Reset()
