@@ -8,6 +8,21 @@ public class Config
     [Description("Whether to show debug messages")]
     public bool Debug { get; set; }
 
+    [Description("Colors used for rainbows")]
+    public string[] RainbowTextColors =
+    [
+        "red",
+        "#FF9500",
+        "yellow",
+        "green",
+        "#00FFF6",
+        "blue",
+        "#FF00FF"
+    ];
+
+    [Description("Time between updates of the continuous hints")]
+    public float HintRefreshTime = 0.5f;
+
     [Description("[Automatically generated] List of Server Specific Settings fields to get IDs")]
     public List<string> ServerSettingIds { get; set; } = [];
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FrikanUtils.FileSystem;
+using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
@@ -22,6 +23,8 @@ public class UtilitiesPlugin : Plugin<Config>
 
     internal static UtilitiesPlugin Instance;
     internal static bool Debug => Instance.Config.Debug;
+    internal static string[] RainbowTextColors => Instance.Config.RainbowTextColors;
+    internal static float HintRefreshTime => Instance.Config.HintRefreshTime;
     internal static List<string> ServerSettingIds => Instance.Config.ServerSettingIds;
     internal static string NoSettingsList => Instance.Config.NoSettingsText;
 
@@ -43,6 +46,7 @@ public class UtilitiesPlugin : Plugin<Config>
         _handlerObject = new GameObject("FrikanUtils Handler Object");
         Object.DontDestroyOnLoad(_handlerObject);
         _handlerObject.AddComponent<RainbowKeycardHandler>();
+        _handlerObject.AddComponent<HintSender>();
     }
 
     public override void Disable()
