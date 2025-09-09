@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FrikanUtils.FileSystem;
+using FrikanUtils.Keycard;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
 using LabApi.Events.Handlers;
@@ -32,17 +33,21 @@ public class UtilitiesPlugin : Plugin<Config>
         FileHandler.RegisterProvider(new LocalFileProvider());
 
         ServerEvents.WaitingForPlayers += Reset;
+        CustomKeycardEventHandler.RegisterEvents();
         SSSEventHandler.RegisterEvents();
     }
 
     public override void Disable()
     {
         ServerEvents.WaitingForPlayers -= Reset;
+        CustomKeycardEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
     }
 
     private static void Reset()
     {
+        CustomKeycard.CustomKeycards.Clear();
+        RainbowKeycardHandler.Keycards.Clear();
         PlayerUtilities.BlacklistedPlayers.Clear();
         TeamUtilities.PlayerTeams.Clear();
     }

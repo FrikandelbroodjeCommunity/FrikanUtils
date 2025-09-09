@@ -87,6 +87,11 @@
         <Compile Include="FileSystem\FileHandler.cs"/>
         <Compile Include="FileSystem\BaseFileProvider.cs" />
         <Compile Include="FileSystem\LocalFileProvider.cs" />
+        <Compile Include="Keycard\CustomKeycard.cs" />
+        <Compile Include="Keycard\CustomKeycardEventHandler.cs" />
+        <Compile Include="Keycard\CustomKeycardPatches.cs" />
+        <Compile Include="Keycard\CustomKeycardUtilities.cs" />
+        <Compile Include="Keycard\RainbowKeycardHandler.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
         <Compile Include="ServerSpecificSettings\Menus\MenuBase.cs" />
         <Compile Include="ServerSpecificSettings\Menus\MenuPriority.cs" />
