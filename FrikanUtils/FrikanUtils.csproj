@@ -93,7 +93,7 @@
         <Compile Include="CustomDummyActions\Patches\CachePatch.cs" />
         <Compile Include="CustomDummyActions\Patches\ExecuteDummyPatch.cs" />
         <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs" />
-        <Compile Include="CustomDummyActions\RAHandler.cs" />
+        <Compile Include="CustomDummyActions\RaHandler.cs" />
         <Compile Include="HintSystem\HintHandler.cs" />
         <Compile Include="HintSystem\HintSender.cs" />
         <Compile Include="Keycard\CustomKeycard.cs" />
