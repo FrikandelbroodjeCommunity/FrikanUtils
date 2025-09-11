@@ -22,7 +22,7 @@ public static class SSSHandler
             Logger.Warn("Found multiple menus with the same ID, overwriting the previous!");
         }
 
-        if (menu.IsDynamic)
+        if (menu.Type == MenuType.Dynamic)
         {
             DynamicMenus.Add(menu);
         }

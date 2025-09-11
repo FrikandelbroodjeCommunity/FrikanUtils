@@ -100,7 +100,7 @@ public class PlayerMenu
             return false;
         }
 
-        if (menu.IsDynamic && !menu.IsForced)
+        if (menu.Type == MenuType.Dynamic)
         {
             return _selectedDynamicMenu?.Equals(menu) ?? false;
         }
@@ -160,7 +160,8 @@ public class PlayerMenu
 
     private void RenderForcedDynamicMenus()
     {
-        foreach (var menu in SSSHandler.DynamicMenus.Where(x => x.InternalHasPermission(_targetPlayer) && x.IsForced))
+        foreach (var menu in SSSHandler.DynamicMenus
+                     .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Forced))
         {
             _shownMenus.Add(menu);
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.MenuId}</size>", true));
@@ -174,7 +175,7 @@ public class PlayerMenu
         _selectorOptions.Clear();
         _selectorOptions.Add("No menu");
         _selectorOptions.AddRange(SSSHandler.DynamicMenus
-            .Where(x => x.InternalHasPermission(_targetPlayer) && !x.IsForced).OrderBy(x => x.MenuId)
+            .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.MenuId)
             .Select(x => x.MenuId)
         );
 

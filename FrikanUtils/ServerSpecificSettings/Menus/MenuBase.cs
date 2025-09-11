@@ -17,18 +17,9 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
     public abstract string MenuId { get; }
 
     /// <summary>
-    /// Whether this menu is a dynamic menu.
-    /// In case of a dynamic menu, the contents given by <code>GetSettings</code> can be changed.
-    /// When using a static menu, the contents given by <code>GetSettings</code> cannot be changed,
-    /// not even depending on the player given as at the moment the menu is registered, the fields must be known.
+    /// The type of menu, will determine how the menu is displayed.
     /// </summary>
-    public abstract bool IsDynamic { get; }
-
-    /// <summary>
-    /// Whether to force show this dynamic menu all the way at the top.
-    /// Only used when IsDynamic is set to true!
-    /// </summary>
-    public abstract bool IsForced { get; }
+    public abstract MenuType Type { get; }
 
     /// <summary>
     /// How high should the menu appear in the menu.
