@@ -234,16 +234,23 @@ public class PlayerMenu
 
     private void RenderMenu(MenuBase menu)
     {
-        foreach (var item in menu.GetSettings(_targetPlayer))
+        try
         {
-            if (_idHandler.TryGetId(menu.MenuId, item.SettingId, item.Base.IsServerOnly, out var id))
+            foreach (var item in menu.GetSettings(_targetPlayer))
             {
-                item.Player = _targetPlayer;
-                item.Id = id;
-                item.MenuOwner = menu.MenuId;
-                _shownItems.Add(item);
-                _rendering.Add(item.Base);
+                if (_idHandler.TryGetId(menu.MenuId, item.SettingId, item.Base.IsServerOnly, out var id))
+                {
+                    item.Player = _targetPlayer;
+                    item.Id = id;
+                    item.MenuOwner = menu.MenuId;
+                    _shownItems.Add(item);
+                    _rendering.Add(item.Base);
+                }
             }
+        }
+        catch (Exception)
+        {
+            // Ignore exceptions as they are most likely caused by permission issues
         }
     }
 }

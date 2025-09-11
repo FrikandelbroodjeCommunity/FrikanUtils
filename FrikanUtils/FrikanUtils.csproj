@@ -126,7 +126,6 @@
         <Compile Include="Utilities\CommandUtilities.cs" />
         <Compile Include="Utilities\KeycardUtilities.cs" />
         <Compile Include="Utilities\ListUtilities.cs" />
-        <Compile Include="Utilities\PermissionUtilities.cs" />
         <Compile Include="Utilities\PlayerUtilities.cs" />
         <Compile Include="Utilities\PositionUtilities.cs" />
         <Compile Include="Utilities\ScpExtension.cs" />
