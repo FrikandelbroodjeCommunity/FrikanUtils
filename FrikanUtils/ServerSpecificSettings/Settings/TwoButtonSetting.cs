@@ -47,4 +47,11 @@ public class TwoButtonSetting : SettingsBase
         OnChanged = changedAction;
         return this;
     }
+    
+    public override SettingsBase Clone()
+    {
+        return new TwoButtonSetting(SettingId, Label, Setting.OptionA, Setting.OptionB, Setting.DefaultIsB,
+                HintDescription, Setting.IsServerOnly)
+            .RegisterChangedAction(OnChanged);
+    }
 }

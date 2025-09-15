@@ -51,4 +51,12 @@ public class Dropdown : ValueSettingsBase<string>
             isServerOnly: isServerOnly
         );
     }
+
+    public override SettingsBase Clone()
+    {
+        return new Dropdown(SettingId, Label, Options, Setting.DefaultOptionIndex, Setting.EntryType, HintDescription,
+            Setting.IsServerOnly)
+            .RegisterChangedAction(OnChanged)
+            .RegisterIntialValueAction(OnInitialValue);
+    }
 }

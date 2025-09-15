@@ -39,4 +39,6 @@ public abstract class SettingsBase
     {
         Base.SendUpdate(newLabel, newHintDescription, applyOverride);
     }
+
+    public abstract SettingsBase Clone();
 }

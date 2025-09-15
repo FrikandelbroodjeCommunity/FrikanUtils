@@ -79,4 +79,14 @@ public class Slider : ValueSettingsBase<float>
         OnInitialValueInt = intialValueAction;
         return this;
     }
+
+    public override SettingsBase Clone()
+    {
+        return new Slider(SettingId, Label, Setting.MinValue, Setting.MaxValue, Setting.DefaultValue, Setting.Integer,
+                Setting.ValueToStringFormat, Setting.FinalDisplayFormat, HintDescription, Setting.IsServerOnly)
+            .RegisterChangedIntAction(OnChangedInt)
+            .RegisterIntialValueIntAction(OnInitialValueInt)
+            .RegisterChangedAction(OnChanged)
+            .RegisterIntialValueAction(OnInitialValue);
+    }
 }

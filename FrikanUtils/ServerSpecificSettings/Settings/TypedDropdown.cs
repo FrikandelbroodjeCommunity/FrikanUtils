@@ -42,4 +42,12 @@ public class TypedDropdown<T> : Dropdown
     {
         _internalOptions = options;
     }
+
+    public override SettingsBase Clone()
+    {
+        return new TypedDropdown<T>(SettingId, Label, _internalOptions, Setting.DefaultOptionIndex, Setting.EntryType,
+                HintDescription, Setting.IsServerOnly)
+            .RegisterChangedAction(OnChanged)
+            .RegisterIntialValueAction(OnInitialValue);
+    }
 }

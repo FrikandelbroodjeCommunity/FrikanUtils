@@ -37,4 +37,10 @@ public class Button : SettingsBase
         OnClick = clickedAction;
         return this;
     }
+
+    public override SettingsBase Clone()
+    {
+        return new Button(SettingId, Label, Setting.ButtonText, Setting.HoldTimeSeconds, HintDescription)
+            .RegisterClickAction(OnClick);
+    }
 }
