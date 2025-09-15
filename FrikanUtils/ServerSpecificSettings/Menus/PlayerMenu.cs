@@ -253,13 +253,11 @@ public class PlayerMenu
 
     private bool RenderMenu(MenuBase menu)
     {
-        Logger.Info($"Rendering menu: {menu.Name}");
         var addedItem = false;
         try
         {
             foreach (var item in menu.GetSettings(_targetPlayer))
             {
-                Logger.Info($"Adding field: {item.SettingId}");
                 item.Player = _targetPlayer;
                 item.Id = _idHandler.GetId(menu.Name, item.SettingId);
                 item.MenuOwner = menu.Name;

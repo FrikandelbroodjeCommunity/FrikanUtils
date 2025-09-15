@@ -1,5 +1,4 @@
-﻿using FrikanUtils.GlobalSettings.InternalSettings;
-using FrikanUtils.ServerSpecificSettings;
+﻿using FrikanUtils.ServerSpecificSettings;
 
 namespace FrikanUtils.GlobalSettings;
 

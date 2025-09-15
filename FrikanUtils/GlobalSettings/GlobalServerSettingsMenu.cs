@@ -21,6 +21,7 @@ public class GlobalServerSettingsMenu : MenuBase
         byte counter = 0;
         return GlobalSettingsHandler.ServerSettings
             .Where(x => x.HasPermissions(player))
+            .OrderBy(x => x.Label)
             .Select(setting => setting.Get(counter++));
     }
 }

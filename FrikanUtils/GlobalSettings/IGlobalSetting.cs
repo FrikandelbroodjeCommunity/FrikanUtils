@@ -5,6 +5,7 @@ namespace FrikanUtils.GlobalSettings;
 
 public interface IGlobalSetting
 {
+    public string Label { get; }
     public bool ServerOnly { get; }
 
     public SettingsBase Get(byte settingId);

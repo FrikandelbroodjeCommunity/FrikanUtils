@@ -5,10 +5,11 @@ using LabApi.Features.Permissions;
 using LabApi.Features.Wrappers;
 using MapGeneration.Holidays;
 
-namespace FrikanUtils.GlobalSettings.InternalSettings;
+namespace FrikanUtils.GlobalSettings;
 
 public class HolidayOverrideSetting : IGlobalSetting
 {
+    public string Label => "[Debug] Override holiday";
     public bool ServerOnly => true;
 
     public SettingsBase Get(byte settingId)
@@ -16,7 +17,7 @@ public class HolidayOverrideSetting : IGlobalSetting
         var values = Enum.GetValues(typeof(HolidayType)).ToArray<HolidayType>();
         return new TypedDropdown<HolidayType>(
             settingId,
-            "[Debug] Override holiday",
+            Label,
             values,
             values.IndexOf(UtilitiesPlugin.PluginConfig.OverrideHoliday),
             hint: "Server will behave as if the event is running. " +
@@ -25,13 +26,15 @@ public class HolidayOverrideSetting : IGlobalSetting
         ).RegisterChangedAction(UpdateValue);
     }
 
-    public bool HasPermissions(Player player)
-    {
-        return player.HasPermissions("frikanutils.debug");
-    }
+    public bool HasPermissions(Player player) => player.HasPermissions("frikanutils.debug");
 
-    private static void UpdateValue(Player player, string value)
+    private void UpdateValue(Player player, string value)
     {
+        if (!HasPermissions(player))
+        {
+            return;
+        }
+
         foreach (HolidayType holiday in Enum.GetValues(typeof(HolidayType)))
         {
             if (!value.Equals(holiday.ToString(), StringComparison.CurrentCultureIgnoreCase)) continue;
