@@ -84,7 +84,7 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Config.cs"/>
-        <Compile Include="FileSystem\FileHandler.cs"/>
+        <Compile Include="FileSystem\FileHandler.cs" />
         <Compile Include="FileSystem\BaseFileProvider.cs" />
         <Compile Include="FileSystem\LocalFileProvider.cs" />
         <Compile Include="CustomDummyActions\ActionExecutable.cs" />
@@ -101,7 +101,7 @@
         <Compile Include="Keycard\CustomKeycardPatches.cs" />
         <Compile Include="Keycard\CustomKeycardUtilities.cs" />
         <Compile Include="Keycard\RainbowKeycardHandler.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="ServerSpecificSettings\Menus\MenuBase.cs" />
         <Compile Include="ServerSpecificSettings\Menus\MenuPriority.cs" />
         <Compile Include="ServerSpecificSettings\Menus\MenuType.cs" />
@@ -122,19 +122,21 @@
         <Compile Include="ServerSpecificSettings\Settings\ValueSettingsBase.cs" />
         <Compile Include="ServerSpecificSettings\SSSEventHandler.cs" />
         <Compile Include="ServerSpecificSettings\SSSHandler.cs" />
-        <Compile Include="UtilitiesPlugin.cs"/>
+        <Compile Include="UtilitiesPlugin.cs" />
         <Compile Include="Utilities\ColorUtilities.cs" />
         <Compile Include="Utilities\CommandUtilities.cs" />
+        <Compile Include="Utilities\DummyUtilities.cs" />
         <Compile Include="Utilities\KeycardUtilities.cs" />
         <Compile Include="Utilities\ListUtilities.cs" />
+        <Compile Include="Utilities\Patches\DummyAuthenticationPatch.cs" />
         <Compile Include="Utilities\PlayerUtilities.cs" />
         <Compile Include="Utilities\PositionUtilities.cs" />
         <Compile Include="Utilities\ScpExtension.cs" />
         <Compile Include="Utilities\TeamUtilities.cs" />
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config"/>
-        <None Include="packages.config"/>
+        <None Include="App.config" />
+        <None Include="packages.config" />
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

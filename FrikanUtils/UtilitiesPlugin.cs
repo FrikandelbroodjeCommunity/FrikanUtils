@@ -27,6 +27,7 @@ public class UtilitiesPlugin : Plugin<Config>
     internal static float HintRefreshTime => Instance.Config.HintRefreshTime;
     internal static List<string> ServerSettingIds => Instance.Config.ServerSettingIds;
     internal static string NoSettingsList => Instance.Config.NoSettingsText;
+    internal static bool ImprovedCardDetection => Instance.Config.ImprovedCardDetection;
 
     private GameObject _handlerObject;
 

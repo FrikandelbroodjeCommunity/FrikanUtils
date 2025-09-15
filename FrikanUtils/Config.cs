@@ -28,4 +28,7 @@ public class Config
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText = "It appears there is currently nothing to show you here.";
+
+    [Description("Whether or not the improved thrown keycard detection is enabled")]
+    public bool ImprovedCardDetection { get; set; } = true;
 }

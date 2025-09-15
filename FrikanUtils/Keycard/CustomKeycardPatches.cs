@@ -33,8 +33,8 @@ public class CustomKeycardPatches
     // ReSharper disable once InconsistentNaming
     public static bool OnProcessCollision(CollisionDetectionPickup __instance, Collision collision)
     {
-        //  TODO: Remove the patch if this ever gets fixed / implemented
-        if (!NetworkServer.active || __instance is not KeycardPickup keycardPickup)
+        if (!NetworkServer.active || !UtilitiesPlugin.ImprovedCardDetection ||
+            __instance is not KeycardPickup keycardPickup)
         {
             return true;
         }
