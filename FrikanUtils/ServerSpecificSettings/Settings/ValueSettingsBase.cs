@@ -41,7 +41,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
             OnInitialValue?.Invoke(player, value);
         }
 
-        OnInitialValue(player, value);
+        OnChanged?.Invoke(player, value);
 
         // For global settings, set the value of all instances
         // We do however require the id as we otherwise cannot find the other fields

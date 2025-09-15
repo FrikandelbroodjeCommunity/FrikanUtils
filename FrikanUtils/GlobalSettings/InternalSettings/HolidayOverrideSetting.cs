@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using FrikanUtils.ServerSpecificSettings.Settings;
 using LabApi.Features.Permissions;
 using LabApi.Features.Wrappers;
@@ -19,7 +20,8 @@ public class HolidayOverrideSetting : IGlobalSetting
             values,
             values.IndexOf(UtilitiesPlugin.PluginConfig.OverrideHoliday),
             hint: "Server will behave as if the event is running. " +
-                  "Only intended for debugging purposes as this may cause some issues during the current round."
+                  "Only intended for debugging purposes as this may cause some issues during the current round.",
+            isServerOnly: ServerOnlyType.GlobalServerOnly
         ).RegisterChangedAction(UpdateValue);
     }
 
@@ -35,6 +37,7 @@ public class HolidayOverrideSetting : IGlobalSetting
             if (!value.Equals(holiday.ToString(), StringComparison.CurrentCultureIgnoreCase)) continue;
 
             UtilitiesPlugin.PluginConfig.OverrideHoliday = holiday;
+            UtilitiesPlugin.Save();
             break;
         }
     }
