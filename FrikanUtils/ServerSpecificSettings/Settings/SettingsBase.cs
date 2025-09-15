@@ -5,7 +5,8 @@ namespace FrikanUtils.ServerSpecificSettings.Settings;
 
 public abstract class SettingsBase
 {
-    public string SettingId { get; }
+    public byte? SettingId { get; }
+    public string MenuOwner { get; internal set; }
 
     public abstract ServerSpecificSettingBase Base { get; }
 
@@ -29,7 +30,7 @@ public abstract class SettingsBase
         set => Base.SettingId = value;
     }
 
-    protected SettingsBase(string settingId)
+    protected SettingsBase(byte? settingId)
     {
         SettingId = settingId;
     }

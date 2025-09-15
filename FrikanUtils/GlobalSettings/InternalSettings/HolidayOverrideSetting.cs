@@ -10,11 +10,11 @@ public class HolidayOverrideSetting : IGlobalSetting
 {
     public bool ServerOnly => true;
 
-    public SettingsBase Get()
+    public SettingsBase Get(byte settingId)
     {
         var values = Enum.GetValues(typeof(HolidayType)).ToArray<HolidayType>();
         return new TypedDropdown<HolidayType>(
-            "holiday override",
+            settingId,
             "[Debug] Override holiday",
             values,
             values.IndexOf(UtilitiesPlugin.PluginConfig.OverrideHoliday),

@@ -9,6 +9,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
 {
     /// <summary>
     /// The name of the menu, displayed at the top of the menu.
+    /// <b>This must be unique as this will help determine the field IDs</b>
     /// </summary>
     public abstract string Name { get; }
 

@@ -7,7 +7,7 @@ public class GroupHeader : SettingsBase
     public override ServerSpecificSettingBase Base { get; }
 
     public GroupHeader(
-        string id,
+        byte? id,
         string label,
         bool reducedPadding = false,
         string hint = null) : base(id)

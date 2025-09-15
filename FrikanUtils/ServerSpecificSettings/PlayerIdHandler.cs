@@ -4,28 +4,25 @@ public class PlayerIdHandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 
-    public bool TryGetId(string menuId, string fieldId, bool isServerOnly, out int id)
+    public int GetId(string menuId, byte? fieldId)
     {
-        if (fieldId == null || isServerOnly)
+        if (!fieldId.HasValue)
         {
             // Remove one from the internal counter and return the new value.
-            id = --_internalIdCounter;
-            return true;
+            return --_internalIdCounter;
         }
 
-        var full = $"{menuId}|{fieldId}";
-        var index = UtilitiesPlugin.PluginConfig.ServerSettingIds.FindIndex(x => x == full);
-        if (index == -1) // If we did not find an entry, add one
+        var menuIndex = UtilitiesPlugin.PluginConfig.ServerSettingMenus.FindIndex(x => x == menuId);
+        if (menuIndex == -1) // If we did not find an entry, add one
         {
-            index = UtilitiesPlugin.PluginConfig.ServerSettingIds.Count;
-            UtilitiesPlugin.PluginConfig.ServerSettingIds.Add(full);
+            menuIndex = UtilitiesPlugin.PluginConfig.ServerSettingMenus.Count;
+            UtilitiesPlugin.PluginConfig.ServerSettingMenus.Add(menuId);
 
             // Save the config
             UtilitiesPlugin.Save();
         }
 
-        id = index;
-        return true;
+        return menuIndex << 8 | fieldId.Value;
     }
 
     public void Reset()

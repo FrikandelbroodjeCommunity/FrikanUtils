@@ -24,8 +24,8 @@ public class Config
     [Description("Time between updates of the continuous hints")]
     public float HintRefreshTime { get; set; } = 0.5f;
 
-    [Description("[Automatically generated] List of Server Specific Settings fields to get IDs")]
-    public List<string> ServerSettingIds { get; set; } = [];
+    [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
+    public List<string> ServerSettingMenus { get; set; } = [];
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";

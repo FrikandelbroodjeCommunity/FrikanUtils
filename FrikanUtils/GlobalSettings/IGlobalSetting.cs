@@ -7,6 +7,6 @@ public interface IGlobalSetting
 {
     public bool ServerOnly { get; }
 
-    public SettingsBase Get();
+    public SettingsBase Get(byte settingId);
     public bool HasPermissions(Player player);
 }

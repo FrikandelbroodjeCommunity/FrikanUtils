@@ -34,12 +34,13 @@ public class PlayerMenu
     /// Get the setting belonging to this player.
     /// If the setting was not found, or the type does not match, it will return null.
     /// </summary>
+    /// <param name="menu">The exact name of the menu</param>
     /// <param name="settingId">ID of the setting</param>
     /// <typeparam name="T">Type of the setting</typeparam>
     /// <returns>The found setting or null</returns>
-    public T GetSetting<T>(string settingId) where T : SettingsBase
+    public T GetSetting<T>(string menu, byte settingId) where T : SettingsBase
     {
-        var found = _shownItems.FirstOrDefault(x => x.SettingId == settingId);
+        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
         return found as T;
     }
 
@@ -252,20 +253,20 @@ public class PlayerMenu
 
     private bool RenderMenu(MenuBase menu)
     {
+        Logger.Info($"Rendering menu: {menu.Name}");
         var addedItem = false;
         try
         {
             foreach (var item in menu.GetSettings(_targetPlayer))
             {
-                if (_idHandler.TryGetId(menu.Name, item.SettingId, item.Base.IsServerOnly, out var id))
-                {
-                    item.Player = _targetPlayer;
-                    item.Id = id;
-                    _shownItems.Add(item);
-                    _rendering.Add(item.Base);
+                Logger.Info($"Adding field: {item.SettingId}");
+                item.Player = _targetPlayer;
+                item.Id = _idHandler.GetId(menu.Name, item.SettingId);
+                item.MenuOwner = menu.Name;
+                _shownItems.Add(item);
+                _rendering.Add(item.Base);
 
-                    addedItem = true;
-                }
+                addedItem = true;
             }
         }
         catch (Exception)

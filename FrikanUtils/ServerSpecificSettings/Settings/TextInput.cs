@@ -16,7 +16,7 @@ public class TextInput : ValueSettingsBase<string>
     }
 
     public TextInput(
-        string id,
+        byte? id,
         string label,
         string placeholder = "...",
         int characterLimit = 64,

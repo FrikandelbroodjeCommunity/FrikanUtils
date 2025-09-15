@@ -2,6 +2,7 @@
 using System.Linq;
 using FrikanUtils.ServerSpecificSettings.Menus;
 using FrikanUtils.ServerSpecificSettings.Settings;
+using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.GlobalSettings;
@@ -18,8 +19,10 @@ public class GlobalClientSettingsMenu : MenuBase
 
     public override IEnumerable<SettingsBase> GetSettings(Player player)
     {
+        Logger.Info("Gathering client settings");
+        byte counter = 0;
         return GlobalSettingsHandler.ClientSettings
             .Where(x => x.HasPermissions(player))
-            .Select(setting => setting.Get());
+            .Select(setting => setting.Get(counter++));
     }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using FrikanUtils.ServerSpecificSettings.Helpers;
+using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
@@ -14,7 +15,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
     protected Action<Player, T> OnChanged;
     protected Action<Player, T> OnInitialValue;
 
-    protected ValueSettingsBase(string settingId, ServerOnlyType isServerOnly) : base(settingId)
+    protected ValueSettingsBase(byte? settingId, ServerOnlyType isServerOnly) : base(settingId)
     {
         GlobalSetting = isServerOnly.IsGlobalSetting();
         ServerOnlyType = isServerOnly;
@@ -43,8 +44,9 @@ public abstract class ValueSettingsBase<T> : SettingsBase
         OnInitialValue(player, value);
 
         // For global settings, set the value of all instances
-        if (!GlobalSetting) return;
-        foreach (var setting in SSSHandler.GetAllFields<ValueSettingsBase<T>>(SettingId))
+        // We do however require the id as we otherwise cannot find the other fields
+        if (!GlobalSetting || !SettingId.HasValue) return;
+        foreach (var setting in SSSHandler.GetAllFields<ValueSettingsBase<T>>(MenuOwner, SettingId.Value))
         {
             setting.Value = value;
         }
