@@ -162,9 +162,16 @@ public class PlayerMenu
         foreach (var menu in SSSHandler.DynamicMenus
                      .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Forced))
         {
-            _shownMenus.Add(menu);
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
-            RenderMenu(menu);
+
+            if (RenderMenu(menu))
+            {
+                _shownMenus.Add(menu);
+            }
+            else // If the menu has no contents, remove the header
+            {
+                _rendering.RemoveAt(_rendering.Count - 1);
+            }
         }
     }
 
@@ -201,14 +208,14 @@ public class PlayerMenu
         _rendering.Add(MenuSelection);
 
         // Render the selected menu or empty message
-        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(_targetPlayer))
+        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(_targetPlayer) ||
+            !RenderMenu(_selectedDynamicMenu))
         {
             _rendering.Add(new SSTextArea(-4, "Currently you have no valid menu selected!"));
         }
         else
         {
             _shownMenus.Add(_selectedDynamicMenu);
-            RenderMenu(_selectedDynamicMenu);
         }
     }
 
@@ -229,7 +236,7 @@ public class PlayerMenu
             }
             else // If the menu has no contents, remove the header
             {
-                _rendering.RemoveAt(-1);
+                _rendering.RemoveAt(_rendering.Count - 1);
             }
         }
 

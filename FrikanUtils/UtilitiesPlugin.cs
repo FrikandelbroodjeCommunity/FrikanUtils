@@ -37,12 +37,15 @@ public class UtilitiesPlugin : Plugin<Config>
         // Register the default file provider
         FileHandler.RegisterProvider(new LocalFileProvider());
 
+        // REgister events
         ServerEvents.WaitingForPlayers += Reset;
         CustomKeycardEventHandler.RegisterEvents();
         SSSEventHandler.RegisterEvents();
 
+        // Register global settings
         InternalGlobalSettings.RegisterInternalSettings();
 
+        // Register all monobehaviour handles
         _handlerObject = new GameObject("FrikanUtils Handler Object");
         Object.DontDestroyOnLoad(_handlerObject);
         _handlerObject.AddComponent<RainbowKeycardHandler>();
@@ -51,12 +54,15 @@ public class UtilitiesPlugin : Plugin<Config>
 
     public override void Disable()
     {
+        // Register events
         ServerEvents.WaitingForPlayers -= Reset;
         CustomKeycardEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
 
+        // Register global settings
         InternalGlobalSettings.UnregisterInternalSettings();
 
+        // Delete all monobehaviour handles
         Object.Destroy(_handlerObject);
     }
 
