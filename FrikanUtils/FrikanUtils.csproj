@@ -34,6 +34,14 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
     </PropertyGroup>
+    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SoftDeploy|AnyCPU' ">
+        <DebugType>pdbonly</DebugType>
+        <Optimize>true</Optimize>
+        <DefineConstants>TRACE</DefineConstants>
+        <ErrorReport>prompt</ErrorReport>
+        <WarningLevel>4</WarningLevel>
+        <OutputPath>bin\SoftDeploy\</OutputPath>
+    </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
             <HintPath>$(SL_DEPENDENCIES)\0Harmony.dll</HintPath>
@@ -52,9 +60,6 @@
         </Reference>
         <Reference Include="Mirror">
             <HintPath>$(SL_REFERENCES)\Mirror.dll</HintPath>
-        </Reference>
-        <Reference Include="mscorlib">
-            <HintPath>$(SL_REFERENCES)\mscorlib.dll</HintPath>
         </Reference>
         <Reference Include="NorthwoodLib">
             <HintPath>$(SL_REFERENCES)\NorthwoodLib.dll</HintPath>
@@ -98,9 +103,9 @@
         <Compile Include="GlobalSettings\GlobalServerSettingsMenu.cs" />
         <Compile Include="GlobalSettings\GlobalSettingsHandler.cs" />
         <Compile Include="GlobalSettings\GlobalClientSettingsMenu.cs" />
+        <Compile Include="GlobalSettings\HolidayOverrideSetting.cs" />
         <Compile Include="GlobalSettings\IGlobalSetting.cs" />
         <Compile Include="GlobalSettings\InternalGlobalSettings.cs" />
-        <Compile Include="GlobalSettings\InternalSettings\HolidayOverrideSetting.cs" />
         <Compile Include="HintSystem\HintHandler.cs" />
         <Compile Include="HintSystem\HintSender.cs" />
         <Compile Include="Keycard\CustomKeycard.cs" />

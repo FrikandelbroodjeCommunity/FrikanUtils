@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project>
+    <Target Label="Post build events" Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(ConfigurationName) == SoftDeploy And $(ProjectName) != PluginTemplate And $(ProjectName) != EventTemplate">
+        <Message Text="Copying mod DLL to build directory"/>
+        <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)/AllPlugins"/>
+    </Target>
+</Project>
