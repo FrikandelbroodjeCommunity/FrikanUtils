@@ -14,7 +14,7 @@ public class AudioPlugin : Plugin<AudioConfig>
     public override Version Version => new(1, 0, 0);
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
 
-    public static AudioPlugin Instance;
+    public static AudioPlugin Instance { get; private set; }
 
     private readonly MuteSetting _muteSetting = new();
     private readonly VolumeSetting _volumeSetting = new();

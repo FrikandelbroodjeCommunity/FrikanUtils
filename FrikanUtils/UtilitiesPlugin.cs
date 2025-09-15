@@ -22,7 +22,8 @@ public class UtilitiesPlugin : Plugin<Config>
     public override Version Version => new(1, 0, 0);
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
 
-    internal static UtilitiesPlugin Instance;
+    public static UtilitiesPlugin Instance { get; private set; }
+    
     internal static Config PluginConfig => Instance.Config;
 
     private GameObject _handlerObject;
