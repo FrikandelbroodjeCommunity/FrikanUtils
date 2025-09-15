@@ -222,9 +222,16 @@ public class PlayerMenu
                      .OrderByDescending(x => x.Priority))
         {
             hasMenu = true;
-            _shownMenus.Add(menu);
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.MenuId}</size>", true));
-            RenderMenu(menu);
+
+            if (RenderMenu(menu))
+            {
+                _shownMenus.Add(menu);
+            }
+            else // If the menu has no contents, remove the header
+            {
+                _rendering.RemoveAt(-1);
+            }
         }
 
         if (!hasMenu) // If there are no menus for this player, show a message
@@ -233,8 +240,9 @@ public class PlayerMenu
         }
     }
 
-    private void RenderMenu(MenuBase menu)
+    private bool RenderMenu(MenuBase menu)
     {
+        var addedItem = false;
         try
         {
             foreach (var item in menu.GetSettings(_targetPlayer))
@@ -246,6 +254,8 @@ public class PlayerMenu
                     item.MenuOwner = menu.MenuId;
                     _shownItems.Add(item);
                     _rendering.Add(item.Base);
+
+                    addedItem = true;
                 }
             }
         }
@@ -253,5 +263,7 @@ public class PlayerMenu
         {
             // Ignore exceptions as they are most likely caused by permission issues
         }
+
+        return addedItem;
     }
 }
