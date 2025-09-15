@@ -11,6 +11,11 @@ public class GlobalClientSettingsMenu : MenuBase
     public override string Name => "General Settings";
     public override MenuType Type => MenuType.Static;
 
+    public override bool HasPermission(Player player)
+    {
+        return base.HasPermission(player) && GlobalSettingsHandler.ClientSettings.Any(x => x.HasPermissions(player));
+    }
+
     public override IEnumerable<SettingsBase> GetSettings(Player player)
     {
         return GlobalSettingsHandler.ClientSettings

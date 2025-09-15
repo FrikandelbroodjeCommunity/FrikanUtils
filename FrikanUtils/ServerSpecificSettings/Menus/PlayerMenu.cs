@@ -208,14 +208,17 @@ public class PlayerMenu
         _rendering.Add(MenuSelection);
 
         // Render the selected menu or empty message
-        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(_targetPlayer) ||
-            !RenderMenu(_selectedDynamicMenu))
+        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(_targetPlayer))
         {
             _rendering.Add(new SSTextArea(-4, "Currently you have no valid menu selected!"));
         }
-        else
+        else if (RenderMenu(_selectedDynamicMenu))
         {
             _shownMenus.Add(_selectedDynamicMenu);
+        }
+        else
+        {
+            _rendering.Add(new SSTextArea(-4, "The menu is currently empty."));
         }
     }
 
@@ -227,11 +230,11 @@ public class PlayerMenu
         foreach (var menu in SSSHandler.StaticMenus.Where(x => x.InternalHasPermission(_targetPlayer))
                      .OrderByDescending(x => x.Priority))
         {
-            hasMenu = true;
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
 
             if (RenderMenu(menu))
             {
+                hasMenu = true;
                 _shownMenus.Add(menu);
             }
             else // If the menu has no contents, remove the header
@@ -267,7 +270,7 @@ public class PlayerMenu
         }
         catch (Exception)
         {
-            // Ignore exceptions as they are most likely caused by permission issues
+            Logger.Debug($"Exception while rendering menu: {menu.Name}", UtilitiesPlugin.PluginConfig.Debug);
         }
 
         return addedItem;

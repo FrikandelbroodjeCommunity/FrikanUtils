@@ -13,7 +13,7 @@ public class GlobalServerSettingsMenu : MenuBase
 
     public override bool HasPermission(Player player)
     {
-        return base.HasPermission(player) && player.RemoteAdminAccess;
+        return base.HasPermission(player) && GlobalSettingsHandler.ServerSettings.Any(x => x.HasPermissions(player));
     }
 
     public override IEnumerable<SettingsBase> GetSettings(Player player)
