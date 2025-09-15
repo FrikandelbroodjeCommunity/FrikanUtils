@@ -1,4 +1,5 @@
-﻿using UserSettings.ServerSpecific;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
 
@@ -7,7 +8,7 @@ public class Dropdown : ValueSettingsBase<string>
     public override ServerSpecificSettingBase Base => Setting;
     public readonly SSDropdownSetting Setting;
 
-    public string Value
+    public override string Value
     {
         get => Setting.SyncSelectionText;
         set
@@ -39,7 +40,7 @@ public class Dropdown : ValueSettingsBase<string>
         int defaultOptionIndex = 0,
         SSDropdownSetting.DropdownEntryType entryType = SSDropdownSetting.DropdownEntryType.Regular,
         string hint = null,
-        bool isServerOnly = false) : base(id)
+        ServerOnlyType isServerOnly = ServerOnlyType.Client) : base(id, isServerOnly)
     {
         Setting = new SSDropdownSetting(
             null,
@@ -48,14 +49,14 @@ public class Dropdown : ValueSettingsBase<string>
             defaultOptionIndex,
             entryType,
             hint,
-            isServerOnly: isServerOnly
+            isServerOnly: isServerOnly != ServerOnlyType.Client
         );
     }
 
     public override SettingsBase Clone()
     {
         return new Dropdown(SettingId, Label, Options, Setting.DefaultOptionIndex, Setting.EntryType, HintDescription,
-            Setting.IsServerOnly)
+                ServerOnlyType)
             .RegisterChangedAction(OnChanged)
             .RegisterIntialValueAction(OnInitialValue);
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using MapGeneration.Holidays;
 
 namespace FrikanUtils;
 
@@ -9,7 +10,7 @@ public class Config
     public bool Debug { get; set; }
 
     [Description("Colors used for rainbows")]
-    public string[] RainbowTextColors =
+    public string[] RainbowTextColors { get; set; } =
     [
         "red",
         "#FF9500",
@@ -21,14 +22,17 @@ public class Config
     ];
 
     [Description("Time between updates of the continuous hints")]
-    public float HintRefreshTime = 0.5f;
+    public float HintRefreshTime { get; set; } = 0.5f;
 
     [Description("[Automatically generated] List of Server Specific Settings fields to get IDs")]
     public List<string> ServerSettingIds { get; set; } = [];
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
-    public string NoSettingsText = "It appears there is currently nothing to show you here.";
+    public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
 
     [Description("Whether or not the improved thrown keycard detection is enabled")]
     public bool ImprovedCardDetection { get; set; } = true;
+
+    [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
+    public HolidayType OverrideHoliday { get; set; }
 }

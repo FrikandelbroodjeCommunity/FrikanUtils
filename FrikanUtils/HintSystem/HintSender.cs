@@ -23,8 +23,8 @@ public class HintSender : MonoBehaviour
 
         _time = 1f;
 
-        var color = UtilitiesPlugin.RainbowTextColors[_color];
-        var duration = UtilitiesPlugin.HintRefreshTime * 1.5f;
+        var color = UtilitiesPlugin.PluginConfig.RainbowTextColors[_color];
+        var duration = UtilitiesPlugin.PluginConfig.HintRefreshTime * 1.5f;
         foreach (var player in Player.List.Where(x => x.IsPlayer && x.Role != RoleTypeId.Tutorial))
         {
             var hint = Round.IsRoundStarted
@@ -38,6 +38,6 @@ public class HintSender : MonoBehaviour
         }
 
         _color++;
-        _color %= UtilitiesPlugin.RainbowTextColors.Length;
+        _color %= UtilitiesPlugin.PluginConfig.RainbowTextColors.Length;
     }
 }

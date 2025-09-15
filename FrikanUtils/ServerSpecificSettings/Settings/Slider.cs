@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
@@ -9,7 +10,7 @@ public class Slider : ValueSettingsBase<float>
     public override ServerSpecificSettingBase Base => Setting;
     public readonly SSSliderSetting Setting;
 
-    public float Value
+    public override float Value
     {
         get => Setting.SyncFloatValue;
         set => Setting.SendValueUpdate(value);
@@ -34,7 +35,7 @@ public class Slider : ValueSettingsBase<float>
         string valueToStringFormat = "0.##",
         string finalDisplayFormat = "{0}",
         string hint = null,
-        bool isServerOnly = false) : base(id)
+        ServerOnlyType isServerOnly = ServerOnlyType.Client) : base(id, isServerOnly)
     {
         Setting = new SSSliderSetting(
             null,
@@ -46,7 +47,7 @@ public class Slider : ValueSettingsBase<float>
             valueToStringFormat,
             finalDisplayFormat,
             hint,
-            isServerOnly: isServerOnly
+            isServerOnly: isServerOnly.IsServerOnly()
         );
     }
 
@@ -83,7 +84,7 @@ public class Slider : ValueSettingsBase<float>
     public override SettingsBase Clone()
     {
         return new Slider(SettingId, Label, Setting.MinValue, Setting.MaxValue, Setting.DefaultValue, Setting.Integer,
-                Setting.ValueToStringFormat, Setting.FinalDisplayFormat, HintDescription, Setting.IsServerOnly)
+                Setting.ValueToStringFormat, Setting.FinalDisplayFormat, HintDescription, ServerOnlyType)
             .RegisterChangedIntAction(OnChangedInt)
             .RegisterIntialValueIntAction(OnInitialValueInt)
             .RegisterChangedAction(OnChanged)

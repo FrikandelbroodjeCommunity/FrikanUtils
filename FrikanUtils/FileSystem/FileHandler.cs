@@ -18,7 +18,7 @@ public static class FileHandler
         }
 
         FileProviders.AddIfNotContains(provider);
-        Logger.Debug($"Registered file provider {provider.Name}", UtilitiesPlugin.Debug);
+        Logger.Debug($"Registered file provider {provider.Name}", UtilitiesPlugin.PluginConfig.Debug);
     }
 
     /// <summary>

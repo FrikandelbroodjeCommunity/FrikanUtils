@@ -1,21 +1,20 @@
 ﻿using System;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
 
-public class TwoButtonSetting : SettingsBase
+public class TwoButtonSetting : ValueSettingsBase<bool>
 {
     public override ServerSpecificSettingBase Base => Setting;
     public readonly SSTwoButtonsSetting Setting;
 
-    public bool IsBSelected
+    public override bool Value
     {
         get => Setting.SyncIsB;
         set => Setting.SendValueUpdate(value);
     }
-
-    internal Action<Player, bool> OnChanged;
 
     public TwoButtonSetting(
         string id,
@@ -24,7 +23,7 @@ public class TwoButtonSetting : SettingsBase
         string optionB,
         bool defaultIsB = false,
         string hint = null,
-        bool isServerOnly = false) : base(id)
+        ServerOnlyType isServerOnly = ServerOnlyType.Client) : base(id, isServerOnly)
     {
         Setting = new SSTwoButtonsSetting(
             null,
@@ -33,7 +32,7 @@ public class TwoButtonSetting : SettingsBase
             optionB,
             defaultIsB,
             hint,
-            isServerOnly: isServerOnly
+            isServerOnly: isServerOnly.IsServerOnly()
         );
     }
 
@@ -42,16 +41,10 @@ public class TwoButtonSetting : SettingsBase
         Setting.SendTwoButtonUpdate(optionA ?? Setting.OptionA, optionB ?? Setting.OptionB, applyOverride);
     }
 
-    public TwoButtonSetting RegisterChangedAction(Action<Player, bool> changedAction)
-    {
-        OnChanged = changedAction;
-        return this;
-    }
-    
     public override SettingsBase Clone()
     {
         return new TwoButtonSetting(SettingId, Label, Setting.OptionA, Setting.OptionB, Setting.DefaultIsB,
-                HintDescription, Setting.IsServerOnly)
+                HintDescription, ServerOnlyType)
             .RegisterChangedAction(OnChanged);
     }
 }

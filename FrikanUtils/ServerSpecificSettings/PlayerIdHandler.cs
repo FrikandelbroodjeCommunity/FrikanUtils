@@ -14,11 +14,11 @@ public class PlayerIdHandler
         }
 
         var full = $"{menuId}|{fieldId}";
-        var index = UtilitiesPlugin.ServerSettingIds.FindIndex(x => x == full);
+        var index = UtilitiesPlugin.PluginConfig.ServerSettingIds.FindIndex(x => x == full);
         if (index == -1) // If we did not find an entry, add one
         {
-            index = UtilitiesPlugin.ServerSettingIds.Count;
-            UtilitiesPlugin.ServerSettingIds.Add(full);
+            index = UtilitiesPlugin.PluginConfig.ServerSettingIds.Count;
+            UtilitiesPlugin.PluginConfig.ServerSettingIds.Add(full);
 
             // Save the config
             UtilitiesPlugin.Save();

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using FrikanUtils.FileSystem;
+using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
 using FrikanUtils.ServerSpecificSettings;
@@ -8,6 +9,7 @@ using FrikanUtils.Utilities;
 using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
+using MapGeneration.Holidays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,13 +24,8 @@ public class UtilitiesPlugin : Plugin<Config>
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
 
     internal static UtilitiesPlugin Instance;
-    internal static bool Debug => Instance.Config.Debug;
-    internal static string[] RainbowTextColors => Instance.Config.RainbowTextColors;
-    internal static float HintRefreshTime => Instance.Config.HintRefreshTime;
-    internal static List<string> ServerSettingIds => Instance.Config.ServerSettingIds;
-    internal static string NoSettingsList => Instance.Config.NoSettingsText;
-    internal static bool ImprovedCardDetection => Instance.Config.ImprovedCardDetection;
-
+    internal static Config PluginConfig => Instance.Config;
+    
     private GameObject _handlerObject;
 
     internal static void Save() => Instance.SaveConfig();
@@ -44,6 +41,8 @@ public class UtilitiesPlugin : Plugin<Config>
         CustomKeycardEventHandler.RegisterEvents();
         SSSEventHandler.RegisterEvents();
 
+        InternalGlobalSettings.RegisterInternalSettings();
+
         _handlerObject = new GameObject("FrikanUtils Handler Object");
         Object.DontDestroyOnLoad(_handlerObject);
         _handlerObject.AddComponent<RainbowKeycardHandler>();
@@ -55,6 +54,8 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.WaitingForPlayers -= Reset;
         CustomKeycardEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
+
+        InternalGlobalSettings.UnregisterInternalSettings();
 
         Object.Destroy(_handlerObject);
     }

@@ -39,14 +39,14 @@ internal static class ExecuteDummyPatch
             .FirstOrDefault(x => x.Name.Replace(" ", "_") == arguments.At(1).Substring(1));
         if (module == null || !module.HasPermission(player))
         {
-            Logger.Debug($"Could not find the module {moduleName}", UtilitiesPlugin.Debug);
+            Logger.Debug($"Could not find the module {moduleName}", UtilitiesPlugin.PluginConfig.Debug);
             return true;
         }
 
         var executable = module.GetAction(player, ids.Select(Player.Get).ToList(), arguments.At(2));
         if (!executable.IsValid())
         {
-            Logger.Debug("Executable is not valid", UtilitiesPlugin.Debug);
+            Logger.Debug("Executable is not valid", UtilitiesPlugin.PluginConfig.Debug);
             return true;
         }
 

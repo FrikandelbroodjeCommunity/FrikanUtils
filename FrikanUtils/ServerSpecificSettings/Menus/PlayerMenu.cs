@@ -58,7 +58,7 @@ public class PlayerMenu
         _shownItems.Clear();
         _shownMenus.Clear();
 
-        Logger.Debug($"Updating player {_targetPlayer.LogName}", UtilitiesPlugin.Debug);
+        Logger.Debug($"Updating player {_targetPlayer.LogName}", UtilitiesPlugin.PluginConfig.Debug);
         if (SSSHandler.StaticMenus.Count == 0 && SSSHandler.DynamicMenus.Count == 0)
         {
             ServerSpecificSettingsSync.SendToPlayer(_targetPlayer.ReferenceHub, []);
@@ -236,7 +236,8 @@ public class PlayerMenu
 
         if (!hasMenu) // If there are no menus for this player, show a message
         {
-            _rendering.Add(new SSTextArea(-2, UtilitiesPlugin.NoSettingsList, textAlignment: TextAlignmentOptions.Top));
+            _rendering.Add(new SSTextArea(-2, UtilitiesPlugin.PluginConfig.NoSettingsText,
+                textAlignment: TextAlignmentOptions.Top));
         }
     }
 

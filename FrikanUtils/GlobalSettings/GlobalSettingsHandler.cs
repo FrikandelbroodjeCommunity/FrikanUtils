@@ -5,12 +5,12 @@ namespace FrikanUtils.GlobalSettings;
 
 public static class GlobalSettingsHandler
 {
-    internal static readonly List<GlobalSetting> ClientSettings = [];
-    internal static readonly List<GlobalSetting> ServerSettings = [];
+    internal static readonly List<IGlobalSetting> ClientSettings = [];
+    internal static readonly List<IGlobalSetting> ServerSettings = [];
 
-    public static void RegisterSetting(GlobalSetting setting)
+    public static void RegisterSetting(IGlobalSetting setting)
     {
-        if (setting.IsServerOnly)
+        if (setting.ServerOnly)
         {
             ServerSettings.Add(setting);
         }
@@ -20,13 +20,13 @@ public static class GlobalSettingsHandler
         }
     }
 
-    public static void UnregisterSetting(GlobalSetting setting)
+    public static void UnregisterSetting(IGlobalSetting setting)
     {
-        var removed = setting.IsServerOnly ? ServerSettings.Remove(setting) : ClientSettings.Remove(setting);
+        var removed = setting.ServerOnly ? ServerSettings.Remove(setting) : ClientSettings.Remove(setting);
 
         if (!removed)
         {
-            Logger.Warn($"Could not remove setting {setting.Setting.Label}");
+            Logger.Warn($"Could not remove setting {setting}");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using TMPro;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
@@ -8,7 +9,7 @@ public class TextInput : ValueSettingsBase<string>
     public override ServerSpecificSettingBase Base => Setting;
     public readonly SSPlaintextSetting Setting;
 
-    public string Value
+    public override string Value
     {
         get => Setting.SyncInputText;
         set => Setting.SendValueUpdate(value);
@@ -21,7 +22,7 @@ public class TextInput : ValueSettingsBase<string>
         int characterLimit = 64,
         TMP_InputField.ContentType contentType = TMP_InputField.ContentType.Standard,
         string hint = null,
-        bool isServerOnly = false) : base(id)
+        ServerOnlyType isServerOnly = ServerOnlyType.Client) : base(id, isServerOnly)
     {
         Setting = new SSPlaintextSetting(
             null,
@@ -30,7 +31,7 @@ public class TextInput : ValueSettingsBase<string>
             characterLimit,
             contentType,
             hint,
-            isServerOnly: isServerOnly
+            isServerOnly: isServerOnly.IsServerOnly()
         );
     }
 
@@ -57,7 +58,7 @@ public class TextInput : ValueSettingsBase<string>
     public override SettingsBase Clone()
     {
         return new TextInput(SettingId, Label, Setting.Placeholder, Setting.CharacterLimit, Setting.ContentType,
-                HintDescription, Setting.IsServerOnly)
+                HintDescription, ServerOnlyType)
             .RegisterChangedAction(OnChanged)
             .RegisterIntialValueAction(OnInitialValue);
     }
