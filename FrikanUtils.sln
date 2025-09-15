@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrikanUtils", "FrikanUtils\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrikanUtils-Audio", "FrikanUtils-Audio\FrikanUtils-Audio.csproj", "{4173091E-CD7F-46D9-8A93-3119A55A4D2A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FrikanUtils-ProjectMer", "FrikanUtils-ProjectMer\FrikanUtils-ProjectMer.csproj", "{70288E77-27E4-4B45-A35F-45BC19B1B5D2}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,5 +25,11 @@ Global
 		{4173091E-CD7F-46D9-8A93-3119A55A4D2A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4173091E-CD7F-46D9-8A93-3119A55A4D2A}.SoftDeploy|Any CPU.ActiveCfg = SoftDeploy|Any CPU
 		{4173091E-CD7F-46D9-8A93-3119A55A4D2A}.SoftDeploy|Any CPU.Build.0 = SoftDeploy|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.SoftDeploy|Any CPU.ActiveCfg = SoftDeploy|Any CPU
+		{70288E77-27E4-4B45-A35F-45BC19B1B5D2}.SoftDeploy|Any CPU.Build.0 = SoftDeploy|Any CPU
 	EndGlobalSection
 EndGlobal
