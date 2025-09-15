@@ -10,7 +10,7 @@ using RemoteAdmin.Communication;
 namespace FrikanUtils.CustomDummyActions.Patches;
 
 [HarmonyPatch(typeof(RaDummyActions))]
-public static class LoadActionsPatch
+internal static class LoadActionsPatch
 {
     private static Player _currentPlayer;
 
@@ -76,7 +76,7 @@ public static class LoadActionsPatch
         {
             return;
         }
-        
+
         foreach (var str in RaHandler.Modules
                      .Where(module => module.HasPermission(_currentPlayer))
                      .SelectMany(module => module.GetStrings(_currentPlayer, dummyPlayer)))

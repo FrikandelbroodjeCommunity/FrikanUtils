@@ -5,7 +5,7 @@ using NetworkManagerUtils.Dummies;
 namespace FrikanUtils.CustomDummyActions.Patches;
 
 [HarmonyPatch(typeof(DummyActionCollector))]
-public static class CachePatch
+internal static class CachePatch
 {
     [HarmonyPatch(nameof(DummyActionCollector.ServerGetActions))]
     [HarmonyPrefix]

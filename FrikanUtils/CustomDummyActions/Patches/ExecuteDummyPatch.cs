@@ -11,7 +11,7 @@ using Utils;
 namespace FrikanUtils.CustomDummyActions.Patches;
 
 [HarmonyPatch]
-public static class ExecuteDummyPatch
+internal static class ExecuteDummyPatch
 {
     [HarmonyPatch(typeof(ActionDummyCommand), nameof(ActionDummyCommand.Execute))]
     [HarmonyPrefix]

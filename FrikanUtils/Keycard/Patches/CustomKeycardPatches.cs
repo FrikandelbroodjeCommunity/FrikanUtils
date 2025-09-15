@@ -10,10 +10,10 @@ using Scp914;
 using Scp914.Processors;
 using UnityEngine;
 
-namespace FrikanUtils.Keycard;
+namespace FrikanUtils.Keycard.Patches;
 
 [Harmony]
-public class CustomKeycardPatches
+internal class CustomKeycardPatches
 {
     [HarmonyPatch(typeof(Scp914Upgrader), nameof(Scp914Upgrader.TryGetProcessor))]
     [HarmonyPrefix]
