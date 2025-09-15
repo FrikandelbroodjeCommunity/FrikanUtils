@@ -12,7 +12,7 @@ namespace FrikanUtils.ProjectMer.Patches;
 [HarmonyPatch]
 internal static class HolidayMerPatch
 {
-    internal static readonly HashSet<SchematicObject> ApplicableSchematics = [];
+    internal static readonly List<SchematicObject> ApplicableSchematics = [];
 
     [HarmonyPatch(typeof(SchematicObject), nameof(SchematicObject.CreateObject))]
     [HarmonyPrefix]

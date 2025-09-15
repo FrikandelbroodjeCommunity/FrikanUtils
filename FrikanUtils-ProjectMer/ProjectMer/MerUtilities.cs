@@ -25,7 +25,7 @@ namespace FrikanUtils.ProjectMer;
 /// </summary>
 public static class MerUtilities
 {
-    internal static readonly HashSet<Interactable> RegisteredPickups = [];
+    internal static readonly List<Interactable> RegisteredPickups = [];
 
     /// <summary>
     /// Find objects with the given name in a schematic object.
