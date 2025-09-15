@@ -1,15 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using FrikanUtils.FileSystem;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
+using HarmonyLib;
 using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
-using MapGeneration.Holidays;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -25,19 +24,21 @@ public class UtilitiesPlugin : Plugin<Config>
 
     internal static UtilitiesPlugin Instance;
     internal static Config PluginConfig => Instance.Config;
-    
+
     private GameObject _handlerObject;
+    private readonly Harmony _harmony = new("com.frikandelbroodje.utils");
 
     internal static void Save() => Instance.SaveConfig();
 
     public override void Enable()
     {
         Instance = this;
+        _harmony.PatchAll();
 
         // Register the default file provider
         FileHandler.RegisterProvider(new LocalFileProvider());
 
-        // REgister events
+        // Register events
         ServerEvents.WaitingForPlayers += Reset;
         CustomKeycardEventHandler.RegisterEvents();
         SSSEventHandler.RegisterEvents();
@@ -54,6 +55,8 @@ public class UtilitiesPlugin : Plugin<Config>
 
     public override void Disable()
     {
+        _harmony.UnpatchAll();
+
         // Register events
         ServerEvents.WaitingForPlayers -= Reset;
         CustomKeycardEventHandler.UnregisterEvents();

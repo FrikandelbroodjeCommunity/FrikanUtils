@@ -1,4 +1,6 @@
-﻿namespace FrikanUtils.ServerSpecificSettings;
+﻿using LabApi.Features.Console;
+
+namespace FrikanUtils.ServerSpecificSettings;
 
 public class PlayerIdHandler
 {
@@ -17,6 +19,9 @@ public class PlayerIdHandler
         {
             menuIndex = UtilitiesPlugin.PluginConfig.ServerSettingMenus.Count;
             UtilitiesPlugin.PluginConfig.ServerSettingMenus.Add(menuId);
+
+            Logger.Debug($"Could not find the menu ID: {menuId}, adding to the config",
+                UtilitiesPlugin.PluginConfig.Debug);
 
             // Save the config
             UtilitiesPlugin.Save();

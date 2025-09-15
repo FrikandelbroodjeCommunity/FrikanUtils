@@ -269,9 +269,9 @@ public class PlayerMenu
                 addedItem = true;
             }
         }
-        catch (Exception)
+        catch (Exception e)
         {
-            Logger.Debug($"Exception while rendering menu: {menu.Name}", UtilitiesPlugin.PluginConfig.Debug);
+            Logger.Debug($"Exception while rendering menu: {menu.Name}.\n{e}", UtilitiesPlugin.PluginConfig.Debug);
         }
 
         return addedItem;
