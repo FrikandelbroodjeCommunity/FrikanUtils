@@ -28,7 +28,14 @@ public class HolidayOverrideSetting : IGlobalSetting
         return player.HasPermissions("frikanutils.debug");
     }
 
-    private void UpdateValue(Player player, string value)
+    private static void UpdateValue(Player player, string value)
     {
+        foreach (HolidayType holiday in Enum.GetValues(typeof(HolidayType)))
+        {
+            if (!value.Equals(holiday.ToString(), StringComparison.CurrentCultureIgnoreCase)) continue;
+
+            UtilitiesPlugin.PluginConfig.OverrideHoliday = holiday;
+            break;
+        }
     }
 }

@@ -5,16 +5,12 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings.Menus;
 
-/// <summary>
-/// Do <b>NOT</b> inherit from this class.
-/// Use StaticMenuBase or DynamicMenuBase instead!
-/// </summary>
 public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
 {
     /// <summary>
-    /// The internal ID of this menu. Should be unique as duplicate IDs are not allowed to be registered.
+    /// The name of the menu, displayed at the top of the menu.
     /// </summary>
-    public abstract string MenuId { get; }
+    public abstract string Name { get; }
 
     /// <summary>
     /// The type of menu, will determine how the menu is displayed.
@@ -67,7 +63,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
     {
         if (ReferenceEquals(null, other)) return false;
         if (ReferenceEquals(this, other)) return true;
-        return MenuId == other.MenuId;
+        return Name == other.Name;
     }
 
     public override bool Equals(object obj)
@@ -79,6 +75,6 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
 
     public override int GetHashCode()
     {
-        return MenuId != null ? MenuId.GetHashCode() : 0;
+        return Name != null ? Name.GetHashCode() : 0;
     }
 }

@@ -80,6 +80,8 @@ public class Slider : ValueSettingsBase<float>
         OnInitialValueInt = intialValueAction;
         return this;
     }
+    
+    
 
     public override SettingsBase Clone()
     {
@@ -88,6 +90,6 @@ public class Slider : ValueSettingsBase<float>
             .RegisterChangedIntAction(OnChangedInt)
             .RegisterIntialValueIntAction(OnInitialValueInt)
             .RegisterChangedAction(OnChanged)
-            .RegisterIntialValueAction(OnInitialValue);
+            .RegisterInitialValueAction(OnInitialValue);
     }
 }

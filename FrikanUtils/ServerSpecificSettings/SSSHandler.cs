@@ -94,16 +94,44 @@ public static class SSSHandler
         return [];
     }
 
-    public static bool TryGetField<T>(Player player, string menuId, string settingId, out T result)
+    /// <summary>
+    /// Get all fields with the given ID.
+    /// </summary>
+    /// <param name="settingId">The unique ID of the fields</param>
+    /// <typeparam name="T">THe expected field type</typeparam>
+    /// <returns>The found fields</returns>
+    public static IEnumerable<T> GetAllFields<T>(string settingId) where T : SettingsBase
+    {
+        return PlayerMenus.Values
+            .Select(playerMenu => playerMenu.GetSetting<T>(settingId))
+            .Where(field => field != null);
+    }
+
+    /// <summary>
+    /// Try to get a specific field for a player.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <param name="result">The resulting field or null</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>Whether the field was found</returns>
+    public static bool TryGetField<T>(Player player, string settingId, out T result)
         where T : SettingsBase
     {
-        result = GetField<T>(player, menuId, settingId);
+        result = GetField<T>(player, settingId);
         return result != null;
     }
 
-    public static T GetField<T>(Player player, string menuId, string settingId) where T : SettingsBase
+    /// <summary>
+    /// Get a specific field for a player. Will return null if the field could not be found or had the wrong type.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found field or null</returns>
+    public static T GetField<T>(Player player, string settingId) where T : SettingsBase
     {
-        return PlayerMenus.TryGetValue(player, out var playerMenu) ? playerMenu.GetSetting<T>(menuId, settingId) : null;
+        return PlayerMenus.TryGetValue(player, out var playerMenu) ? playerMenu.GetSetting<T>(settingId) : null;
     }
 
     internal static void CreatePlayer(Player player)

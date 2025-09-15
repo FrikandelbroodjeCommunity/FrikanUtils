@@ -8,7 +8,7 @@ namespace FrikanUtils.GlobalSettings;
 
 public class GlobalClientSettingsMenu : MenuBase
 {
-    public override string MenuId => "General Settings";
+    public override string Name => "General Settings";
     public override MenuType Type => MenuType.Static;
 
     public override IEnumerable<SettingsBase> GetSettings(Player player)

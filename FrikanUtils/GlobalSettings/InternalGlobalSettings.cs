@@ -1,16 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using FrikanUtils.GlobalSettings.InternalSettings;
-using FrikanUtils.ServerSpecificSettings.Settings;
-using LabApi.Features.Wrappers;
-using MapGeneration.Holidays;
+﻿using FrikanUtils.GlobalSettings.InternalSettings;
+using FrikanUtils.ServerSpecificSettings;
 
 namespace FrikanUtils.GlobalSettings;
 
 internal static class InternalGlobalSettings
 {
-    private static readonly IGlobalSetting[] InternalSettings = GenerateInternalSettings().ToArray();
+    private static readonly IGlobalSetting[] InternalSettings =
+    [
+        new HolidayOverrideSetting()
+    ];
+
+    private static readonly GlobalClientSettingsMenu _clientMenu = new();
+    private static readonly GlobalServerSettingsMenu _serverMenu = new();
 
     internal static void RegisterInternalSettings()
     {
@@ -18,23 +19,19 @@ internal static class InternalGlobalSettings
         {
             GlobalSettingsHandler.RegisterSetting(setting);
         }
+
+        SSSHandler.RegisterMenu(_clientMenu);
+        SSSHandler.RegisterMenu(_serverMenu);
     }
 
     internal static void UnregisterInternalSettings()
     {
+        SSSHandler.UnregisterMenu(_clientMenu);
+        SSSHandler.UnregisterMenu(_serverMenu);
+
         foreach (var setting in InternalSettings)
         {
             GlobalSettingsHandler.UnregisterSetting(setting);
         }
-    }
-
-    private static IEnumerable<IGlobalSetting> GenerateInternalSettings()
-    {
-        yield return new HolidayOverrideSetting();
-    }
-
-    private static void OnSetHoliday(Player player, string _)
-    {
-        
     }
 }

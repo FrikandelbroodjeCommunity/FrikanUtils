@@ -58,6 +58,6 @@ public class Dropdown : ValueSettingsBase<string>
         return new Dropdown(SettingId, Label, Options, Setting.DefaultOptionIndex, Setting.EntryType, HintDescription,
                 ServerOnlyType)
             .RegisterChangedAction(OnChanged)
-            .RegisterIntialValueAction(OnInitialValue);
+            .RegisterInitialValueAction(OnInitialValue);
     }
 }

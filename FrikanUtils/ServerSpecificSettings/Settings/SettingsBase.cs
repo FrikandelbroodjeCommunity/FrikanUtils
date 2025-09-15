@@ -5,7 +5,6 @@ namespace FrikanUtils.ServerSpecificSettings.Settings;
 
 public abstract class SettingsBase
 {
-    public string MenuOwner { get; internal set; }
     public string SettingId { get; }
 
     public abstract ServerSpecificSettingBase Base { get; }

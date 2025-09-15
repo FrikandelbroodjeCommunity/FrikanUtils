@@ -8,7 +8,7 @@ namespace FrikanUtils.GlobalSettings;
 
 public class GlobalServerSettingsMenu : MenuBase
 {
-    public override string MenuId => "General Server Settings";
+    public override string Name => "General Server Settings";
     public override MenuType Type => MenuType.Dynamic;
 
     public override bool HasPermission(Player player)

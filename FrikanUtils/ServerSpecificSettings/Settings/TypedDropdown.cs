@@ -50,6 +50,6 @@ public class TypedDropdown<T> : Dropdown
         return new TypedDropdown<T>(SettingId, Label, _internalOptions, Setting.DefaultOptionIndex, Setting.EntryType,
                 HintDescription, ServerOnlyType)
             .RegisterChangedAction(OnChanged)
-            .RegisterIntialValueAction(OnInitialValue);
+            .RegisterInitialValueAction(OnInitialValue);
     }
 }

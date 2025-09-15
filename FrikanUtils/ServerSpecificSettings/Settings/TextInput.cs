@@ -60,6 +60,6 @@ public class TextInput : ValueSettingsBase<string>
         return new TextInput(SettingId, Label, Setting.Placeholder, Setting.CharacterLimit, Setting.ContentType,
                 HintDescription, ServerOnlyType)
             .RegisterChangedAction(OnChanged)
-            .RegisterIntialValueAction(OnInitialValue);
+            .RegisterInitialValueAction(OnInitialValue);
     }
 }

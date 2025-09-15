@@ -11,12 +11,14 @@ internal static class SSSEventHandler
 {
     internal static void RegisterEvents()
     {
+        ServerSpecificSettingsSync.ServerOnStatusReceived += OnUpdateReceived;
         PlayerEvents.Joined += OnPlayerJoined;
         PlayerEvents.Left += OnPlayerLeft;
     }
 
     internal static void UnregisterEvents()
     {
+        ServerSpecificSettingsSync.ServerOnStatusReceived -= OnUpdateReceived;
         PlayerEvents.Joined -= OnPlayerJoined;
         PlayerEvents.Left -= OnPlayerLeft;
     }
@@ -49,13 +51,7 @@ internal static class SSSEventHandler
         }
         else if (field is Dropdown dropdown)
         {
-            if (!dropdown.ReceivedInitialValue)
-            {
-                dropdown.ReceivedInitialValue = true;
-                dropdown.OnInitialValue?.Invoke(player, ((SSDropdownSetting)dropdown.Base).SyncSelectionText);
-            }
-
-            dropdown.OnChanged?.Invoke(player, ((SSDropdownSetting)dropdown.Base).SyncSelectionText);
+            dropdown.OnValueChanged(player, ((SSDropdownSetting)dropdown.Base).SyncSelectionText);
         }
         else if (field is Keybind keybind)
         {
@@ -78,29 +74,22 @@ internal static class SSSEventHandler
         }
         else if (field is Slider slider)
         {
+            // Do the int variants here as they are not done automatically
             if (!slider.ReceivedInitialValue)
             {
-                slider.ReceivedInitialValue = true;
-                slider.OnInitialValue?.Invoke(player, ((SSSliderSetting)slider.Base).SyncFloatValue);
                 slider.OnInitialValueInt?.Invoke(player, ((SSSliderSetting)slider.Base).SyncIntValue);
             }
 
-            slider.OnChanged?.Invoke(player, ((SSSliderSetting)slider.Base).SyncFloatValue);
             slider.OnChangedInt?.Invoke(player, ((SSSliderSetting)slider.Base).SyncIntValue);
+            slider.OnValueChanged(player, ((SSSliderSetting)slider.Base).SyncFloatValue);
         }
         else if (field is TextInput text)
         {
-            if (!text.ReceivedInitialValue)
-            {
-                text.ReceivedInitialValue = true;
-                text.OnInitialValue?.Invoke(player, ((SSPlaintextSetting)text.Base).SyncInputText);
-            }
-
-            text.OnChanged?.Invoke(player, ((SSPlaintextSetting)text.Base).SyncInputText);
+            text.OnValueChanged(player, ((SSPlaintextSetting)text.Base).SyncInputText);
         }
         else if (field is TwoButtonSetting twoButton)
         {
-            twoButton.OnChanged?.Invoke(player, ((SSTwoButtonsSetting)twoButton.Base).SyncIsB);
+            twoButton.OnValueChanged(player, ((SSTwoButtonsSetting)twoButton.Base).SyncIsB);
         }
     }
 }

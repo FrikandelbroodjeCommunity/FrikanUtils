@@ -10,9 +10,9 @@ public abstract class ValueSettingsBase<T> : SettingsBase
 
     internal bool ReceivedInitialValue;
     internal bool GlobalSetting;
-    internal ServerOnlyType ServerOnlyType;
-    internal Action<Player, T> OnChanged;
-    internal Action<Player, T> OnInitialValue;
+    protected ServerOnlyType ServerOnlyType;
+    protected Action<Player, T> OnChanged;
+    protected Action<Player, T> OnInitialValue;
 
     protected ValueSettingsBase(string settingId, ServerOnlyType isServerOnly) : base(settingId)
     {
@@ -26,7 +26,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
         return this;
     }
 
-    public ValueSettingsBase<T> RegisterIntialValueAction(Action<Player, T> intialValueAction)
+    public ValueSettingsBase<T> RegisterInitialValueAction(Action<Player, T> intialValueAction)
     {
         OnInitialValue = intialValueAction;
         return this;
@@ -42,9 +42,11 @@ public abstract class ValueSettingsBase<T> : SettingsBase
 
         OnInitialValue(player, value);
 
-        if (GlobalSetting)
+        // For global settings, set the value of all instances
+        if (!GlobalSetting) return;
+        foreach (var setting in SSSHandler.GetAllFields<ValueSettingsBase<T>>(SettingId))
         {
-            Value = value;
+            setting.Value = value;
         }
     }
 }

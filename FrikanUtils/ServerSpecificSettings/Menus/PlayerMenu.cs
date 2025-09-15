@@ -34,13 +34,12 @@ public class PlayerMenu
     /// Get the setting belonging to this player.
     /// If the setting was not found, or the type does not match, it will return null.
     /// </summary>
-    /// <param name="menuId">The menu to take the setting from</param>
     /// <param name="settingId">ID of the setting</param>
     /// <typeparam name="T">Type of the setting</typeparam>
     /// <returns>The found setting or null</returns>
-    public T GetSetting<T>(string menuId, string settingId) where T : SettingsBase
+    public T GetSetting<T>(string settingId) where T : SettingsBase
     {
-        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menuId && x.SettingId == settingId);
+        var found = _shownItems.FirstOrDefault(x => x.SettingId == settingId);
         return found as T;
     }
 
@@ -132,7 +131,7 @@ public class PlayerMenu
             return;
         }
 
-        var target = SSSHandler.DynamicMenus.FirstOrDefault(x => x.MenuId == _selectorOptions[index]);
+        var target = SSSHandler.DynamicMenus.FirstOrDefault(x => x.Name == _selectorOptions[index]);
         if (_selectedDynamicMenu == null && target == null)
         {
             return;
@@ -164,7 +163,7 @@ public class PlayerMenu
                      .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Forced))
         {
             _shownMenus.Add(menu);
-            _rendering.Add(new SSGroupHeader($"<size=20>{menu.MenuId}</size>", true));
+            _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
             RenderMenu(menu);
         }
     }
@@ -175,8 +174,8 @@ public class PlayerMenu
         _selectorOptions.Clear();
         _selectorOptions.Add("No menu");
         _selectorOptions.AddRange(SSSHandler.DynamicMenus
-            .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.MenuId)
-            .Select(x => x.MenuId)
+            .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.Name)
+            .Select(x => x.Name)
         );
 
         // If we only have the "No menu item", don't show anything of the dynamic menu system
@@ -188,9 +187,9 @@ public class PlayerMenu
         var index = 0;
 
         // If a menu is already selected, keep that index
-        if (_selectedDynamicMenu != null && _selectorOptions.Contains(_selectedDynamicMenu.MenuId))
+        if (_selectedDynamicMenu != null && _selectorOptions.Contains(_selectedDynamicMenu.Name))
         {
-            index = _selectorOptions.IndexOf(_selectedDynamicMenu.MenuId);
+            index = _selectorOptions.IndexOf(_selectedDynamicMenu.Name);
         }
 
         // Show the header
@@ -222,7 +221,7 @@ public class PlayerMenu
                      .OrderByDescending(x => x.Priority))
         {
             hasMenu = true;
-            _rendering.Add(new SSGroupHeader($"<size=20>{menu.MenuId}</size>", true));
+            _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
 
             if (RenderMenu(menu))
             {
@@ -248,11 +247,10 @@ public class PlayerMenu
         {
             foreach (var item in menu.GetSettings(_targetPlayer))
             {
-                if (_idHandler.TryGetId(menu.MenuId, item.SettingId, item.Base.IsServerOnly, out var id))
+                if (_idHandler.TryGetId(menu.Name, item.SettingId, item.Base.IsServerOnly, out var id))
                 {
                     item.Player = _targetPlayer;
                     item.Id = id;
-                    item.MenuOwner = menu.MenuId;
                     _shownItems.Add(item);
                     _rendering.Add(item.Base);
 
