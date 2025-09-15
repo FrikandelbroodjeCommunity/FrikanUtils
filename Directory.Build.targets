@@ -3,5 +3,7 @@
     <Target Label="Post build events" Name="PostBuild" AfterTargets="PostBuildEvent" Condition="$(ConfigurationName) == SoftDeploy And $(ProjectName) != PluginTemplate And $(ProjectName) != EventTemplate">
         <Message Text="Copying mod DLL to build directory"/>
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)/AllPlugins"/>
+        <Message Text="Copying mod pdb to build directory"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(SolutionDir)/AllPlugins"/>
     </Target>
 </Project>

@@ -6,7 +6,7 @@ using LabApi.Loader.Features.Plugins;
 
 namespace FrikanUtils;
 
-public class ProjectMerPlugin : Plugin<ProjectMerConfig>
+public class ProjectMerPlugin : Plugin
 {
     public override string Name => "FrikanUtils-ProjectMer";
     public override string Description => "ProjectMer extension for FrikanUtils";
