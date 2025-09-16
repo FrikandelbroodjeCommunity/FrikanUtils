@@ -10,6 +10,7 @@ public class GlobalClientSettingsMenu : MenuBase
 {
     public override string Name => "General Settings";
     public override MenuType Type => MenuType.Static;
+    public override int Priority => MenuPriority.Highest;
 
     public override bool HasPermission(Player player)
     {

@@ -10,6 +10,7 @@ public class GlobalServerSettingsMenu : MenuBase
 {
     public override string Name => "General Server Settings";
     public override MenuType Type => MenuType.Dynamic;
+    public override int Priority => MenuPriority.Highest;
 
     public override bool HasPermission(Player player)
     {
