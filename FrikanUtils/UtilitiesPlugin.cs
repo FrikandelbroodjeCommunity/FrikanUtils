@@ -35,10 +35,7 @@ public class UtilitiesPlugin : Plugin<Config>
     {
         Instance = this;
         _harmony.PatchAll();
-
-        // Register the default file provider
-        FileHandler.RegisterProvider(new LocalFileProvider());
-
+        
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
         CustomKeycardEventHandler.RegisterEvents();

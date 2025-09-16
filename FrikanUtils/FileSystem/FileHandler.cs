@@ -7,7 +7,10 @@ namespace FrikanUtils.FileSystem;
 
 public static class FileHandler
 {
-    private static readonly List<BaseFileProvider> FileProviders = [];
+    private static readonly List<BaseFileProvider> FileProviders =
+    [
+        new LocalFileProvider()
+    ];
 
     public static void RegisterProvider(BaseFileProvider provider)
     {
@@ -73,7 +76,7 @@ public static class FileHandler
 
             Logger.Debug($"No full file path found in provider {provider.Name}");
         }
-        
+
         Logger.Debug($"{filename} could not be found in {folder}");
         return default;
     }
