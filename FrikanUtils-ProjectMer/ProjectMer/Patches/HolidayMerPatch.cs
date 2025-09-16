@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using FrikanUtils.Utilities;
 using HarmonyLib;
 using MapGeneration.Holidays;
@@ -20,31 +19,27 @@ internal static class HolidayMerPatch
     public static bool OnCreateObject(SchematicObject __instance, SchematicBlockData block)
     {
         // If it isn't applicable, no additional checks are needed
-        if (!ApplicableSchematics.Contains(__instance))
+        if (!ApplicableSchematics.Contains(__instance) || block == null)
         {
             return true;
         }
 
-        var holidays = GetHolidayTypes(block.Name).ToArray();
-        return holidays.IsEmpty() || // If it doesn't filter on holidays, skip it
-               holidays.Any(x => x.IsActive()); // Otherwise check if one of the holidays is active
-    }
-
-    private static IEnumerable<HolidayType> GetHolidayTypes(string name)
-    {
-        var separatorIndex = name.IndexOf(';');
+        var separatorIndex = block.Name.IndexOf(';');
         if (separatorIndex < 0)
         {
-            yield break;
+            // The separator is not even included, so no need to check holidays
+            return true;
         }
 
-        var split = name.Substring(0, separatorIndex + 1).Split(',');
+        var split = block.Name.Substring(0, separatorIndex + 1).Split(',');
         foreach (var holiday in split)
         {
-            if (Enum.TryParse(holiday, out HolidayType holidayType))
+            if (Enum.TryParse(holiday, out HolidayType type) && type.IsActive())
             {
-                yield return holidayType;
+                return true;
             }
         }
+
+        return false;
     }
 }
