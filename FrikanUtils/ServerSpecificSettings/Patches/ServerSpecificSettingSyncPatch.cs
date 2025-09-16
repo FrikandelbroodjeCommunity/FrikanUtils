@@ -1,4 +1,5 @@
 using System;
+using System.Reflection;
 using HarmonyLib;
 using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
@@ -8,8 +9,14 @@ using UserSettings.ServerSpecific;
 namespace FrikanUtils.ServerSpecificSettings.Patches;
 
 [HarmonyPatch(typeof(ServerSpecificSettingsSync))]
-public class ServerSpecificSettingSyncPatch
+internal static class ServerSpecificSettingSyncPatch
 {
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
+    {
+        return UtilitiesPlugin.PluginConfig.UseServerSpecificSettings;
+    }
+    
     [HarmonyPatch(nameof(ServerSpecificSettingsSync.ServerProcessClientResponseMsg))]
     [HarmonyPrefix]
     public static bool OnReceiveMessage(NetworkConnection conn, SSSClientResponse msg)

@@ -25,7 +25,7 @@ public class UtilitiesPlugin : Plugin<Config>
     public override LoadPriority Priority => LoadPriority.Highest;
 
     public static UtilitiesPlugin Instance { get; private set; }
-    
+
     internal static Config PluginConfig => Instance.Config;
 
     private GameObject _handlerObject;
@@ -37,20 +37,20 @@ public class UtilitiesPlugin : Plugin<Config>
     {
         Instance = this;
         _harmony.PatchAll();
-        
+
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
-        CustomKeycardEventHandler.RegisterEvents();
-        SSSEventHandler.RegisterEvents();
+        if (Config.UseKeycardImprovements) CustomKeycardEventHandler.RegisterEvents();
+        if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
         // Register global settings
         InternalGlobalSettings.RegisterInternalSettings();
 
         // Register all monobehaviour handles
         _handlerObject = new GameObject("FrikanUtils Handler Object");
-        Object.DontDestroyOnLoad(_handlerObject);
         _handlerObject.AddComponent<RainbowKeycardHandler>();
-        _handlerObject.AddComponent<HintSender>();
+        if (Config.UseHintSystem) _handlerObject.AddComponent<HintSender>();
+        Object.DontDestroyOnLoad(_handlerObject);
     }
 
     public override void Disable()

@@ -1,4 +1,5 @@
-﻿using HarmonyLib;
+﻿using System.Reflection;
+using HarmonyLib;
 using Interactables.Interobjects;
 using Interactables.Interobjects.DoorButtons;
 using Interactables.Interobjects.DoorUtils;
@@ -6,29 +7,20 @@ using InventorySystem;
 using InventorySystem.Items.Keycards;
 using InventorySystem.Items.Pickups;
 using Mirror;
-using Scp914;
-using Scp914.Processors;
 using UnityEngine;
 
 namespace FrikanUtils.Keycard.Patches;
 
-[Harmony]
-internal class CustomKeycardPatches
+[HarmonyPatch(typeof(CollisionDetectionPickup))]
+internal static class KeycardCollisionPatch
 {
-    [HarmonyPatch(typeof(Scp914Upgrader), nameof(Scp914Upgrader.TryGetProcessor))]
-    [HarmonyPrefix]
-    // ReSharper disable once InconsistentNaming
-    public static bool OnTryGetProcessor(ItemType itemType, ref Scp914ItemProcessor processor, ref bool __result)
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
     {
-        // Make custom keycards trigger the 914 system
-        if (!CustomKeycardUtilities.CustomKeycards.Contains(itemType)) return true;
-        if (!Scp914Upgrader.TryGetProcessor(ItemType.KeycardO5, out processor)) return true;
-
-        __result = true;
-        return false;
+        return UtilitiesPlugin.PluginConfig.UseKeycardImprovements;
     }
 
-    [HarmonyPatch(typeof(CollisionDetectionPickup), nameof(CollisionDetectionPickup.ProcessCollision))]
+    [HarmonyPatch(nameof(CollisionDetectionPickup.ProcessCollision))]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming
     public static bool OnProcessCollision(CollisionDetectionPickup __instance, Collision collision)

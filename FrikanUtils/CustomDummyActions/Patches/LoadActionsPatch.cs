@@ -17,6 +17,12 @@ internal static class LoadActionsPatch
     private static readonly PropertyInfo IsDummyField = typeof(ReferenceHub).GetProperty(nameof(ReferenceHub.IsDummy));
     private static readonly PropertyInfo IsHostField = typeof(ReferenceHub).GetProperty(nameof(ReferenceHub.IsHost));
 
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
+    {
+        return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
+    }
+    
     [HarmonyPatch(nameof(RaDummyActions.ReceiveData), typeof(CommandSender), typeof(string))]
     [HarmonyPrefix]
     public static void OnReceiveData(CommandSender sender)

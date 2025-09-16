@@ -111,7 +111,8 @@
         <Compile Include="Keycard\CustomKeycard.cs" />
         <Compile Include="Keycard\CustomKeycardEventHandler.cs" />
         <Compile Include="Keycard\CustomKeycardUtilities.cs" />
-        <Compile Include="Keycard\Patches\CustomKeycardPatches.cs" />
+        <Compile Include="Keycard\Patches\CustomKeycard914Patch.cs" />
+        <Compile Include="Keycard\Patches\KeycardCollisionPatch.cs" />
         <Compile Include="Keycard\RainbowKeycardHandler.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyHelper.cs" />

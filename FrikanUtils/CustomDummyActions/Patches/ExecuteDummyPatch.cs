@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.Reflection;
 using CommandSystem;
 using CommandSystem.Commands.RemoteAdmin.Dummies;
 using FrikanUtils.Utilities;
@@ -10,10 +11,16 @@ using Utils;
 
 namespace FrikanUtils.CustomDummyActions.Patches;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(ActionDummyCommand))]
 internal static class ExecuteDummyPatch
 {
-    [HarmonyPatch(typeof(ActionDummyCommand), nameof(ActionDummyCommand.Execute))]
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
+    {
+        return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
+    }
+    
+    [HarmonyPatch(nameof(ActionDummyCommand.Execute))]
     [HarmonyPrefix]
     public static bool OnExecuteDummy(ArraySegment<string> arguments, ICommandSender sender, ref string response,
         // ReSharper disable once InconsistentNaming

@@ -3,12 +3,12 @@ using HarmonyLib;
 
 namespace FrikanUtils.Utilities.Patches;
 
-[HarmonyPatch]
+[HarmonyPatch(typeof(PlayerAuthenticationManager))]
 internal static class DummyAuthenticationPatch
 {
     private static byte _uniqueDummyId;
 
-    [HarmonyPatch(typeof(PlayerAuthenticationManager), nameof(PlayerAuthenticationManager.Awake))]
+    [HarmonyPatch(nameof(PlayerAuthenticationManager.Awake))]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming
     public static bool OnAwakeAuthentication(PlayerAuthenticationManager __instance)

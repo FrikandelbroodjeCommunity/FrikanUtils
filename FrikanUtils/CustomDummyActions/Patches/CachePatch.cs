@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using HarmonyLib;
 using NetworkManagerUtils.Dummies;
 
@@ -7,6 +8,12 @@ namespace FrikanUtils.CustomDummyActions.Patches;
 [HarmonyPatch(typeof(DummyActionCollector))]
 internal static class CachePatch
 {
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
+    {
+        return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
+    }
+    
     [HarmonyPatch(nameof(DummyActionCollector.ServerGetActions))]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming

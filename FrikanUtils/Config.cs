@@ -8,6 +8,18 @@ public class Config
 {
     [Description("Whether to show debug messages")]
     public bool Debug { get; set; }
+    
+    [Description("Whether the custom dummy actions system should be enabled")]
+    public bool UseCustomDummyActions { get; set; } = true;
+
+    [Description("Whether the hint system should be enabled")]
+    public bool UseHintSystem { get; set; } = true;
+
+    [Description("Whether the keycard improvements should be enabled")]
+    public bool UseKeycardImprovements { get; set; } = true;
+    
+    [Description("Whether the server specific settings system should be enabled")]
+    public bool UseServerSpecificSettings { get; set; } = true;
 
     [Description("Colors used for rainbows")]
     public string[] RainbowTextColors { get; set; } =
