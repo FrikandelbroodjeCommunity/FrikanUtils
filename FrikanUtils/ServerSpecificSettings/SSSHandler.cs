@@ -101,7 +101,7 @@ public static class SSSHandler
     /// <param name="settingId">The unique ID of the fields</param>
     /// <typeparam name="T">THe expected field type</typeparam>
     /// <returns>The found fields</returns>
-    public static IEnumerable<T> GetAllFields<T>(string menu, byte settingId) where T : SettingsBase
+    public static IEnumerable<T> GetAllFields<T>(string menu, ushort settingId) where T : SettingsBase
     {
         return PlayerMenus.Values
             .Select(playerMenu => playerMenu.GetSetting<T>(menu, settingId))
@@ -117,7 +117,7 @@ public static class SSSHandler
     /// <param name="result">The resulting field or null</param>
     /// <typeparam name="T">The expected field type</typeparam>
     /// <returns>Whether the field was found</returns>
-    public static bool TryGetField<T>(Player player, string menu, byte settingId, out T result)
+    public static bool TryGetField<T>(Player player, string menu, ushort settingId, out T result)
         where T : SettingsBase
     {
         result = GetField<T>(player, menu, settingId);
@@ -132,7 +132,7 @@ public static class SSSHandler
     /// <param name="settingId">The unique ID of the field</param>
     /// <typeparam name="T">The expected field type</typeparam>
     /// <returns>The found field or null</returns>
-    public static T GetField<T>(Player player, string menu, byte settingId) where T : SettingsBase
+    public static T GetField<T>(Player player, string menu, ushort settingId) where T : SettingsBase
     {
         return PlayerMenus.TryGetValue(player, out var playerMenu) ? playerMenu.GetSetting<T>(menu, settingId) : null;
     }

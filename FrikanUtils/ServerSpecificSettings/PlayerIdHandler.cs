@@ -6,7 +6,7 @@ public class PlayerIdHandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 
-    public int GetId(string menuId, byte? fieldId)
+    public int GetId(string menuId, ushort? fieldId)
     {
         if (!fieldId.HasValue)
         {
@@ -27,7 +27,7 @@ public class PlayerIdHandler
             UtilitiesPlugin.Save();
         }
 
-        return menuIndex << 8 | fieldId.Value;
+        return menuIndex << 16 | fieldId.Value;
     }
 
     public void Reset()

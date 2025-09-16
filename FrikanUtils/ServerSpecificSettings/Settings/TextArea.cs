@@ -8,7 +8,7 @@ public class TextArea : SettingsBase
     public override ServerSpecificSettingBase Base { get; }
 
     public TextArea(
-        byte? id,
+        ushort? id,
         string content,
         SSTextArea.FoldoutMode foldoutMode = SSTextArea.FoldoutMode.NotCollapsable,
         string collapsedText = null,

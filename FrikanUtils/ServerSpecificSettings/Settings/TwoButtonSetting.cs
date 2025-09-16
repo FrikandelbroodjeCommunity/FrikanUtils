@@ -17,7 +17,7 @@ public class TwoButtonSetting : ValueSettingsBase<bool>
     }
 
     public TwoButtonSetting(
-        byte? id,
+        ushort? id,
         string label,
         string optionA,
         string optionB,

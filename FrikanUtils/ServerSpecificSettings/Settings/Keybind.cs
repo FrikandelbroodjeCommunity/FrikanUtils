@@ -16,7 +16,7 @@ public class Keybind : SettingsBase
     internal bool PressedPreviousFrame;
 
     public Keybind(
-        byte? id,
+        ushort? id,
         string label,
         KeyCode suggestedKey = KeyCode.None,
         bool preventInteractionOnGui = true,

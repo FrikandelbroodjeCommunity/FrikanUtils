@@ -32,7 +32,7 @@ public class TypedDropdown<T> : Dropdown
     private T[] _internalOptions;
 
     public TypedDropdown(
-        byte? id,
+        ushort? id,
         string label,
         T[] options,
         int defaultOptionIndex = 0,

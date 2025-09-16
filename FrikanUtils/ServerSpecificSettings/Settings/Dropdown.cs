@@ -34,7 +34,7 @@ public class Dropdown : ValueSettingsBase<string>
     }
 
     public Dropdown(
-        byte? id,
+        ushort? id,
         string label,
         string[] options,
         int defaultOptionIndex = 0,

@@ -26,7 +26,7 @@ public class Slider : ValueSettingsBase<float>
     internal Action<Player, int> OnInitialValueInt;
 
     public Slider(
-        byte? id,
+        ushort? id,
         string label,
         float minValue,
         float maxValue,

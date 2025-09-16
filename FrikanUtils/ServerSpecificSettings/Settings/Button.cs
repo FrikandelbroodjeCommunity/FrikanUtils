@@ -12,7 +12,7 @@ public class Button : SettingsBase
     internal Action<Player> OnClick;
 
     public Button(
-        byte? id,
+        ushort? id,
         string label,
         string buttonText,
         float? holdTimeSeconds = null,

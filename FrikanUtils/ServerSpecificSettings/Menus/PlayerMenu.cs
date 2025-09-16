@@ -38,7 +38,7 @@ public class PlayerMenu
     /// <param name="settingId">ID of the setting</param>
     /// <typeparam name="T">Type of the setting</typeparam>
     /// <returns>The found setting or null</returns>
-    public T GetSetting<T>(string menu, byte settingId) where T : SettingsBase
+    public T GetSetting<T>(string menu, ushort settingId) where T : SettingsBase
     {
         var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
         return found as T;

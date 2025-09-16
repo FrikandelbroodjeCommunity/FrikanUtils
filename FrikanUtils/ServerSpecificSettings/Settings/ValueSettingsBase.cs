@@ -15,7 +15,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
     protected Action<Player, T> OnChanged;
     protected Action<Player, T> OnInitialValue;
 
-    protected ValueSettingsBase(byte? settingId, ServerOnlyType isServerOnly) : base(settingId)
+    protected ValueSettingsBase(ushort? settingId, ServerOnlyType isServerOnly) : base(settingId)
     {
         GlobalSetting = isServerOnly.IsGlobalSetting();
         ServerOnlyType = isServerOnly;
