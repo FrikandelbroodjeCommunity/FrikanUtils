@@ -9,8 +9,8 @@ internal static class InternalGlobalSettings
         new HolidayOverrideSetting()
     ];
 
-    private static readonly GlobalClientSettingsMenu _clientMenu = new();
-    private static readonly GlobalServerSettingsMenu _serverMenu = new();
+    private static readonly GlobalClientSettingsMenu ClientMenu = new();
+    private static readonly GlobalServerSettingsMenu ServerMenu = new();
 
     internal static void RegisterInternalSettings()
     {
@@ -19,14 +19,14 @@ internal static class InternalGlobalSettings
             GlobalSettingsHandler.RegisterSetting(setting);
         }
 
-        SSSHandler.RegisterMenu(_clientMenu);
-        SSSHandler.RegisterMenu(_serverMenu);
+        SSSHandler.RegisterMenu(ClientMenu);
+        SSSHandler.RegisterMenu(ServerMenu);
     }
 
     internal static void UnregisterInternalSettings()
     {
-        SSSHandler.UnregisterMenu(_clientMenu);
-        SSSHandler.UnregisterMenu(_serverMenu);
+        SSSHandler.UnregisterMenu(ClientMenu);
+        SSSHandler.UnregisterMenu(ServerMenu);
 
         foreach (var setting in InternalSettings)
         {

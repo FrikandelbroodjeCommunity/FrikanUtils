@@ -52,11 +52,9 @@ public abstract class DummyModuleBase : IEquatable<DummyModuleBase>
 
         foreach (var target in targets.Where(target => target != null))
         {
-            Logger.Info($"Checking action for: {target.LogName}");
             var action = GetActions(executor, target).FirstOrDefault(x => x.Name.Replace(" ", "_") == name);
             if (action == null) continue;
 
-            Logger.Info($"Adding {target.LogName}");
             executable.Action ??= action.Action;
             executable.Players.Add(target);
         }

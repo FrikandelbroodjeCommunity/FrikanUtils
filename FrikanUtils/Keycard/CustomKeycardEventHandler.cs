@@ -33,7 +33,7 @@ internal static class CustomKeycardEventHandler
         ev.IsAllowed = false; // Always disallow custom keycards as they cannot be upgraded
 
         // Check if the card is represented and we can get a processor for it
-        if (!Keycard.CustomKeycard.TryGet(ev.Item.Serial, out var keycardData) ||
+        if (!CustomKeycard.TryGet(ev.Item.Serial, out var keycardData) ||
             keycardData.RepresentativeType == ItemType.None ||
             !Scp914Upgrader.TryGetProcessor(keycardData.RepresentativeType, out var processor))
         {

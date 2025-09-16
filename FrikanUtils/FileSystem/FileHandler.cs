@@ -40,14 +40,16 @@ public static class FileHandler
             var result = await provider.SearchFullPath(filename, folder);
             if (!string.IsNullOrEmpty(result))
             {
-                Logger.Debug($"Found full file path from provider {provider.Name}");
+                Logger.Debug($"Found full file path from provider {provider.Name}: {result}",
+                    UtilitiesPlugin.PluginConfig.Debug);
                 return result;
             }
 
-            Logger.Debug($"No full file path found in provider {provider.Name}");
+            Logger.Debug($"No full file path found in provider {provider.Name} for {folder}/{filename}",
+                UtilitiesPlugin.PluginConfig.Debug);
         }
 
-        Logger.Debug($"{filename} could not be found in {folder}");
+        Logger.Warn($"{filename} could not be found in {folder}");
         return null;
     }
 
@@ -70,14 +72,16 @@ public static class FileHandler
             var result = await provider.SearchFile<T>(filename, folder, json);
             if (!result.Equals(default(T)))
             {
-                Logger.Debug($"Found full file path from provider {provider.Name}");
+                Logger.Debug($"Found file {folder}/{filename} from provider {provider.Name}",
+                    UtilitiesPlugin.PluginConfig.Debug);
                 return result;
             }
 
-            Logger.Debug($"No full file path found in provider {provider.Name}");
+            Logger.Debug($"No file found in provider {provider.Name} for {folder}/{filename}",
+                UtilitiesPlugin.PluginConfig.Debug);
         }
 
-        Logger.Debug($"{filename} could not be found in {folder}");
+        Logger.Warn($"{filename} could not be found in {folder}");
         return default;
     }
 }
