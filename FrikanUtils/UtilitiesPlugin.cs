@@ -9,6 +9,7 @@ using HarmonyLib;
 using LabApi.Events.Handlers;
 using LabApi.Features;
 using LabApi.Loader.Features.Plugins;
+using LabApi.Loader.Features.Plugins.Enums;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -21,6 +22,7 @@ public class UtilitiesPlugin : Plugin<Config>
     public override string Author => "gamendegamer321";
     public override Version Version => new(1, 0, 0);
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
+    public override LoadPriority Priority => LoadPriority.Highest;
 
     public static UtilitiesPlugin Instance { get; private set; }
     
