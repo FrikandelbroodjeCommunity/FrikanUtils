@@ -21,6 +21,9 @@ public class Config
         "#FF00FF"
     ];
 
+    [Description("The amount of refreshes the same rainbow color is shown")]
+    public int RainbowColorTicks { get; set; } = 2;
+
     [Description("Time between updates of the continuous hints")]
     public float HintRefreshTime { get; set; } = 0.5f;
 
