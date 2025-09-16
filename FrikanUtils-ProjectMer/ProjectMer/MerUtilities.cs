@@ -35,7 +35,7 @@ public static class MerUtilities
     /// <returns>Enumerable for the transform(s) of the found object(s)</returns>
     public static IEnumerable<Transform> FindNamedObjects(this SchematicObject obj, string name)
     {
-        return obj._attachedBlocks
+        return obj.AttachedBlocks
             .Where(schematicObj => schematicObj.name == name)
             .Select(x => x.transform);
     }
@@ -157,7 +157,7 @@ public static class MerUtilities
     {
         var door = NetworkClient.prefabs.Values.First(x => x.name.Contains("EZ"));
 
-        foreach (var schematicObj in obj._attachedBlocks.Where(x => x.name.ContainsIgnoreCase("SpawnDoor")))
+        foreach (var schematicObj in obj.AttachedBlocks.Where(x => x.name.ContainsIgnoreCase("SpawnDoor")))
         {
             var transform = schematicObj.transform;
             var doorObj = Object.Instantiate(door, transform.position, transform.rotation);
