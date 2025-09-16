@@ -40,7 +40,7 @@ public class UtilitiesPlugin : Plugin<Config>
 
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
-        if (Config.UseKeycardImprovements) CustomKeycardEventHandler.RegisterEvents();
+        CustomKeycardEventHandler.RegisterEvents();
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
         // Register global settings
