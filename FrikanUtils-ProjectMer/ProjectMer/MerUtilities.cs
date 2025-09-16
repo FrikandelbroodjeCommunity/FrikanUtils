@@ -53,7 +53,7 @@ public static class MerUtilities
     public static async void FindAndSpawnSchematic(string file, Vector3 position,
         Quaternion rotation, Action<SchematicObject> action = null, string folder = "Maps", bool ignoreHoliday = false)
     {
-        var data = await FileHandler.SearchFile<SchematicObjectDataList>(file, folder);
+        var data = await FileHandler.SearchFile<SchematicObjectDataList>(file, folder, true);
         if (data == null)
         {
             Logger.Warn($"Could not find {file} in folder {folder}!");

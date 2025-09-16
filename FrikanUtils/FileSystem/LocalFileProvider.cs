@@ -14,7 +14,7 @@ public class LocalFileProvider : BaseFileProvider
 {
     public override string Name => "LocalFileProvider";
 
-    public override Task<string> SearchFullPath(string filename, string folder = null)
+    public override Task<string> SearchFullPath(string filename, string folder)
     {
         var directory = string.IsNullOrEmpty(folder)
             ? UtilitiesPlugin.Instance.GetConfigDirectory().FullName
@@ -32,7 +32,7 @@ public class LocalFileProvider : BaseFileProvider
         return Task.FromResult<string>(null);
     }
 
-    public override Task<T> SearchFile<T>(string filename, string folder = null, bool json = false)
+    public override Task<T> SearchFile<T>(string filename, string folder, bool json)
     {
         var path = SearchFullPath(filename, folder).Result;
         if (string.IsNullOrEmpty(path))

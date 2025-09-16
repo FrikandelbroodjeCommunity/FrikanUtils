@@ -21,7 +21,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
     /// <returns>The full path to the file or null</returns>
-    public abstract Task<string> SearchFullPath(string filename, string folder = null);
+    public abstract Task<string> SearchFullPath(string filename, string folder);
 
     /// <summary>
     /// Search for the file and convert it into the data as needed.
@@ -35,7 +35,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
-    public abstract Task<T> SearchFile<T>(string filename, string folder = null, bool json = false);
+    public abstract Task<T> SearchFile<T>(string filename, string folder, bool json);
 
     /// <summary>
     /// Helper method to get all holiday variants of a filename.
