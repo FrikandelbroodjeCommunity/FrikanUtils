@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using LabApi.Features.Console;
 using Utils.NonAllocLINQ;
@@ -37,16 +38,23 @@ public static class FileHandler
     {
         foreach (var provider in FileProviders)
         {
-            var result = await provider.SearchFullPath(filename, folder);
-            if (!string.IsNullOrEmpty(result))
+            try
             {
-                Logger.Debug($"Found full file path from provider {provider.Name}: {result}",
-                    UtilitiesPlugin.PluginConfig.Debug);
-                return result;
-            }
+                var result = await provider.SearchFullPath(filename, folder);
+                if (!string.IsNullOrEmpty(result))
+                {
+                    Logger.Debug($"Found full file path from provider {provider.Name}: {result}",
+                        UtilitiesPlugin.PluginConfig.Debug);
+                    return result;
+                }
 
-            Logger.Debug($"No full file path found in provider {provider.Name} for {folder}/{filename}",
-                UtilitiesPlugin.PluginConfig.Debug);
+                Logger.Debug($"No full file path found in provider {provider.Name} for {folder}/{filename}",
+                    UtilitiesPlugin.PluginConfig.Debug);
+            }
+            catch (Exception e)
+            {
+                Logger.Warn($"Encountered error while using provider: {provider}.\n{e}");
+            }
         }
 
         Logger.Warn($"{filename} could not be found in {folder}");
@@ -65,23 +73,30 @@ public static class FileHandler
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
-    public static async Task<T> SearchFile<T>(string filename, string folder, bool json)
+    public static async Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class
     {
         foreach (var provider in FileProviders)
         {
-            var result = await provider.SearchFile<T>(filename, folder, json);
-            if (!result.Equals(default(T)))
+            try
             {
-                Logger.Debug($"Found file {folder}/{filename} from provider {provider.Name}",
-                    UtilitiesPlugin.PluginConfig.Debug);
-                return result;
-            }
+                var result = await provider.SearchFile<T>(filename, folder, json);
+                if (result != null)
+                {
+                    Logger.Debug($"Found file {folder}/{filename} from provider {provider.Name}",
+                        UtilitiesPlugin.PluginConfig.Debug);
+                    return result;
+                }
 
-            Logger.Debug($"No file found in provider {provider.Name} for {folder}/{filename}",
-                UtilitiesPlugin.PluginConfig.Debug);
+                Logger.Debug($"No file found in provider {provider.Name} for {folder}/{filename}",
+                    UtilitiesPlugin.PluginConfig.Debug);
+            }
+            catch (Exception e)
+            {
+                Logger.Warn($"Encountered error while using provider: {provider}.\n{e}");
+            }
         }
 
         Logger.Warn($"{filename} could not be found in {folder}");
-        return default;
+        return null;
     }
 }

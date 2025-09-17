@@ -32,12 +32,12 @@ public class LocalFileProvider : BaseFileProvider
         return Task.FromResult<string>(null);
     }
 
-    public override Task<T> SearchFile<T>(string filename, string folder, bool json)
+    public override Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class
     {
         var path = SearchFullPath(filename, folder).Result;
         if (string.IsNullOrEmpty(path))
         {
-            return default;
+            return Task.FromResult<T>(null);
         }
 
         return Task.FromResult(json

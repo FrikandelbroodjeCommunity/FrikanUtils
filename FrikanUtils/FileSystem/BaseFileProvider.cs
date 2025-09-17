@@ -35,7 +35,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
-    public abstract Task<T> SearchFile<T>(string filename, string folder, bool json);
+    public abstract Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class;
 
     /// <summary>
     /// Helper method to get all holiday variants of a filename.
