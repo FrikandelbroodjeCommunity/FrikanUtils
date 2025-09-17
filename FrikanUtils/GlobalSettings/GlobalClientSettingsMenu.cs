@@ -8,9 +8,11 @@ namespace FrikanUtils.GlobalSettings;
 
 public class GlobalClientSettingsMenu : MenuBase
 {
-    public override string Name => "General Settings";
+    public override string Name => ClientId;
     public override MenuType Type => MenuType.Static;
     public override int Priority => MenuPriority.Highest;
+
+    public const string ClientId = "General Settings";
 
     public override bool HasPermission(Player player)
     {

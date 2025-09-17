@@ -9,8 +9,8 @@ internal static class InternalGlobalSettings
         new HolidayOverrideSetting()
     ];
 
+    internal static readonly GlobalServerSettingsMenu ServerMenu = new();
     private static readonly GlobalClientSettingsMenu ClientMenu = new();
-    private static readonly GlobalServerSettingsMenu ServerMenu = new();
 
     internal static void RegisterInternalSettings()
     {

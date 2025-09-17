@@ -137,6 +137,22 @@ public static class SSSHandler
         return PlayerMenus.TryGetValue(player, out var playerMenu) ? playerMenu.GetSetting<T>(menu, settingId) : null;
     }
 
+    /// <summary>
+    /// Get a specific field for a player. Will return null if the field could not be found or had the wrong type.
+    /// As labels may include duplicates, it will only return the first instance it finds.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="menu">The exact name of the menu</param>
+    /// <param name="label">The value of the label</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found field or null</returns>
+    public static T GetFieldByLabel<T>(Player player, string menu, string label) where T : SettingsBase
+    {
+        return PlayerMenus.TryGetValue(player, out var playerMenu)
+            ? playerMenu.GetSettingByLabel<T>(menu, label)
+            : null;
+    }
+
     internal static void CreatePlayer(Player player)
     {
         var menu = new PlayerMenu(player);

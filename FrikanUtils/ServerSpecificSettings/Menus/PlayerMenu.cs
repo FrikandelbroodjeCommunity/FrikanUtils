@@ -45,6 +45,20 @@ public class PlayerMenu
     }
 
     /// <summary>
+    /// Alternative way of getting the setting belonging to this player.
+    /// This uses the label instead of the unique ID, only the first found value will be returned.
+    /// </summary>
+    /// <param name="menu"></param>
+    /// <param name="label"></param>
+    /// <typeparam name="T"></typeparam>
+    /// <returns></returns>
+    public T GetSettingByLabel<T>(string menu, string label) where T : SettingsBase
+    {
+        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.Label == label);
+        return found as T;
+    }
+
+    /// <summary>
     /// Update the settings shown for this player.
     /// </summary>
     public void Update(bool force = false)

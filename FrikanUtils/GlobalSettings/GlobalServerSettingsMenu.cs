@@ -8,10 +8,12 @@ namespace FrikanUtils.GlobalSettings;
 
 public class GlobalServerSettingsMenu : MenuBase
 {
-    public override string Name => "General Server Settings";
+    public override string Name => ServerId;
     public override MenuType Type => MenuType.Dynamic;
     public override int Priority => MenuPriority.Highest;
 
+    public const string ServerId = "General Server Settings";
+    
     public override bool HasPermission(Player player)
     {
         return base.HasPermission(player) && GlobalSettingsHandler.ServerSettings.Any(x => x.HasPermissions(player));
