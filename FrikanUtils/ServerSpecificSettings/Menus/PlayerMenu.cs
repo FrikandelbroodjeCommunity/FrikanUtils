@@ -59,7 +59,7 @@ public class PlayerMenu
         _shownMenus.Clear();
 
         Logger.Debug($"Updating player {_targetPlayer.LogName}", UtilitiesPlugin.PluginConfig.Debug);
-        if (SSSHandler.StaticMenus.Count == 0 && SSSHandler.DynamicMenus.Count == 0)
+        if (SSSHandler.RegisteredMenus.Count == 0)
         {
             ServerSpecificSettingsSync.SendToPlayer(_targetPlayer.ReferenceHub, []);
             return;
@@ -132,7 +132,7 @@ public class PlayerMenu
             return;
         }
 
-        var target = SSSHandler.DynamicMenus.FirstOrDefault(x => x.Name == _selectorOptions[index]);
+        var target = SSSHandler.RegisteredMenus.FirstOrDefault(x => x.Name == _selectorOptions[index]);
         if (_selectedDynamicMenu == null && target == null)
         {
             return;
@@ -160,7 +160,7 @@ public class PlayerMenu
 
     private void RenderForcedDynamicMenus()
     {
-        foreach (var menu in SSSHandler.DynamicMenus
+        foreach (var menu in SSSHandler.RegisteredMenus
                      .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Forced))
         {
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
@@ -181,7 +181,7 @@ public class PlayerMenu
         // Get the options for the dropdown
         _selectorOptions.Clear();
         _selectorOptions.Add("No menu");
-        _selectorOptions.AddRange(SSSHandler.DynamicMenus
+        _selectorOptions.AddRange(SSSHandler.RegisteredMenus
             .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.Name)
             .Select(x => x.Name)
         );
@@ -228,7 +228,8 @@ public class PlayerMenu
         var hasMenu = false;
 
         _rendering.Add(new SSGroupHeader("<b>Settings</b>"));
-        foreach (var menu in SSSHandler.StaticMenus.Where(x => x.InternalHasPermission(_targetPlayer))
+        foreach (var menu in SSSHandler.RegisteredMenus
+                     .Where(x => x.Type == MenuType.Static && x.InternalHasPermission(_targetPlayer))
                      .OrderByDescending(x => x.Priority))
         {
             _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));

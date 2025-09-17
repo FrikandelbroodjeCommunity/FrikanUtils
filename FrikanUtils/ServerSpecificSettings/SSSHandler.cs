@@ -11,8 +11,7 @@ public static class SSSHandler
 {
     internal const int LowestReservedId = -4;
 
-    internal static readonly List<MenuBase> StaticMenus = [];
-    internal static readonly List<MenuBase> DynamicMenus = [];
+    internal static readonly List<MenuBase> RegisteredMenus = [];
     internal static readonly Dictionary<Player, PlayerMenu> PlayerMenus = new();
 
     public static void RegisterMenu(MenuBase menu)
@@ -22,35 +21,16 @@ public static class SSSHandler
             Logger.Warn("Found multiple menus with the same ID, overwriting the previous!");
         }
 
-        if (menu.Type == MenuType.Dynamic)
-        {
-            DynamicMenus.Add(menu);
-        }
-        else
-        {
-            StaticMenus.Add(menu);
-        }
-
+        RegisteredMenus.Add(menu);
         UpdateAll(menu);
     }
 
     public static bool UnregisterMenu(MenuBase menu)
     {
-        if (StaticMenus.Contains(menu))
-        {
-            StaticMenus.Remove(menu);
-            UpdateAll(menu);
-            return true;
-        }
+        if (!RegisteredMenus.Remove(menu)) return false;
 
-        if (DynamicMenus.Contains(menu))
-        {
-            DynamicMenus.Remove(menu);
-            UpdateAll(menu);
-            return true;
-        }
-
-        return false;
+        UpdateAll(menu);
+        return true;
     }
 
     /// <summary>
@@ -86,7 +66,7 @@ public static class SSSHandler
     /// <returns>Players that have the menu open</returns>
     public static IEnumerable<Player> GetAllPlayers(MenuBase menu)
     {
-        if (StaticMenus.Contains(menu) || DynamicMenus.Contains(menu))
+        if (RegisteredMenus.Contains(menu))
         {
             return from pair in PlayerMenus where pair.Value.HasMenu(menu) select pair.Key;
         }
