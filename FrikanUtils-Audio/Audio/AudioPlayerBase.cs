@@ -22,12 +22,12 @@ public abstract class AudioPlayerBase
     /// The forced volume of the audio.
     /// If set to -1, the player will use the global volume controlled by the `ut v` command.
     /// </summary>
-    public float OverrideVolume;
+    public float OverrideVolume = -1;
 
     /// <summary>
     /// The volume the player should use. Will be the global volume or the <see cref="OverrideVolume"/>.
     /// </summary>
-    public float Volume => OverrideVolume < 0 ? AudioSystem.GlobalVolume : OverrideVolume;
+    public float Volume => OverrideVolume < 0 ? AudioPlugin.Instance.Config.Volume : OverrideVolume;
 
     /// <summary>
     /// Whether the player is still valid, should be false after being cleaned up.
@@ -145,7 +145,7 @@ public abstract class AudioPlayerBase
             return false;
         }
 
-        if (RestrictPlayers)
+        if (!RestrictPlayers)
         {
             return AudioSystem.DefaultFilterList.Contains(player.PlayerId);
         }

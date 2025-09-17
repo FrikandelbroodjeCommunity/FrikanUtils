@@ -11,7 +11,7 @@ namespace FrikanUtils.Utilities;
 public static class PlayerUtilities
 {
     public static IEnumerable<RoleTypeId> BlacklistedRoles => BlacklistedRolesInternal;
-    
+
     private static readonly RoleTypeId[] BlacklistedRolesInternal =
     [
         RoleTypeId.Filmmaker,
@@ -30,7 +30,8 @@ public static class PlayerUtilities
     {
         return Player.List.Where(player => !BlacklistedRoles.Contains(player.Role) &&
                                            !BlacklistedPlayers.Contains(player) &&
-                                           !player.IsHost);
+                                           !player.IsHost &&
+                                           player.UserId != null);
     }
 
     /// <summary>

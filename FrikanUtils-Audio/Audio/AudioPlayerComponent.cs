@@ -70,6 +70,9 @@ public class AudioPlayerComponent : MonoBehaviour
 
     private void SelectNext()
     {
+        _reader?.Dispose();
+        _reader = null;
+
         var position = AudioPlayer.CurrentPosition;
         if (position < 0 || position >= AudioPlayer.Files.Count)
         {
@@ -104,5 +107,11 @@ public class AudioPlayerComponent : MonoBehaviour
         }
 
         _reader = reader;
+    }
+
+    private void OnDestroy()
+    {
+        _encoder.Dispose();
+        _playbackBuffer.Dispose();
     }
 }

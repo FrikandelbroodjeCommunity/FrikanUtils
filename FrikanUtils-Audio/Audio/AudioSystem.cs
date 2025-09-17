@@ -9,7 +9,6 @@ namespace FrikanUtils.Audio;
 
 public static class AudioSystem
 {
-    public static int GlobalVolume { get; internal set; }
     public static readonly List<AudioPlayerBase> AudioPlayers = [];
 
     internal static readonly Dictionary<string, bool> MusicPreference = new();

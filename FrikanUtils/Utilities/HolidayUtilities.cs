@@ -13,6 +13,6 @@ public static class HolidayUtilities
     /// <returns>Whether the given holiday type is active</returns>
     public static bool IsActive(this HolidayType type)
     {
-        return (HolidayOverride != HolidayType.None && HolidayOverride == type) || HolidayUtils.IsHolidayActive(type);
+        return HolidayOverride == HolidayType.None ? HolidayUtils.IsHolidayActive(type) : HolidayOverride == type;
     }
 }

@@ -1,6 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
+using Logger = LabApi.Features.Console.Logger;
 
 namespace FrikanUtils.Utilities;
 
@@ -28,6 +28,7 @@ public static class PositionUtilities
     /// <returns>Positions and rotations of objects on the circle</returns>
     public static IEnumerable<PositionAndRotation> GetCirclePositions(int count, float radius)
     {
+        Logger.Debug($"Generating circle positions for radius: {radius}", UtilitiesPlugin.PluginConfig.Debug);
         var angle = 360f / count;
         for (var i = 0; i < count; i++)
         {
