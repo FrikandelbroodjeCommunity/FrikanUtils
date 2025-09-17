@@ -40,6 +40,7 @@ public class UtilitiesPlugin : Plugin<Config>
 
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
+        ServerEvents.RoundStarted += RoundStarted;
         CustomKeycardEventHandler.RegisterEvents();
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
@@ -59,6 +60,7 @@ public class UtilitiesPlugin : Plugin<Config>
 
         // Register events
         ServerEvents.WaitingForPlayers -= Reset;
+        ServerEvents.RoundStarted -= RoundStarted;
         CustomKeycardEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
 
@@ -75,5 +77,10 @@ public class UtilitiesPlugin : Plugin<Config>
         RainbowKeycardHandler.Keycards.Clear();
         PlayerUtilities.BlacklistedPlayers.Clear();
         TeamUtilities.PlayerTeams.Clear();
+    }
+
+    private static void RoundStarted()
+    {
+        HintHandler.ForceDisableLobby = false;
     }
 }

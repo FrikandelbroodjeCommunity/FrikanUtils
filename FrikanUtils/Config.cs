@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
 using MapGeneration.Holidays;
 
@@ -54,4 +53,13 @@ public class Config
 
     [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
     public HolidayType OverrideHoliday { get; set; }
+
+    [Description("Text shown while in the lobby, leave empty to not show any text by default")]
+    public string LobbyText { get; set; } = "<color=rainbow><b>[Server rules]</b></color>\n" +
+                                            "Please read our server rules! You can find them in our server info.\n" +
+                                            "<i>Esc -> Server Info</i>\n\n" +
+                                            "<color=rainbow><b>[Server settings]</b></color>\n" +
+                                            "This server uses the Server Specific Settings system.\n" +
+                                            "Go and check it out in your settings menu!\n" +
+                                            "<i>Esc -> Settings -> Server-specific</i></size>";
 }

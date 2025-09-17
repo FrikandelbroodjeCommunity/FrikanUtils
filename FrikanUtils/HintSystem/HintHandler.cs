@@ -14,6 +14,8 @@ public static class HintHandler
     private static readonly List<Func<Player, string>> LobbyHints = [];
     private static readonly List<Func<Player, string>> GameHints = [];
 
+    public static bool ForceDisableLobby;
+
     /// <summary>
     /// Add a function to add text to the lobby hints.
     /// Text will be added on top of the other hints.
@@ -53,6 +55,11 @@ public static class HintHandler
 
     internal static string GetLobbyText(Player ply, string color)
     {
+        if (ForceDisableLobby)
+        {
+            return "";
+        }
+
         var builder = new StringBuilder();
         builder.Append("\n\n\n\n\n\n\n\n\n\n<size=25>");
 
@@ -62,15 +69,7 @@ public static class HintHandler
             builder.AppendLine();
         }
 
-        builder.AppendLine("<color=rainbow><b>[Server rules]</b></color>");
-        builder.AppendLine("Please read our server rules! You can find them in our server info.\n" +
-                           "<i>Esc -> Server Info</i>");
-        builder.AppendLine();
-        builder.AppendLine("<color=rainbow><b>[Server settings]</b></color>");
-        builder.AppendLine("This server uses the Server Specific Settings system.\n" +
-                           "Go and check it out in your settings menu!\n" +
-                           "<i>Esc -> Settings -> Server-specific</i></size>");
-
+        builder.AppendLine(UtilitiesPlugin.PluginConfig.LobbyText);
         builder.Replace("<color=rainbow>", $"<color={color}>");
 
         return builder.ToString();
