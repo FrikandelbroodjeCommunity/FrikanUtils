@@ -9,7 +9,7 @@ public class MuteSetting : IGlobalSetting
     public string Label => "Audio preference";
     public bool ServerOnly => false;
 
-    public SettingsBase Get(byte settingId)
+    public SettingsBase Get(ushort settingId)
     {
         return new TwoButtonSetting(
             settingId,

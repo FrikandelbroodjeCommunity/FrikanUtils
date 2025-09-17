@@ -10,7 +10,7 @@ public class VolumeSetting : IGlobalSetting
     public string Label => "Music volume";
     public bool ServerOnly => true;
 
-    public SettingsBase Get(byte settingId)
+    public SettingsBase Get(ushort settingId)
     {
         return new Slider(
             settingId,

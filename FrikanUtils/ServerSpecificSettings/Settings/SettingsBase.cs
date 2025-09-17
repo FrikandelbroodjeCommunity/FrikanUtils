@@ -1,4 +1,5 @@
-﻿using LabApi.Features.Wrappers;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
@@ -7,6 +8,7 @@ public abstract class SettingsBase
 {
     public ushort? SettingId { get; }
     public string MenuOwner { get; internal set; }
+    public readonly ServerOnlyType ServerOnlyType;
 
     public abstract ServerSpecificSettingBase Base { get; }
 
@@ -30,9 +32,10 @@ public abstract class SettingsBase
         set => Base.SettingId = value;
     }
 
-    protected SettingsBase(ushort? settingId)
+    protected SettingsBase(ushort? settingId, ServerOnlyType serverOnlyType)
     {
         SettingId = settingId;
+        ServerOnlyType = serverOnlyType;
     }
 
     public void UpdateBase(string newLabel, string newHintDescription, bool applyOverride = true)

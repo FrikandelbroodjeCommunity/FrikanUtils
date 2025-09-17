@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using TMPro;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
@@ -12,7 +13,7 @@ public class TextArea : SettingsBase
         string content,
         SSTextArea.FoldoutMode foldoutMode = SSTextArea.FoldoutMode.NotCollapsable,
         string collapsedText = null,
-        TextAlignmentOptions textAlignment = TextAlignmentOptions.TopLeft) : base(id)
+        TextAlignmentOptions textAlignment = TextAlignmentOptions.TopLeft) : base(id, ServerOnlyType.ServerOnly)
     {
         Base = new SSTextArea(
             null,

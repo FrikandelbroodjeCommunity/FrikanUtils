@@ -8,8 +8,11 @@ namespace FrikanUtils.GlobalSettings;
 
 public class GlobalServerSettingsMenu : MenuBase
 {
-    public override string Name => "General Server Settings";
+    public override string Name => ServerId;
     public override MenuType Type => MenuType.Dynamic;
+    public override int Priority => MenuPriority.Highest;
+
+    public const string ServerId = "General Server Settings";
 
     public override bool HasPermission(Player player)
     {
@@ -18,10 +21,13 @@ public class GlobalServerSettingsMenu : MenuBase
 
     public override IEnumerable<SettingsBase> GetSettings(Player player)
     {
-        byte counter = 0;
-        return GlobalSettingsHandler.ServerSettings
-            .Where(x => x.HasPermissions(player))
-            .OrderBy(x => x.Label)
-            .Select(setting => setting.Get(counter++));
+        for (ushort i = 0; i < GlobalSettingsHandler.ServerSettings.Count; i++)
+        {
+            var setting = GlobalSettingsHandler.ServerSettings[i];
+            if (setting.HasPermissions(player))
+            {
+                yield return setting.Get(i);
+            }
+        }
     }
 }

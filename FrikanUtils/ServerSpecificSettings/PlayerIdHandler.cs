@@ -1,4 +1,5 @@
-﻿using LabApi.Features.Console;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using LabApi.Features.Console;
 
 namespace FrikanUtils.ServerSpecificSettings;
 
@@ -6,9 +7,9 @@ public class PlayerIdHandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 
-    public int GetId(string menuId, ushort? fieldId)
+    public int GetId(string menuId, ushort? fieldId, ServerOnlyType serverOnlyType)
     {
-        if (!fieldId.HasValue)
+        if (!fieldId.HasValue || serverOnlyType != ServerOnlyType.Client)
         {
             // Remove one from the internal counter and return the new value.
             return --_internalIdCounter;

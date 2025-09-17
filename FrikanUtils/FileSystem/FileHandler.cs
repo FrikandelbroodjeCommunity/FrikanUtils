@@ -65,7 +65,7 @@ public static class FileHandler
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
-    public static async Task<T> SearchFile<T>(string filename, string folder = null, bool json = false)
+    public static async Task<T> SearchFile<T>(string filename, string folder, bool json)
     {
         foreach (var provider in FileProviders)
         {

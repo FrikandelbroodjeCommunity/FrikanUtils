@@ -101,6 +101,7 @@
         <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs" />
         <Compile Include="CustomDummyActions\RaHandler.cs" />
         <Compile Include="GlobalSettings\GlobalServerSettingsMenu.cs" />
+        <Compile Include="GlobalSettings\GlobalSettingComparer.cs" />
         <Compile Include="GlobalSettings\GlobalSettingsHandler.cs" />
         <Compile Include="GlobalSettings\GlobalClientSettingsMenu.cs" />
         <Compile Include="GlobalSettings\HolidayOverrideSetting.cs" />
