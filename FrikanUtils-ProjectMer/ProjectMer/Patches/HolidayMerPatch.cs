@@ -41,7 +41,7 @@ internal static class HolidayMerPatch
         var split = name.Substring(0, separatorIndex + 1).Split(',');
         foreach (var holiday in split)
         {
-            if (Enum.TryParse(holiday, out HolidayType holidayType))
+            if (Enum.TryParse(holiday, true, out HolidayType holidayType))
             {
                 yield return holidayType;
             }
