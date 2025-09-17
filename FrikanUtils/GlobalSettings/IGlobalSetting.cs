@@ -8,6 +8,6 @@ public interface IGlobalSetting
     public string Label { get; }
     public bool ServerOnly { get; }
 
-    public SettingsBase Get(byte settingId);
+    public SettingsBase Get(ushort settingId);
     public bool HasPermissions(Player player);
 }

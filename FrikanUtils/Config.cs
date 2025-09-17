@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using MapGeneration.Holidays;
 
@@ -8,7 +9,7 @@ public class Config
 {
     [Description("Whether to show debug messages")]
     public bool Debug { get; set; }
-    
+
     [Description("Whether the custom dummy actions system should be enabled")]
     public bool UseCustomDummyActions { get; set; } = true;
 
@@ -17,7 +18,7 @@ public class Config
 
     [Description("Whether the keycard improvements should be enabled")]
     public bool UseKeycardImprovements { get; set; } = true;
-    
+
     [Description("Whether the server specific settings system should be enabled")]
     public bool UseServerSpecificSettings { get; set; } = true;
 
@@ -41,6 +42,9 @@ public class Config
 
     [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
     public List<string> ServerSettingMenus { get; set; } = [];
+
+    [Description("[Automatically generated] List of Global Client settings, ensuring they are always given the same ID")]
+    public List<string> GlobalClientSettings { get; set; } = [];
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";

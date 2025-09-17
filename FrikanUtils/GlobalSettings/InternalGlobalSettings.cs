@@ -10,7 +10,7 @@ internal static class InternalGlobalSettings
     ];
 
     internal static readonly GlobalServerSettingsMenu ServerMenu = new();
-    private static readonly GlobalClientSettingsMenu ClientMenu = new();
+    internal static readonly GlobalClientSettingsMenu ClientMenu = new();
 
     internal static void RegisterInternalSettings()
     {

@@ -21,10 +21,23 @@ public class GlobalClientSettingsMenu : MenuBase
 
     public override IEnumerable<SettingsBase> GetSettings(Player player)
     {
-        byte counter = 0;
-        return GlobalSettingsHandler.ClientSettings
-            .Where(x => x.HasPermissions(player))
-            .OrderBy(x => x.Label)
-            .Select(setting => setting.Get(counter++));
+        var updated = false;
+        foreach (var setting in GlobalSettingsHandler.ClientSettings.Where(x => x.HasPermissions(player)))
+        {
+            var id = UtilitiesPlugin.PluginConfig.GlobalClientSettings.IndexOf(setting.Label);
+            if (id < 0)
+            {
+                id = UtilitiesPlugin.PluginConfig.GlobalClientSettings.Count;
+                UtilitiesPlugin.PluginConfig.GlobalClientSettings.Add(setting.Label);
+                updated = true;
+            }
+
+            yield return setting.Get((ushort)id);
+        }
+
+        if (updated)
+        {
+            UtilitiesPlugin.Save();
+        }
     }
 }
