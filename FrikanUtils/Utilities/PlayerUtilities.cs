@@ -10,7 +10,9 @@ namespace FrikanUtils.Utilities;
 
 public static class PlayerUtilities
 {
-    private static readonly RoleTypeId[] BlacklistedRoles =
+    public static IEnumerable<RoleTypeId> BlacklistedRoles => BlacklistedRolesInternal;
+    
+    private static readonly RoleTypeId[] BlacklistedRolesInternal =
     [
         RoleTypeId.Filmmaker,
         RoleTypeId.Overwatch,
