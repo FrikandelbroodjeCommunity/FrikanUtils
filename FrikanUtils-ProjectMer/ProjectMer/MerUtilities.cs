@@ -5,6 +5,7 @@ using System.Linq;
 using AdminToys;
 using FrikanUtils.FileSystem;
 using FrikanUtils.ProjectMer.Patches;
+using FrikanUtils.Utilities;
 using Interactables.Interobjects.DoorUtils;
 using LabApi.Features.Wrappers;
 using LiteNetLib4Mirror.Open.Nat;
@@ -169,5 +170,41 @@ public static class MerUtilities
                 DoorId = schematicObj.name
             };
         }
+    }
+
+    /// <summary>
+    /// Divide the players into teams and spawn them around the map (on their team spawnpoints)
+    /// </summary>
+    /// <param name="map"></param>
+    /// <param name="teamCount"></param>
+    public static void SpawnTeams(this SchematicObject map, int teamCount)
+    {
+        if (teamCount > TeamUtilities.TeamRoles.Length)
+        {
+            Logger.Error($"Cannot assign more teams than are available {teamCount} > {TeamUtilities.TeamRoles.Length}");
+            return;
+        }
+
+        var positions = new Vector3[teamCount];
+        for (var i = 0; i < teamCount; i++)
+        {
+            var role = TeamUtilities.TeamRoles[i];
+            var found = false;
+
+            foreach (var obj in map.FindNamedObjects($"SpawnTeam{role}"))
+            {
+                positions[i] = obj.position;
+                found = true;
+                break;
+            }
+
+            if (!found)
+            {
+                Logger.Error($"Could not find named object: SpawnTeam{role}");
+                return;
+            }
+        }
+
+        TeamUtilities.AssignEqualTeams(positions);
     }
 }

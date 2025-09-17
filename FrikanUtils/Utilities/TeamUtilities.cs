@@ -17,9 +17,7 @@ public static class TeamUtilities
     /// </summary>
     public static readonly Dictionary<string, RoleTypeId> PlayerTeams = new();
 
-    private static readonly Random Random = new();
-
-    private static readonly RoleTypeId[] TeamRoles =
+    public static readonly RoleTypeId[] TeamRoles =
     [
         RoleTypeId.ClassD,
         RoleTypeId.Scientist,
@@ -27,6 +25,8 @@ public static class TeamUtilities
         RoleTypeId.ChaosRifleman,
         RoleTypeId.FacilityGuard
     ];
+    
+    private static readonly Random Random = new();
 
     /// <summary>
     /// Assign all players (gotten from <see cref="PlayerUtilities.GetPlayers"/>) into random teams.
