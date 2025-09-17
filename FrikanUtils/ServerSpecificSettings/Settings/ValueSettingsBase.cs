@@ -11,14 +11,13 @@ public abstract class ValueSettingsBase<T> : SettingsBase
 
     internal bool ReceivedInitialValue;
     internal bool GlobalSetting;
-    protected ServerOnlyType ServerOnlyType;
+
     protected Action<Player, T> OnChanged;
     protected Action<Player, T> OnInitialValue;
 
-    protected ValueSettingsBase(ushort? settingId, ServerOnlyType isServerOnly) : base(settingId)
+    protected ValueSettingsBase(ushort? settingId, ServerOnlyType isServerOnly) : base(settingId, isServerOnly)
     {
         GlobalSetting = isServerOnly.IsGlobalSetting();
-        ServerOnlyType = isServerOnly;
     }
 
     public ValueSettingsBase<T> RegisterChangedAction(Action<Player, T> changedAction)

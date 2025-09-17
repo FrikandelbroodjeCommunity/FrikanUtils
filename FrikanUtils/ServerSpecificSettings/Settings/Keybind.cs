@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using LabApi.Features.Wrappers;
 using UnityEngine;
 using UserSettings.ServerSpecific;
@@ -21,7 +22,7 @@ public class Keybind : SettingsBase
         KeyCode suggestedKey = KeyCode.None,
         bool preventInteractionOnGui = true,
         bool allowSpectatorTrigger = true,
-        string hint = null) : base(id)
+        string hint = null) : base(id, ServerOnlyType.Client)
     {
         Base = new SSKeybindSetting(
             null,

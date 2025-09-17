@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
@@ -16,7 +17,7 @@ public class Button : SettingsBase
         string label,
         string buttonText,
         float? holdTimeSeconds = null,
-        string hint = null) : base(id)
+        string hint = null) : base(id, ServerOnlyType.ServerOnly)
     {
         Setting = new SSButton(
             null,

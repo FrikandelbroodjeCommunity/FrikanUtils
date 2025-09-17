@@ -259,7 +259,7 @@ public class PlayerMenu
             foreach (var item in menu.GetSettings(_targetPlayer))
             {
                 item.Player = _targetPlayer;
-                item.Id = _idHandler.GetId(menu.Name, item.SettingId);
+                item.Id = _idHandler.GetId(menu.Name, item.SettingId, item.ServerOnlyType);
                 item.MenuOwner = menu.Name;
                 _shownItems.Add(item);
                 _rendering.Add(item.Base);

@@ -1,4 +1,5 @@
-﻿using UserSettings.ServerSpecific;
+﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
 
@@ -10,7 +11,7 @@ public class GroupHeader : SettingsBase
         ushort? id,
         string label,
         bool reducedPadding = false,
-        string hint = null) : base(id)
+        string hint = null) : base(id, ServerOnlyType.ServerOnly)
     {
         Base = new SSGroupHeader(
             label,
