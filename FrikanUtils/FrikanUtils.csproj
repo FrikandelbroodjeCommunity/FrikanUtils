@@ -149,6 +149,7 @@
         <Compile Include="ServerSpecificSettings\SSSEventHandler.cs" />
         <Compile Include="ServerSpecificSettings\SSSHandler.cs" />
         <Compile Include="UtilitiesPlugin.cs" />
+        <Compile Include="Utilities\AsyncUtilities.cs" />
         <Compile Include="Utilities\ColorUtilities.cs" />
         <Compile Include="Utilities\CommandUtilities.cs" />
         <Compile Include="Utilities\HolidayUtilities.cs" />

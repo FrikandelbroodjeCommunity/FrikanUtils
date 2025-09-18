@@ -51,6 +51,7 @@ public class UtilitiesPlugin : Plugin<Config>
 
         // Register all monobehaviour handles
         _handlerObject = new GameObject("FrikanUtils Handler Object");
+        _handlerObject.AddComponent<AsyncUtilities.AsyncUtilitiesComponent>();
         _handlerObject.AddComponent<RainbowKeycardHandler>();
         if (Config.UseHintSystem) _handlerObject.AddComponent<HintSender>();
         Object.DontDestroyOnLoad(_handlerObject);

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using FrikanUtils.FileSystem;
+using FrikanUtils.Utilities;
 using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.Audio;
@@ -71,7 +72,8 @@ public abstract class AudioPlayerBase
             var path = await FileHandler.SearchFullPath(file, "Audio");
             if (path != null)
             {
-                QueueFile(path, -1);
+                // Chances of modifying at the same time are very low, but this makes sure nothing can go wrong by accident
+                AsyncUtilities.ExecuteOnMainThread(() => QueueFile(path, -1));
             }
         }
 

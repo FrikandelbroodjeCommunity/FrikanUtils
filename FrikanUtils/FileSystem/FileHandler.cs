@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using FrikanUtils.Utilities;
 using LabApi.Features.Console;
 using Utils.NonAllocLINQ;
 
@@ -33,8 +34,10 @@ public static class FileHandler
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
+    /// <param name="onResult">Executed on the main thread after a result is gotten</param>
     /// <returns>The full path to the file or null</returns>
-    public static async Task<string> SearchFullPath(string filename, string folder = null)
+    public static async Task<string> SearchFullPath(string filename, string folder = null,
+        Action<string> onResult = null)
     {
         foreach (var provider in FileProviders)
         {
@@ -45,6 +48,12 @@ public static class FileHandler
                 {
                     Logger.Debug($"Found full file path from provider {provider.Name}: {result}",
                         UtilitiesPlugin.PluginConfig.Debug);
+
+                    if (onResult != null)
+                    {
+                        AsyncUtilities.ExecuteOnMainThread(() => onResult.Invoke(result));
+                    }
+
                     return result;
                 }
 
@@ -71,9 +80,11 @@ public static class FileHandler
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
     /// <param name="json">Whether to read it as JSON or YAML</param>
+    /// <param name="onResult">Executed on the main thread after a result is gotten</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
-    public static async Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class
+    public static async Task<T> SearchFile<T>(string filename, string folder, bool json, Action<T> onResult = null)
+        where T : class
     {
         foreach (var provider in FileProviders)
         {
@@ -84,6 +95,12 @@ public static class FileHandler
                 {
                     Logger.Debug($"Found file {folder}/{filename} from provider {provider.Name}",
                         UtilitiesPlugin.PluginConfig.Debug);
+
+                    if (onResult != null)
+                    {
+                        AsyncUtilities.ExecuteOnMainThread(() => onResult.Invoke(result));
+                    }
+
                     return result;
                 }
 
