@@ -3,9 +3,9 @@ using LabApi.Features.Wrappers;
 using Mirror;
 using NetworkManagerUtils.Dummies;
 
-namespace FrikanUtils.Utilities;
+namespace FrikanUtils.Npc;
 
-public static class DummyUtilities
+public static class NpcSystem
 {
     /// <summary>
     /// Creates a normal dummy.

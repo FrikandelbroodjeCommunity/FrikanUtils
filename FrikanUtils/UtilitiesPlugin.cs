@@ -3,6 +3,7 @@ using FrikanUtils.FileSystem;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
+using FrikanUtils.Npc;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
 using HarmonyLib;
@@ -42,6 +43,7 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.WaitingForPlayers += Reset;
         ServerEvents.RoundStarted += RoundStarted;
         CustomKeycardEventHandler.RegisterEvents();
+        NpcEventHandler.RegisterEvents();
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
         // Register global settings
@@ -58,13 +60,14 @@ public class UtilitiesPlugin : Plugin<Config>
     {
         _harmony.UnpatchAll();
 
-        // Register events
+        // Unregister events
         ServerEvents.WaitingForPlayers -= Reset;
         ServerEvents.RoundStarted -= RoundStarted;
         CustomKeycardEventHandler.UnregisterEvents();
+        NpcEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
 
-        // Register global settings
+        // Unregister global settings
         InternalGlobalSettings.UnregisterInternalSettings();
 
         // Delete all monobehaviour handles

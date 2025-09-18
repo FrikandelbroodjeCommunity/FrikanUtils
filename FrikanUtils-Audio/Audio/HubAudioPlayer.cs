@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.Npc;
 using FrikanUtils.Utilities;
 using LabApi.Features.Wrappers;
 using MapGeneration.Holidays;
@@ -56,7 +57,7 @@ public class HubAudioPlayer : AudioPlayerBase
     private void CreateDummy(string name, bool enableGodmode, bool canSpectate)
     {
         // Spawn a new (hidden) dummy
-        Player = DummyUtilities.CreateHiddenDummy(name ?? GetDefaultName());
+        Player = NpcSystem.CreateHiddenDummy(name ?? GetDefaultName());
         Player.IsSpectatable = canSpectate;
 
         PlayerUtilities.RegisterNpc(Player);
