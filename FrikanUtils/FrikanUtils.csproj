@@ -125,6 +125,7 @@
         <Compile Include="Npc\NpcEventHandler.cs" />
         <Compile Include="Npc\NpcSystem.cs" />
         <Compile Include="Npc\Patches\DummyAuthenticationPatch.cs" />
+        <Compile Include="Npc\Patches\MaxMovementSpeedPatch.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
         <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyHelper.cs" />
         <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyType.cs" />

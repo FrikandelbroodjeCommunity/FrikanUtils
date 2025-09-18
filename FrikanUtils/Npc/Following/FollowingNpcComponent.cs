@@ -1,6 +1,7 @@
 ﻿using System;
 using FrikanUtils.Npc.Enums;
 using PlayerRoles.FirstPersonControl;
+using RelativePositioning;
 using UnityEngine;
 using Logger = LabApi.Features.Console.Logger;
 
@@ -14,9 +15,13 @@ public class FollowingNpcComponent : BaseNpcComponent
 
     private void Update()
     {
-        if (!Data.Npc.IsAlive || Data.TargetPlayer == null) return;
+        if (!Data.Dummy.IsAlive || Data.TargetPlayer == null) return;
+        if (Data.Dummy.RoleBase is not IFpcRole fpcRole) return;
 
-        var distance = Vector3.Distance(Data.Npc.Position, Data.TargetPlayer.Position);
+        var dir = Data.TargetPlayer.Position - Data.Dummy.Position;
+        fpcRole.FpcModule.MouseLook.LookAtDirection(dir);
+
+        var distance = Vector3.Distance(Data.Dummy.Position, Data.TargetPlayer.Position);
         if (distance >= Data.MaxDistance)
         {
             switch (Data.OutOfRangeAction)
@@ -27,7 +32,7 @@ public class FollowingNpcComponent : BaseNpcComponent
                     Data.TargetPlayer = null;
                     break;
                 case OutOfRangeAction.Teleport:
-                    Data.Npc.Position = Data.TargetPlayer.Position + Vector3.up * 0.1f;
+                    Data.Dummy.Position = Data.TargetPlayer.Position + Vector3.up * 0.1f;
                     break;
                 case OutOfRangeAction.Destroy:
                     Data.Destroy(DestroyReason.OutsideOfRange);
@@ -42,11 +47,11 @@ public class FollowingNpcComponent : BaseNpcComponent
         }
         else if (distance >= Data.SprintDistance)
         {
-            Move(Data.SprintSpeed);
+            Move(fpcRole, dir, Data.SprintSpeed);
         }
         else if (distance >= Data.IdleDistance)
         {
-            Move(Data.WalkSpeed);
+            Move(fpcRole, dir, Data.WalkSpeed);
         }
         else
         {
@@ -67,9 +72,9 @@ public class FollowingNpcComponent : BaseNpcComponent
         }
     }
 
-    private void Move(float speed)
+    private void Move(IFpcRole fpcRole, Vector3 dir, float speed)
     {
-        var direction = (Data.TargetPlayer.Position - Data.Npc.Position).normalized;
-        ((IFpcRole)Data.Npc.RoleBase).FpcModule.CharController.Move(direction * (speed * Time.deltaTime));
+        var vector3 = Time.deltaTime * speed * dir.normalized;
+        fpcRole.FpcModule.Motor.ReceivedPosition = new RelativePosition(Data.Dummy.Position + vector3);
     }
 }

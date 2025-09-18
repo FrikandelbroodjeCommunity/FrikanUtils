@@ -1,14 +1,15 @@
 ﻿using CentralAuth;
 using HarmonyLib;
+using LabApi.Features.Console;
 
 namespace FrikanUtils.Npc.Patches;
 
-[HarmonyPatch(typeof(PlayerAuthenticationManager))]
+[HarmonyPatch]
 internal static class DummyAuthenticationPatch
 {
     private static byte _uniqueDummyId;
 
-    [HarmonyPatch(nameof(PlayerAuthenticationManager.Awake))]
+    [HarmonyPatch(typeof(PlayerAuthenticationManager), nameof(PlayerAuthenticationManager.Start))]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming
     public static bool OnAwakeAuthentication(PlayerAuthenticationManager __instance)

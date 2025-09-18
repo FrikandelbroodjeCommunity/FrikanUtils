@@ -1,5 +1,6 @@
 ﻿using System;
 using FrikanUtils.Npc.Enums;
+using FrikanUtils.Npc.Patches;
 using FrikanUtils.Utilities;
 using LabApi.Features.Wrappers;
 using Mirror;
@@ -8,21 +9,23 @@ namespace FrikanUtils.Npc;
 
 public abstract class BaseNpc
 {
-    public Player Npc { get; }
+    public Player Dummy { get; }
 
     public Action OnDestroy;
-    public bool DestroyOnDeath;
+    public bool DestroyOnDeath = true;
 
     public BaseNpc(string name)
     {
-        Npc = NpcSystem.CreateHiddenDummy(name);
-        Npc.IsSpectatable = false;
-        PlayerUtilities.RegisterNpc(Npc);
+        Dummy = NpcSystem.CreateHiddenDummy(name);
+        Dummy.IsSpectatable = false;
+        PlayerUtilities.RegisterNpc(Dummy);
+
+        MaxMovementSpeedPatch.NpcModules.Add(Dummy.ReferenceHub);
     }
 
     public virtual void Destroy(DestroyReason reason)
     {
         OnDestroy?.Invoke();
-        NetworkServer.Destroy(Npc.GameObject);
+        NetworkServer.Destroy(Dummy.GameObject);
     }
 }

@@ -4,6 +4,7 @@ using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
 using FrikanUtils.Npc;
+using FrikanUtils.Npc.Patches;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
 using HarmonyLib;
@@ -81,6 +82,7 @@ public class UtilitiesPlugin : Plugin<Config>
         RainbowKeycardHandler.Keycards.Clear();
         PlayerUtilities.BlacklistedPlayers.Clear();
         TeamUtilities.PlayerTeams.Clear();
+        MaxMovementSpeedPatch.NpcModules.Clear();
     }
 
     private static void RoundStarted()

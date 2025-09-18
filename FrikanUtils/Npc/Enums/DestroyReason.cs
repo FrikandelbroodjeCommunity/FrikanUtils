@@ -4,5 +4,6 @@ public enum DestroyReason
 {
     Died,
     ReachedTarget,
-    OutsideOfRange
+    OutsideOfRange,
+    Removal
 }

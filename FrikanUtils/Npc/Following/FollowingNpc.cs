@@ -9,9 +9,9 @@ public class FollowingNpc : BaseNpc
 {
     public Player TargetPlayer;
 
-    public float IdleDistance = 0.8f;
-    public float SprintDistance = 16f;
-    public float MaxDistance = 28f;
+    public float IdleDistance = 2f;
+    public float SprintDistance = 7f;
+    public float MaxDistance = 14f;
 
     public float WalkSpeed = 3.9f;
     public float SprintSpeed = 5.4f;
@@ -26,9 +26,14 @@ public class FollowingNpc : BaseNpc
     {
         TargetPlayer = target;
 
-        if (Npc.GameObject?.AddComponent<FollowingNpcComponent>() == null)
+        var component = Dummy.GameObject?.AddComponent<FollowingNpcComponent>();
+        if (component == null)
         {
             Logger.Warn("Failed to add FollowingNpcComponent to npc!");
+        }
+        else
+        {
+            component.Data = this;
         }
     }
 }

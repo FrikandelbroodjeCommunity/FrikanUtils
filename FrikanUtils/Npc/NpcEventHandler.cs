@@ -18,7 +18,7 @@ internal static class NpcEventHandler
 
     private static void OnPlayerDeath(PlayerDeathEventArgs ev)
     {
-        if ((ev.Player.GameObject?.TryGetComponent(out BaseNpcComponent npcComponent) ?? true) ||
+        if (!ev.Player.GameObject.TryGetComponent(out BaseNpcComponent npcComponent) || 
             !npcComponent.NpcData.DestroyOnDeath)
         {
             return;
