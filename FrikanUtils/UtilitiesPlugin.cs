@@ -80,7 +80,7 @@ public class UtilitiesPlugin : Plugin<Config>
     {
         CustomKeycard.CustomKeycards.Clear();
         RainbowKeycardHandler.Keycards.Clear();
-        PlayerUtilities.BlacklistedPlayers.Clear();
+        NpcSystem.Npcs.Clear();
         TeamUtilities.PlayerTeams.Clear();
         MaxMovementSpeedPatch.NpcModules.Clear();
     }

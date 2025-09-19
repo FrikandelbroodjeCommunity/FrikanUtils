@@ -14,12 +14,13 @@ internal static class DummyAuthenticationPatch
     // ReSharper disable once InconsistentNaming
     public static bool OnAwakeAuthentication(PlayerAuthenticationManager __instance)
     {
-        if (__instance.connectionToClient is NpcSystem.FakeConnection)
+        if (__instance.connectionToClient is not NpcSystem.FakeConnection fakeConnection) return true;
+
+        if (fakeConnection.GiveUserId)
         {
             __instance.UserId = $"ID_CDummy_{_uniqueDummyId++}";
-            return false;
         }
 
-        return true;
+        return false;
     }
 }

@@ -1,10 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using FrikanUtils.Npc;
 using LabApi.Features.Wrappers;
 using MEC;
 using PlayerRoles;
 using UnityEngine;
-using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.Utilities;
 
@@ -18,9 +18,7 @@ public static class PlayerUtilities
         RoleTypeId.Overwatch,
         RoleTypeId.Tutorial
     ];
-
-    internal static readonly List<Player> BlacklistedPlayers = [];
-
+    
     /// <summary>
     /// Get a list of all players excluding some blacklisted roles and the audio bot.
     /// This is intended for use during events.
@@ -29,7 +27,7 @@ public static class PlayerUtilities
     public static IEnumerable<Player> GetPlayers()
     {
         return Player.List.Where(player => !BlacklistedRoles.Contains(player.Role) &&
-                                           !BlacklistedPlayers.Contains(player) &&
+                                           !NpcSystem.Npcs.Contains(player) &&
                                            !player.IsHost &&
                                            player.UserId != null);
     }
@@ -59,16 +57,4 @@ public static class PlayerUtilities
             }
         });
     }
-
-    /// <summary>
-    /// Registers a player as an NPC, this will cause them to no longer be included the <see cref="GetPlayers"/>.
-    /// </summary>
-    /// <param name="npc">Player that is an NPC</param>
-    public static void RegisterNpc(Player npc) => BlacklistedPlayers.AddIfNotContains(npc);
-
-    /// <summary>
-    /// Unregisters a player as an NPC, this will cause them to be included in the <see cref="GetPlayers"/> again.
-    /// </summary>
-    /// <param name="npc">Player that is no longer an NPC</param>
-    public static void UnregisterNpc(Player npc) => BlacklistedPlayers.Remove(npc);
 }

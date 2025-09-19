@@ -33,7 +33,7 @@ public class HubAudioPlayer : AudioPlayerBase
     protected override void InternalCleanup()
     {
         NetworkServer.Destroy(Player.ReferenceHub.gameObject);
-        PlayerUtilities.UnregisterNpc(Player);
+        NpcSystem.UnregisterNpc(Player);
     }
 
     public void SetUsername(string name)
@@ -60,7 +60,7 @@ public class HubAudioPlayer : AudioPlayerBase
         Player = NpcSystem.CreateHiddenDummy(name ?? GetDefaultName());
         Player.IsSpectatable = canSpectate;
 
-        PlayerUtilities.RegisterNpc(Player);
+        NpcSystem.RegisterNpc(Player);
 
         // Auto enable GodMode on a small delay
         if (enableGodmode)

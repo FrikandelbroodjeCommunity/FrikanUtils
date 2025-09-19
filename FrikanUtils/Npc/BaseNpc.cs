@@ -18,7 +18,7 @@ public abstract class BaseNpc
     {
         Dummy = NpcSystem.CreateHiddenDummy(name);
         Dummy.IsSpectatable = false;
-        PlayerUtilities.RegisterNpc(Dummy);
+        NpcSystem.RegisterNpc(Dummy);
 
         MaxMovementSpeedPatch.NpcModules.Add(Dummy.ReferenceHub);
     }
