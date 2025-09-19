@@ -5,5 +5,6 @@ public enum DestroyReason
     Died,
     ReachedTarget,
     OutsideOfRange,
-    Removal
+    Removal,
+    Cleanup
 }
