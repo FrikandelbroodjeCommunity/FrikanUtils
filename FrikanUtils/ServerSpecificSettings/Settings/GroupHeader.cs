@@ -19,9 +19,4 @@ public class GroupHeader : SettingsBase
             hint
         );
     }
-
-    public override SettingsBase Clone()
-    {
-        return new GroupHeader(SettingId, Label, ((SSGroupHeader)Base).ReducedPadding, HintDescription);
-    }
 }

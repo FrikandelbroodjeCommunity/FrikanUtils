@@ -40,11 +40,4 @@ public class TwoButtonSetting : ValueSettingsBase<bool>
     {
         Setting.SendTwoButtonUpdate(optionA ?? Setting.OptionA, optionB ?? Setting.OptionB, applyOverride);
     }
-
-    public override SettingsBase Clone()
-    {
-        return new TwoButtonSetting(SettingId, Label, Setting.OptionA, Setting.OptionB, Setting.DefaultIsB,
-                HintDescription, ServerOnlyType)
-            .RegisterChangedAction(OnChanged);
-    }
 }

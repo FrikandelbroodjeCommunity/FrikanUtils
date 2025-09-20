@@ -139,6 +139,7 @@
         <Compile Include="ServerSpecificSettings\Settings\Button.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Dropdown.cs" />
         <Compile Include="ServerSpecificSettings\Settings\GroupHeader.cs" />
+        <Compile Include="ServerSpecificSettings\Settings\IServerSpecificSetting.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Keybind.cs" />
         <Compile Include="ServerSpecificSettings\Settings\SettingsBase.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Slider.cs" />

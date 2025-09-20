@@ -19,7 +19,7 @@ public class GlobalClientSettingsMenu : MenuBase
         return base.HasPermission(player) && GlobalSettingsHandler.ClientSettings.Any(x => x.HasPermissions(player));
     }
 
-    public override IEnumerable<SettingsBase> GetSettings(Player player)
+    public override IEnumerable<IServerSpecificSetting> GetSettings(Player player)
     {
         var updated = false;
         foreach (var setting in GlobalSettingsHandler.ClientSettings.Where(x => x.HasPermissions(player)))

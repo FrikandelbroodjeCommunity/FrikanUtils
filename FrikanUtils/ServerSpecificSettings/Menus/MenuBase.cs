@@ -38,7 +38,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
     /// </summary>
     /// <param name="player">Player to load the settings for</param>
     /// <returns>Returns a list of settings to show</returns>
-    public abstract IEnumerable<SettingsBase> GetSettings(Player player);
+    public abstract IEnumerable<IServerSpecificSetting> GetSettings(Player player);
 
     internal bool InternalHasPermission(Player player)
     {

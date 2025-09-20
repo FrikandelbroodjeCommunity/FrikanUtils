@@ -45,13 +45,4 @@ public class Keybind : SettingsBase
         OnReleased = releasedAction;
         return this;
     }
-
-    public override SettingsBase Clone()
-    {
-        var keybind = (SSKeybindSetting)Base;
-        return new Keybind(SettingId, Label, keybind.SuggestedKey, keybind.PreventInteractionOnGUI,
-                keybind.AllowSpectatorTrigger, HintDescription)
-            .RegisterPressedAction(OnPressed)
-            .RegisterReleasedAction(OnReleased);
-    }
 }

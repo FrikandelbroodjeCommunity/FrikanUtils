@@ -23,10 +23,4 @@ public class TextArea : SettingsBase
             textAlignment
         );
     }
-
-    public override SettingsBase Clone()
-    {
-        var area = (SSTextArea)Base;
-        return new TextArea(SettingId, Label, area.Foldout, HintDescription, area.AlignmentOptions);
-    }
 }

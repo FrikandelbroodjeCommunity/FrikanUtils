@@ -13,73 +13,58 @@ public class PlayerMenu
 {
     internal SSDropdownSetting MenuSelection;
 
+    internal readonly Player TargetPlayer;
+    internal readonly List<SettingsBase> ShownItems = [];
+    internal readonly List<ServerSpecificSettingBase> Rendering = [];
+    internal readonly PlayerIdHandler IDHandler = new();
+
     private bool _isOpen;
     private bool _isDirty;
-    private readonly Player _targetPlayer;
 
     private MenuBase _selectedDynamicMenu;
     private readonly List<MenuBase> _shownMenus = [];
-    private readonly List<SettingsBase> _shownItems = [];
-    private readonly List<ServerSpecificSettingBase> _rendering = [];
-    private readonly PlayerIdHandler _idHandler = new();
-
     private readonly List<string> _selectorOptions = [];
 
-    public PlayerMenu(Player user)
+    internal PlayerMenu(Player user)
     {
-        _targetPlayer = user;
+        TargetPlayer = user;
     }
 
-    /// <summary>
-    /// Get the setting belonging to this player.
-    /// If the setting was not found, or the type does not match, it will return null.
-    /// </summary>
-    /// <param name="menu">The exact name of the menu</param>
-    /// <param name="settingId">ID of the setting</param>
-    /// <typeparam name="T">Type of the setting</typeparam>
-    /// <returns>The found setting or null</returns>
-    public T GetSetting<T>(string menu, ushort settingId) where T : SettingsBase
+    internal T GetSetting<T>(string menu, ushort settingId) where T : SettingsBase
     {
-        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
+        var found = ShownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
         return found as T;
     }
 
-    /// <summary>
-    /// Update the settings shown for this player.
-    /// </summary>
-    public void Update(bool force = false)
+    internal void Update(bool force = false)
     {
         if (!force && !_isOpen)
         {
             _isDirty = true;
-        }
-
-        _isDirty = false;
-        _shownItems.Clear();
-        _shownMenus.Clear();
-
-        Logger.Debug($"Updating player {_targetPlayer.LogName}", UtilitiesPlugin.PluginConfig.Debug);
-        if (SSSHandler.RegisteredMenus.Count == 0)
-        {
-            ServerSpecificSettingsSync.SendToPlayer(_targetPlayer.ReferenceHub, []);
             return;
         }
 
-        _idHandler.Reset();
+        _isDirty = false;
+        ShownItems.Clear();
+        _shownMenus.Clear();
+
+        Logger.Debug($"Updating player {TargetPlayer.LogName}", UtilitiesPlugin.PluginConfig.Debug);
+        if (SSSHandler.RegisteredMenus.Count == 0)
+        {
+            ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, []);
+            return;
+        }
+
+        IDHandler.Reset();
         RenderForcedDynamicMenus();
         RenderDynamicMenus();
         RenderStaticMenus();
 
-        ServerSpecificSettingsSync.SendToPlayer(_targetPlayer.ReferenceHub, _rendering.ToArray());
-        _rendering.Clear(); // Clear after, as we don't need references anymore
+        ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, Rendering.ToArray());
+        Rendering.Clear(); // Clear after, as we don't need references anymore
     }
 
-    /// <summary>
-    /// Try to update the menu based on the visibility
-    /// </summary>
-    /// <param name="menu">The menu that needs to be visible in order to update</param>
-    /// <param name="force">Whether to force update, or wait for the player to open the menu</param>
-    public void TryUpdate(MenuBase menu, bool force = false)
+    internal void TryUpdate(MenuBase menu, bool force = false)
     {
         // If the player has access to the menu, or the menu is still shown (even though access has been removed)
         if (HasMenu(menu) || _shownMenus.Contains(menu))
@@ -88,14 +73,9 @@ public class PlayerMenu
         }
     }
 
-    /// <summary>
-    /// Check whether a player is currently shown the given menu.
-    /// </summary>
-    /// <param name="menu">Manu to question</param>
-    /// <returns>Whether the menu is shown</returns>
-    public bool HasMenu(MenuBase menu)
+    internal bool HasMenu(MenuBase menu)
     {
-        if (!menu.InternalHasPermission(_targetPlayer))
+        if (!menu.InternalHasPermission(TargetPlayer))
         {
             return false;
         }
@@ -114,7 +94,7 @@ public class PlayerMenu
 
         if (status && _isDirty)
         {
-            Update();
+            Update(true);
         }
     }
 
@@ -149,7 +129,7 @@ public class PlayerMenu
 
     internal SettingsBase GetSetting(int settingId, Type expectedType)
     {
-        var found = _shownItems.FirstOrDefault(x => x.Id == settingId);
+        var found = ShownItems.FirstOrDefault(x => x.Id == settingId);
         if (found == null || found.Base.GetType() != expectedType)
         {
             return null;
@@ -161,9 +141,9 @@ public class PlayerMenu
     private void RenderForcedDynamicMenus()
     {
         foreach (var menu in SSSHandler.RegisteredMenus
-                     .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Forced))
+                     .Where(x => x.InternalHasPermission(TargetPlayer) && x.Type == MenuType.Forced))
         {
-            _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
+            Rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
 
             if (RenderMenu(menu))
             {
@@ -171,7 +151,7 @@ public class PlayerMenu
             }
             else // If the menu has no contents, remove the header
             {
-                _rendering.RemoveAt(_rendering.Count - 1);
+                Rendering.RemoveAt(Rendering.Count - 1);
             }
         }
     }
@@ -182,7 +162,7 @@ public class PlayerMenu
         _selectorOptions.Clear();
         _selectorOptions.Add("No menu");
         _selectorOptions.AddRange(SSSHandler.RegisteredMenus
-            .Where(x => x.InternalHasPermission(_targetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.Name)
+            .Where(x => x.InternalHasPermission(TargetPlayer) && x.Type == MenuType.Dynamic).OrderBy(x => x.Name)
             .Select(x => x.Name)
         );
 
@@ -201,17 +181,17 @@ public class PlayerMenu
         }
 
         // Show the header
-        _rendering.Add(new SSGroupHeader("<b>Menus</b>"));
+        Rendering.Add(new SSGroupHeader("<b>Menus</b>"));
 
         // Show dropdown selection
         MenuSelection = new SSDropdownSetting(-3, "Selected dynamic menu", _selectorOptions.ToArray(), index,
             hint: "Determines which menu is shown below. Select \'No menu\' to not show a menu.");
-        _rendering.Add(MenuSelection);
+        Rendering.Add(MenuSelection);
 
         // Render the selected menu or empty message
-        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(_targetPlayer))
+        if (_selectedDynamicMenu == null || !_selectedDynamicMenu.InternalHasPermission(TargetPlayer))
         {
-            _rendering.Add(new SSTextArea(-4, "Currently you have no valid menu selected!"));
+            Rendering.Add(new SSTextArea(-4, "Currently you have no valid menu selected!"));
         }
         else if (RenderMenu(_selectedDynamicMenu))
         {
@@ -219,7 +199,7 @@ public class PlayerMenu
         }
         else
         {
-            _rendering.Add(new SSTextArea(-4, "The menu is currently empty."));
+            Rendering.Add(new SSTextArea(-4, "The menu is currently empty."));
         }
     }
 
@@ -227,12 +207,12 @@ public class PlayerMenu
     {
         var hasMenu = false;
 
-        _rendering.Add(new SSGroupHeader("<b>Settings</b>"));
+        Rendering.Add(new SSGroupHeader("<b>Settings</b>"));
         foreach (var menu in SSSHandler.RegisteredMenus
-                     .Where(x => x.Type == MenuType.Static && x.InternalHasPermission(_targetPlayer))
+                     .Where(x => x.Type == MenuType.Static && x.InternalHasPermission(TargetPlayer))
                      .OrderByDescending(x => x.Priority))
         {
-            _rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
+            Rendering.Add(new SSGroupHeader($"<size=20>{menu.Name}</size>", true));
 
             if (RenderMenu(menu))
             {
@@ -241,13 +221,13 @@ public class PlayerMenu
             }
             else // If the menu has no contents, remove the header
             {
-                _rendering.RemoveAt(_rendering.Count - 1);
+                Rendering.RemoveAt(Rendering.Count - 1);
             }
         }
 
         if (!hasMenu) // If there are no menus for this player, show a message
         {
-            _rendering.Add(new SSTextArea(-2, UtilitiesPlugin.PluginConfig.NoSettingsText,
+            Rendering.Add(new SSTextArea(-2, UtilitiesPlugin.PluginConfig.NoSettingsText,
                 textAlignment: TextAlignmentOptions.Top));
         }
     }
@@ -257,14 +237,9 @@ public class PlayerMenu
         var addedItem = false;
         try
         {
-            foreach (var item in menu.GetSettings(_targetPlayer))
+            foreach (var item in menu.GetSettings(TargetPlayer))
             {
-                item.Player = _targetPlayer;
-                item.Id = _idHandler.GetId(menu.Name, item.SettingId, item.ServerOnlyType);
-                item.MenuOwner = menu.Name;
-                _shownItems.Add(item);
-                _rendering.Add(item.Base);
-
+                item.RenderForMenu(menu, this);
                 addedItem = true;
             }
         }

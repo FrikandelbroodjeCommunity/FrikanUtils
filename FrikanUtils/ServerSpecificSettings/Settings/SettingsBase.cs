@@ -1,13 +1,14 @@
 ﻿using FrikanUtils.ServerSpecificSettings.Helpers;
+using FrikanUtils.ServerSpecificSettings.Menus;
 using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
 
-public abstract class SettingsBase
+public abstract class SettingsBase : IServerSpecificSetting
 {
     public ushort? SettingId { get; }
-    public string MenuOwner { get; internal set; }
+    public string MenuOwner { get; private set; }
     public readonly ServerOnlyType ServerOnlyType;
 
     public abstract ServerSpecificSettingBase Base { get; }
@@ -43,5 +44,12 @@ public abstract class SettingsBase
         Base.SendUpdate(newLabel, newHintDescription, applyOverride);
     }
 
-    public abstract SettingsBase Clone();
+    public void RenderForMenu(MenuBase menu, PlayerMenu playerMenu)
+    {
+        Player = playerMenu.TargetPlayer;
+        Id = playerMenu.IDHandler.GetId(menu.Name, SettingId, ServerOnlyType);
+        MenuOwner = menu.Name;
+        playerMenu.ShownItems.Add(this);
+        playerMenu.Rendering.Add(Base);
+    }
 }
