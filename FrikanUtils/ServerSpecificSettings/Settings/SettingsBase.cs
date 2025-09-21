@@ -49,7 +49,7 @@ public abstract class SettingsBase : IServerSpecificSetting
         Player = playerMenu.TargetPlayer;
         Id = playerMenu.IDHandler.GetId(menu.Name, SettingId, ServerOnlyType);
         MenuOwner = menu.Name;
-        playerMenu.ShownItems.Add(this);
+        playerMenu.RenderingItems.Add(this);
         playerMenu.Rendering.Add(Base);
     }
 }

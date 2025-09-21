@@ -77,9 +77,19 @@ public static class SSSHandler
     /// <summary>
     /// Get all fields with the given ID.
     /// </summary>
+    /// <param name="menu">The menu to search in</param>
+    /// <param name="settingId">The unique ID of the fields</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found fields</returns>
+    public static IEnumerable<T> GetAllFields<T>(MenuBase menu, ushort settingId) where T : SettingsBase
+        => GetAllFields<T>(menu.Name, settingId);
+
+    /// <summary>
+    /// Get all fields with the given ID.
+    /// </summary>
     /// <param name="menu">The exact name of the menu</param>
     /// <param name="settingId">The unique ID of the fields</param>
-    /// <typeparam name="T">THe expected field type</typeparam>
+    /// <typeparam name="T">The expected field type</typeparam>
     /// <returns>The found fields</returns>
     public static IEnumerable<T> GetAllFields<T>(string menu, ushort settingId) where T : SettingsBase
     {
@@ -87,6 +97,19 @@ public static class SSSHandler
             .Select(playerMenu => playerMenu.GetSetting<T>(menu, settingId))
             .Where(field => field != null);
     }
+
+    /// <summary>
+    /// Try to get a specific field for a player.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="menu">The menu to search in</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <param name="result">The resulting field or null</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>Whether the field was found</returns>
+    public static bool TryGetField<T>(Player player, MenuBase menu, ushort settingId, out T result)
+        where T : SettingsBase
+        => TryGetField(player, menu.Name, settingId, out result);
 
     /// <summary>
     /// Try to get a specific field for a player.
@@ -103,6 +126,17 @@ public static class SSSHandler
         result = GetField<T>(player, menu, settingId);
         return result != null;
     }
+
+    /// <summary>
+    /// Get a specific field for a player. Will return null if the field could not be found or had the wrong type.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="menu">The menu to search in</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found field or null</returns>
+    public static T GetField<T>(Player player, MenuBase menu, ushort settingId) where T : SettingsBase
+        => GetField<T>(player, menu.Name, settingId);
 
     /// <summary>
     /// Get a specific field for a player. Will return null if the field could not be found or had the wrong type.

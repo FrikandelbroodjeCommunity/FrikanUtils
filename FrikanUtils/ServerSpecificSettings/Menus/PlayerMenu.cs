@@ -14,7 +14,7 @@ public class PlayerMenu
     internal SSDropdownSetting MenuSelection;
 
     internal readonly Player TargetPlayer;
-    internal readonly List<SettingsBase> ShownItems = [];
+    internal readonly List<SettingsBase> RenderingItems = [];
     internal readonly List<ServerSpecificSettingBase> Rendering = [];
     internal readonly PlayerIdHandler IDHandler = new();
 
@@ -22,6 +22,7 @@ public class PlayerMenu
     private bool _isDirty;
 
     private MenuBase _selectedDynamicMenu;
+    private readonly List<SettingsBase> _shownItems = [];
     private readonly List<MenuBase> _shownMenus = [];
     private readonly List<string> _selectorOptions = [];
 
@@ -32,7 +33,7 @@ public class PlayerMenu
 
     internal T GetSetting<T>(string menu, ushort settingId) where T : SettingsBase
     {
-        var found = ShownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
+        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
         return found as T;
     }
 
@@ -45,7 +46,6 @@ public class PlayerMenu
         }
 
         _isDirty = false;
-        ShownItems.Clear();
         _shownMenus.Clear();
 
         Logger.Debug($"Updating player {TargetPlayer.LogName}", UtilitiesPlugin.PluginConfig.Debug);
@@ -60,8 +60,12 @@ public class PlayerMenu
         RenderDynamicMenus();
         RenderStaticMenus();
 
+        _shownItems.Clear();
+        _shownItems.AddRange(RenderingItems);
+
         ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, Rendering.ToArray());
         Rendering.Clear(); // Clear after, as we don't need references anymore
+        RenderingItems.Clear();
     }
 
     internal void TryUpdate(MenuBase menu, bool force = false)
@@ -129,7 +133,7 @@ public class PlayerMenu
 
     internal SettingsBase GetSetting(int settingId, Type expectedType)
     {
-        var found = ShownItems.FirstOrDefault(x => x.Id == settingId);
+        var found = _shownItems.FirstOrDefault(x => x.Id == settingId);
         if (found == null || found.Base.GetType() != expectedType)
         {
             return null;
