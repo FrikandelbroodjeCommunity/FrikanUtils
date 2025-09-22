@@ -53,6 +53,6 @@ public abstract class CollapsableSubMenu : SubMenu
 
     private void CollapsedUpdated(Player player, bool collapsed)
     {
-        SSSHandler.UpdatePlayer(player, _menuOwner);
+        SSSHandler.UpdatePlayer(player, _menuOwner, false);
     }
 }

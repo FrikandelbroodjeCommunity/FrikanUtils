@@ -37,7 +37,7 @@ public class PlayerMenu
         return found as T;
     }
 
-    internal void Update(bool force = false)
+    internal void Update(bool force)
     {
         if (!force && !_isOpen)
         {
@@ -68,7 +68,7 @@ public class PlayerMenu
         RenderingItems.Clear();
     }
 
-    internal void TryUpdate(MenuBase menu, bool force = false)
+    internal void TryUpdate(MenuBase menu, bool force)
     {
         // If the player has access to the menu, or the menu is still shown (even though access has been removed)
         if (HasMenu(menu) || _shownMenus.Contains(menu))
@@ -110,7 +110,7 @@ public class PlayerMenu
             if (_selectedDynamicMenu != null)
             {
                 _selectedDynamicMenu = null;
-                Update();
+                Update(false);
             }
 
             return;
@@ -128,7 +128,7 @@ public class PlayerMenu
         }
 
         _selectedDynamicMenu = target;
-        Update();
+        Update(false);
     }
 
     internal SettingsBase GetSetting(int settingId, Type expectedType)

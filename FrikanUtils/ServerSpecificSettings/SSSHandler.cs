@@ -22,39 +22,45 @@ public static class SSSHandler
         }
 
         RegisteredMenus.Add(menu);
-        UpdateAll(menu);
+        UpdateAll(menu, true);
     }
 
     public static bool UnregisterMenu(MenuBase menu)
     {
         if (!RegisteredMenus.Remove(menu)) return false;
 
-        UpdateAll(menu);
+        UpdateAll(menu, true);
         return true;
     }
 
     /// <summary>
     /// Update the given menu for all players. Any player who can see this menu will have their menu updated.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
     /// </summary>
     /// <param name="menu">Menu to update</param>
-    public static void UpdateAll(MenuBase menu)
+    /// <param name="force">Whether to force the update</param>
+    public static void UpdateAll(MenuBase menu, bool force)
     {
         foreach (var playerMenu in PlayerMenus.Values)
         {
-            playerMenu.TryUpdate(menu);
+            playerMenu.TryUpdate(menu, force);
         }
     }
 
     /// <summary>
     /// Update the given menu for a specific player. The menu will only be updated if the player can see the menu.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
     /// </summary>
     /// <param name="player">Player to update the menu for</param>
     /// <param name="menu">Menu to update</param>
-    public static void UpdatePlayer(Player player, MenuBase menu)
+    /// <param name="force">Whether to force the update</param>
+    public static void UpdatePlayer(Player player, MenuBase menu, bool force)
     {
         if (PlayerMenus.TryGetValue(player, out var playerMenu))
         {
-            playerMenu.TryUpdate(menu);
+            playerMenu.TryUpdate(menu, force);
         }
     }
 
@@ -155,7 +161,7 @@ public static class SSSHandler
     {
         var menu = new PlayerMenu(player);
         PlayerMenus.Add(player, menu);
-        menu.Update();
+        menu.Update(true);
     }
 
     internal static void DestroyPlayer(Player player)

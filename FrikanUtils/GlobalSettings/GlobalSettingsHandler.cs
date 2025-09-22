@@ -41,12 +41,12 @@ public static class GlobalSettingsHandler
 
     public static void ReloadServerSettings()
     {
-        SSSHandler.UpdateAll(InternalGlobalSettings.ServerMenu);
+        SSSHandler.UpdateAll(InternalGlobalSettings.ServerMenu, false);
     }
 
     public static void ReloadClientSettings()
     {
-        SSSHandler.UpdateAll(InternalGlobalSettings.ClientMenu);
+        SSSHandler.UpdateAll(InternalGlobalSettings.ClientMenu, true);
     }
 
     public static IEnumerable<T> GetSettings<T>(IGlobalSetting setting) where T : SettingsBase

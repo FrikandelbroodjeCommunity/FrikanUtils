@@ -41,9 +41,9 @@ internal static class ExecuteDummyPatch
         }
 
         // Get the targeted module
-        var moduleName = arguments.At(1).Substring(1);
+        var moduleName = arguments.At(1);
         var module = RaHandler.Modules
-            .FirstOrDefault(x => x.Name.Replace(" ", "_") == arguments.At(1).Substring(1));
+            .FirstOrDefault(x => x.Name.Replace(" ", "_") == moduleName);
         if (module == null || !module.HasPermission(player))
         {
             Logger.Debug($"Could not find the module {moduleName}", UtilitiesPlugin.PluginConfig.Debug);

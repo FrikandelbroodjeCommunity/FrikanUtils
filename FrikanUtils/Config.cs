@@ -47,10 +47,7 @@ public class Config
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
-
-    [Description("Whether the improved thrown keycard detection is enabled")]
-    public bool ImprovedCardDetection { get; set; } = true;
-
+    
     [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
     public HolidayType OverrideHoliday { get; set; }
 

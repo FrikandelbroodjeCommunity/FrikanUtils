@@ -29,7 +29,7 @@ public static class PlayerUtilities
         return Player.List.Where(player => !BlacklistedRoles.Contains(player.Role) &&
                                            !NpcSystem.Npcs.Contains(player) &&
                                            !player.IsHost &&
-                                           player.UserId != null);
+                                           player.UserId != null).ToArray();
     }
 
     /// <summary>
