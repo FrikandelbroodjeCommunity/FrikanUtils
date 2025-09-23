@@ -33,6 +33,11 @@ from an invisible point.
 Allows a plugin to player audio through a dummy. If no name for the dummy is provided, a default name will be used,
 which can be set in the config.
 
+## Player Speaker Audio Player
+
+Attaches a speaker to a player or dummy. The audio will be played through the speaker, which follows the player,
+allowing audio to be played in proximity chat even for roles that normally don't allow that.
+
 ## Global Settings
 
 The mute setting allows each player to determine whether they want to mute the audio played through the speaker and hub

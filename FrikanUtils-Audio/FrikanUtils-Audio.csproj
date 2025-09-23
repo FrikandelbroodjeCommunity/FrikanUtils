@@ -92,6 +92,7 @@
         <Compile Include="Audio\AudioPlayerComponent.cs" />
         <Compile Include="Audio\AudioSystem.cs" />
         <Compile Include="Audio\HubAudioPlayer.cs" />
+        <Compile Include="Audio\PlayerSpeakerAudioPlayer.cs" />
         <Compile Include="Audio\SpeakerAudioPlayer.cs" />
         <Compile Include="GlobalSettings\MuteSetting.cs" />
         <Compile Include="GlobalSettings\VolumeSetting.cs" />

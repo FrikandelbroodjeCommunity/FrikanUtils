@@ -30,6 +30,16 @@ public class HubAudioPlayer : AudioPlayerBase
         CreateDummy(botName, enableGodmode, canSpectate);
     }
 
+    public HubAudioPlayer(Player player)
+    {
+        Player = player;
+        
+        NpcSystem.RegisterNpc(Player);
+        
+        var comp = Player.ReferenceHub.gameObject.AddComponent<AudioPlayerComponent>();
+        comp.AudioPlayer = this;
+    }
+
     protected override void InternalCleanup()
     {
         NetworkServer.Destroy(Player.ReferenceHub.gameObject);

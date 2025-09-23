@@ -24,6 +24,16 @@ public class FollowingNpc : BaseNpc
 
     public FollowingNpc(Player target, string name) : base(name)
     {
+        Setup(target);
+    }
+
+    public FollowingNpc(Player dummy, Player target) : base(dummy)
+    {
+        Setup(target);
+    }
+
+    private void Setup(Player target)
+    {
         TargetPlayer = target;
 
         var component = Dummy.GameObject?.AddComponent<FollowingNpcComponent>();

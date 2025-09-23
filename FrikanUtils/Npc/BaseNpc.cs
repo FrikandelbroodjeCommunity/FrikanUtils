@@ -50,9 +50,13 @@ public abstract class BaseNpc
     /// </summary>
     public bool CanEscape;
 
-    public BaseNpc(string name)
+    public BaseNpc(string name) : this(NpcSystem.CreateHiddenDummy(name))
     {
-        Dummy = NpcSystem.CreateHiddenDummy(name);
+    }
+
+    public BaseNpc(Player dummy)
+    {
+        Dummy = dummy;
         Dummy.IsSpectatable = false;
         NpcSystem.RegisterNpc(Dummy);
 
