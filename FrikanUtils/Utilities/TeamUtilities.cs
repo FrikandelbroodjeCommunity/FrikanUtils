@@ -25,7 +25,7 @@ public static class TeamUtilities
         RoleTypeId.ChaosRifleman,
         RoleTypeId.FacilityGuard
     ];
-    
+
     private static readonly Random Random = new();
 
     /// <summary>

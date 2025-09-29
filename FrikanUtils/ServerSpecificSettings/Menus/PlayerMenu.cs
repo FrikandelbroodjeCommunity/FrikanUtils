@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using FrikanUtils.ServerSpecificSettings.Helpers;
 using FrikanUtils.ServerSpecificSettings.Settings;
 using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
@@ -22,7 +23,7 @@ public class PlayerMenu
     private bool _isDirty;
 
     private MenuBase _selectedDynamicMenu;
-    private readonly List<SettingsBase> _shownItems = [];
+    private readonly Dictionary<int, SettingsBase> _shownItems = new();
     private readonly List<MenuBase> _shownMenus = [];
     private readonly List<string> _selectorOptions = [];
 
@@ -33,8 +34,8 @@ public class PlayerMenu
 
     internal T GetSetting<T>(string menu, ushort settingId) where T : SettingsBase
     {
-        var found = _shownItems.FirstOrDefault(x => x.MenuOwner == menu && x.SettingId == settingId);
-        return found as T;
+        var id = IDHandler.GetId(menu, settingId);
+        return _shownItems.TryGetValue(id, out var value) ? value as T : null;
     }
 
     internal void Update(bool force)
@@ -60,8 +61,16 @@ public class PlayerMenu
         RenderDynamicMenus();
         RenderStaticMenus();
 
-        _shownItems.Clear();
-        _shownItems.AddRange(RenderingItems);
+        foreach (var item in RenderingItems)
+        {
+            // Keep value if it already existed
+            if (_shownItems.TryGetValue(item.Id, out var setting))
+            {
+                item.CopyValue(setting);
+            }
+
+            _shownItems[item.Id] = item;
+        }
 
         ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, Rendering.ToArray());
         Rendering.Clear(); // Clear after, as we don't need references anymore
@@ -133,13 +142,12 @@ public class PlayerMenu
 
     internal SettingsBase GetSetting(int settingId, Type expectedType)
     {
-        var found = _shownItems.FirstOrDefault(x => x.Id == settingId);
-        if (found == null || found.Base.GetType() != expectedType)
+        if (_shownItems.TryGetValue(settingId, out var setting) && setting.Base.GetType() == expectedType)
         {
-            return null;
+            return setting;
         }
 
-        return found;
+        return null;
     }
 
     private void RenderForcedDynamicMenus()

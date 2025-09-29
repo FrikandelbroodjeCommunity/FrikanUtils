@@ -13,7 +13,7 @@ internal static class CachePatch
     {
         return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
     }
-    
+
     [HarmonyPatch(nameof(DummyActionCollector.ServerGetActions))]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming

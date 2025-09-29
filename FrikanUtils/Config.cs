@@ -42,12 +42,13 @@ public class Config
     [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
     public List<string> ServerSettingMenus { get; set; } = [];
 
-    [Description("[Automatically generated] List of Global Client settings, ensuring they are always given the same ID")]
+    [Description(
+        "[Automatically generated] List of Global Client settings, ensuring they are always given the same ID")]
     public List<string> GlobalClientSettings { get; set; } = [];
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
-    
+
     [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
     public HolidayType OverrideHoliday { get; set; }
 

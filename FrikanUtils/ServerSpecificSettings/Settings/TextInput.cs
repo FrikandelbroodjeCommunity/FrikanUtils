@@ -54,4 +54,13 @@ public class TextInput : ValueSettingsBase<string>
         ((SSPlaintextSetting)Base).SyncInputText = "";
         ((SSPlaintextSetting)Base).SendClearRequest(x => x == Player.ReferenceHub);
     }
+
+    public override void CopyValue(SettingsBase setting)
+    {
+        base.CopyValue(setting);
+        if (setting is TextInput text)
+        {
+            Setting.SyncInputText = text.Setting.SyncInputText;
+        }
+    }
 }

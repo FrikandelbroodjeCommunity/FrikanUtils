@@ -53,7 +53,7 @@ public static class AudioSystem
         }
     }
 
-    internal static void SetUserPreference(Player ply, bool preference)
+    internal static void SetUserPreference(Player ply, bool _, bool preference)
     {
         MusicPreference[ply.UserId] = preference;
 

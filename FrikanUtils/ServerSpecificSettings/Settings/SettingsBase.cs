@@ -39,6 +39,10 @@ public abstract class SettingsBase : IServerSpecificSetting
         ServerOnlyType = serverOnlyType;
     }
 
+    public virtual void CopyValue(SettingsBase setting)
+    {
+    }
+
     public void UpdateBase(string newLabel, string newHintDescription, bool applyOverride = true)
     {
         Base.SendUpdate(newLabel, newHintDescription, applyOverride);
@@ -47,7 +51,7 @@ public abstract class SettingsBase : IServerSpecificSetting
     public void RenderForMenu(MenuBase menu, PlayerMenu playerMenu)
     {
         Player = playerMenu.TargetPlayer;
-        Id = playerMenu.IDHandler.GetId(menu.Name, SettingId, ServerOnlyType);
+        Id = playerMenu.IDHandler.GetId(menu.Name, SettingId);
         MenuOwner = menu.Name;
         playerMenu.RenderingItems.Add(this);
         playerMenu.Rendering.Add(Base);

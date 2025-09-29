@@ -24,7 +24,7 @@ public class VolumeSetting : IGlobalSetting
 
     public bool HasPermissions(Player player) => player.HasPermissions("frikanutils.audio");
 
-    private void UpdateValue(Player player, float value)
+    private void UpdateValue(Player player, float _, float value)
     {
         if (!HasPermissions(player))
         {

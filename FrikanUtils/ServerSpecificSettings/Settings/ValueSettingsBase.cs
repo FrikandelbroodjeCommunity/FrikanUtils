@@ -12,7 +12,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
     internal bool ReceivedInitialValue;
     internal bool GlobalSetting;
 
-    protected Action<Player, T> OnChanged;
+    protected Action<Player, T, T> OnChanged;
     protected Action<Player, T> OnInitialValue;
 
     protected ValueSettingsBase(ushort? settingId, ServerOnlyType isServerOnly) : base(settingId, isServerOnly)
@@ -20,7 +20,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
         GlobalSetting = isServerOnly.IsGlobalSetting();
     }
 
-    public ValueSettingsBase<T> RegisterChangedAction(Action<Player, T> changedAction)
+    public ValueSettingsBase<T> RegisterChangedAction(Action<Player, T, T> changedAction)
     {
         OnChanged = changedAction;
         return this;
@@ -32,7 +32,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
         return this;
     }
 
-    internal void OnValueChanged(Player player, T value)
+    internal void OnValueChanged(Player player, T oldValue, T value)
     {
         if (!ReceivedInitialValue)
         {
@@ -40,7 +40,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
             OnInitialValue?.Invoke(player, value);
         }
 
-        OnChanged?.Invoke(player, value);
+        OnChanged?.Invoke(player, oldValue, value);
 
         // For global settings, set the value of all instances
         // We do however require the id as we otherwise cannot find the other fields

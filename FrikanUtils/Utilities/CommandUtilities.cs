@@ -49,14 +49,14 @@ public static class CommandUtilities
     {
         player = null;
         response = null;
-        
+
         // Search using ID
         if (int.TryParse(text, out var id))
         {
             player = Player.List.First(x => x.PlayerId == id);
 
             if (player != null) return true;
-            
+
             response = $"No player with the ID {id} was found!";
             return false;
         }
@@ -73,7 +73,7 @@ public static class CommandUtilities
                 {
                     builder.AppendLine($" - ({ply.PlayerId}) {ply.DisplayName}");
                 }
-                
+
                 response = builder.ToString();
                 return false;
             }

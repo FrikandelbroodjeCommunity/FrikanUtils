@@ -18,7 +18,7 @@ public static class PlayerUtilities
         RoleTypeId.Overwatch,
         RoleTypeId.Tutorial
     ];
-    
+
     /// <summary>
     /// Get a list of all players excluding some blacklisted roles and the audio bot.
     /// This is intended for use during events.

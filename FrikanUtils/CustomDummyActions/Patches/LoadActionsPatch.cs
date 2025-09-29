@@ -22,7 +22,7 @@ internal static class LoadActionsPatch
     {
         return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
     }
-    
+
     [HarmonyPatch(nameof(RaDummyActions.ReceiveData), typeof(CommandSender), typeof(string))]
     [HarmonyPrefix]
     public static void OnReceiveData(CommandSender sender)

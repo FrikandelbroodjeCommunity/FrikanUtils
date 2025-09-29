@@ -19,7 +19,7 @@ internal static class ExecuteDummyPatch
     {
         return UtilitiesPlugin.PluginConfig.UseCustomDummyActions;
     }
-    
+
     [HarmonyPatch(nameof(ActionDummyCommand.Execute))]
     [HarmonyPrefix]
     public static bool OnExecuteDummy(ArraySegment<string> arguments, ICommandSender sender, ref string response,

@@ -7,9 +7,7 @@ namespace FrikanUtils.ServerSpecificSettings.Settings.Submenus;
 
 public abstract class CollapsableSubMenu : SubMenu
 {
-    public IServerSpecificSetting[] CachedSettings { get; private set; }
-
-    protected abstract bool Label { get; }
+    protected abstract string Label { get; }
     protected abstract bool DefaultCollapsed { get; }
     protected abstract bool FirstRenderCollapsed { get; }
     protected abstract ServerOnlyType CollapseSelectorServerType { get; }
@@ -34,25 +32,25 @@ public abstract class CollapsableSubMenu : SubMenu
         var shouldRender = !FirstRenderCollapsed;
 
         // Get the priorly rendered setting
-        if (SSSHandler.TryGetField(playerMenu.TargetPlayer, menu, _settingId,
-                out TwoButtonSetting renderedSetting))
+        if (SSSHandler.TryGetField(playerMenu.TargetPlayer, menu, _settingId, out TwoButtonSetting renderedSetting))
         {
-            shouldRender = renderedSetting.Value;
+            shouldRender = !renderedSetting.Value;
         }
 
         if (shouldRender)
         {
-            CachedSettings = GetSettings(playerMenu.TargetPlayer).ToArray();
-
-            foreach (var setting in CachedSettings)
+            foreach (var setting in GetSettings(playerMenu.TargetPlayer))
             {
                 setting.RenderForMenu(menu, playerMenu);
             }
         }
     }
 
-    private void CollapsedUpdated(Player player, bool collapsed)
+    private void CollapsedUpdated(Player player, bool oldValue, bool collapsed)
     {
-        SSSHandler.UpdatePlayer(player, _menuOwner, false);
+        if (oldValue != collapsed)
+        {
+            SSSHandler.UpdatePlayer(player, _menuOwner, false);
+        }
     }
 }

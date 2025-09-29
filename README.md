@@ -31,3 +31,5 @@ promise that something will be implemented.
 |----------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | More (advanced) NPCs | - Extension of Follow NPCs which can actively wander around the map until they find another player, which they will then target.<br/> - No further ideas (yet)              |
 | Localization         | Allow plugins to register localizations both for their own plugins, but also other plugins, allowing players to choose a language from their Server Specific Settings menu. |
+| Centralized config   | Functionality that allows for/makes it easier for a centralized configuration, allowing multiple servers to synchronize their configuration with a central server.          |
+| Bridges              | Add bridge modules that allow FrikanUtils to work together with other SSS or Dummy Action frameworks.                                                                       |

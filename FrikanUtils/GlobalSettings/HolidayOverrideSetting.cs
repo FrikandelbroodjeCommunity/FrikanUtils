@@ -28,7 +28,7 @@ public class HolidayOverrideSetting : IGlobalSetting
 
     public bool HasPermissions(Player player) => player.HasPermissions("frikanutils.debug");
 
-    private void UpdateValue(Player player, string value)
+    private void UpdateValue(Player player, string _, string value)
     {
         if (!HasPermissions(player))
         {

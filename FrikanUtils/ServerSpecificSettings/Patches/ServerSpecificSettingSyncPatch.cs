@@ -16,7 +16,7 @@ internal static class ServerSpecificSettingSyncPatch
     {
         return UtilitiesPlugin.PluginConfig.UseServerSpecificSettings;
     }
-    
+
     [HarmonyPatch(nameof(ServerSpecificSettingsSync.ServerProcessClientResponseMsg))]
     [HarmonyPrefix]
     public static bool OnReceiveMessage(NetworkConnection conn, SSSClientResponse msg)
@@ -48,18 +48,19 @@ internal static class ServerSpecificSettingSyncPatch
             return false;
         }
 
-        // Update the SSS Base
         var reader = NetworkReaderPool.Get(msg.Payload);
-        field.Base.DeserializeValue(reader);
-        reader.Dispose();
 
         try
         {
-            SSSEventHandler.OnValueReceived(player, field);
+            SSSEventHandler.OnValueReceived(player, field, reader);
         }
         catch (Exception e)
         {
             Logger.Error($"Exception while receiving SSS packet for player {player.LogName}: {e}");
+        }
+        finally
+        {
+            reader.Dispose();
         }
 
         return false;

@@ -7,9 +7,9 @@ public class PlayerIdHandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 
-    public int GetId(string menuId, ushort? fieldId, ServerOnlyType serverOnlyType)
+    public int GetId(string menuId, ushort? fieldId)
     {
-        if (!fieldId.HasValue || serverOnlyType != ServerOnlyType.Client)
+        if (!fieldId.HasValue)
         {
             // Remove one from the internal counter and return the new value.
             return --_internalIdCounter;

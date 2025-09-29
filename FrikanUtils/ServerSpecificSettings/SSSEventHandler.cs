@@ -3,6 +3,7 @@ using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Handlers;
 using LabApi.Features.Wrappers;
 using MEC;
+using Mirror;
 using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings;
@@ -33,7 +34,7 @@ internal static class SSSEventHandler
         SSSHandler.DestroyPlayer(ev.Player);
     }
 
-    internal static void OnUpdateReceived(ReferenceHub hub, SSSUserStatusReport status)
+    private static void OnUpdateReceived(ReferenceHub hub, SSSUserStatusReport status)
     {
         var player = Player.Get(hub);
 
@@ -43,18 +44,23 @@ internal static class SSSEventHandler
         }
     }
 
-    internal static void OnValueReceived(Player player, SettingsBase field)
+    internal static void OnValueReceived(Player player, SettingsBase field, NetworkReaderPooled reader)
     {
         if (field is Button button)
         {
+            field.Base.DeserializeValue(reader);
             button.OnClick?.Invoke(player);
         }
         else if (field is Dropdown dropdown)
         {
-            dropdown.OnValueChanged(player, ((SSDropdownSetting)dropdown.Base).SyncSelectionText);
+            var previous = dropdown.Value;
+            field.Base.DeserializeValue(reader);
+            dropdown.OnValueChanged(player, previous, ((SSDropdownSetting)dropdown.Base).SyncSelectionText);
         }
         else if (field is Keybind keybind)
         {
+            field.Base.DeserializeValue(reader);
+
             var isPressed = ((SSKeybindSetting)keybind.Base).SyncIsPressed;
             // Only when we already received a value do we process the button presses
             // Otherwise we always get the button presses when receiving a value
@@ -80,16 +86,25 @@ internal static class SSSEventHandler
                 slider.OnInitialValueInt?.Invoke(player, ((SSSliderSetting)slider.Base).SyncIntValue);
             }
 
+            var previous = slider.Value;
+            field.Base.DeserializeValue(reader);
+
             slider.OnChangedInt?.Invoke(player, ((SSSliderSetting)slider.Base).SyncIntValue);
-            slider.OnValueChanged(player, ((SSSliderSetting)slider.Base).SyncFloatValue);
+            slider.OnValueChanged(player, previous, ((SSSliderSetting)slider.Base).SyncFloatValue);
         }
         else if (field is TextInput text)
         {
-            text.OnValueChanged(player, ((SSPlaintextSetting)text.Base).SyncInputText);
+            var previous = text.Value;
+            field.Base.DeserializeValue(reader);
+
+            text.OnValueChanged(player, previous, ((SSPlaintextSetting)text.Base).SyncInputText);
         }
         else if (field is TwoButtonSetting twoButton)
         {
-            twoButton.OnValueChanged(player, ((SSTwoButtonsSetting)twoButton.Base).SyncIsB);
+            var previous = twoButton.Value;
+            field.Base.DeserializeValue(reader);
+
+            twoButton.OnValueChanged(player, previous, ((SSTwoButtonsSetting)twoButton.Base).SyncIsB);
         }
     }
 }

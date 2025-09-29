@@ -40,4 +40,13 @@ public class TwoButtonSetting : ValueSettingsBase<bool>
     {
         Setting.SendTwoButtonUpdate(optionA ?? Setting.OptionA, optionB ?? Setting.OptionB, applyOverride);
     }
+
+    public override void CopyValue(SettingsBase setting)
+    {
+        base.CopyValue(setting);
+        if (setting is TwoButtonSetting twoButtonSetting)
+        {
+            Setting.SyncIsB = twoButtonSetting.Setting.SyncIsB;
+        }
+    }
 }

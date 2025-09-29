@@ -33,9 +33,9 @@ public class HubAudioPlayer : AudioPlayerBase
     public HubAudioPlayer(Player player)
     {
         Player = player;
-        
+
         NpcSystem.RegisterNpc(Player);
-        
+
         var comp = Player.ReferenceHub.gameObject.AddComponent<AudioPlayerComponent>();
         comp.AudioPlayer = this;
     }

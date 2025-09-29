@@ -23,7 +23,7 @@ public class AudioPlugin : Plugin<AudioConfig>
     {
         Instance = this;
         AudioSystem.RegisterEvents();
-        
+
         GlobalSettingsHandler.RegisterSetting(_muteSetting);
         GlobalSettingsHandler.RegisterSetting(_volumeSetting);
     }
@@ -31,7 +31,7 @@ public class AudioPlugin : Plugin<AudioConfig>
     public override void Disable()
     {
         AudioSystem.UnregisterEvents();
-        
+
         GlobalSettingsHandler.UnregisterSetting(_muteSetting);
         GlobalSettingsHandler.UnregisterSetting(_volumeSetting);
     }

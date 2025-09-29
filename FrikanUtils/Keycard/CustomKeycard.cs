@@ -256,7 +256,7 @@ public class CustomKeycard : IDoorPermissionProvider
     }
 
     public PermissionUsed PermissionsUsedCallback => Keycard.Base.PermissionsUsedCallback;
-    
+
     private void ReadDetails()
     {
         Permissions = Keycard.Levels;

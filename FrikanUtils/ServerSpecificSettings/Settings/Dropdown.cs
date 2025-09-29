@@ -52,4 +52,13 @@ public class Dropdown : ValueSettingsBase<string>
             isServerOnly: isServerOnly != ServerOnlyType.Client
         );
     }
+
+    public override void CopyValue(SettingsBase setting)
+    {
+        base.CopyValue(setting);
+        if (setting is Dropdown dropdown)
+        {
+            Setting.SyncSelectionIndexRaw = dropdown.Setting.SyncSelectionIndexRaw;
+        }
+    }
 }

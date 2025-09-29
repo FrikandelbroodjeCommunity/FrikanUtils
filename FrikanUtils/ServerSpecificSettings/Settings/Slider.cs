@@ -80,4 +80,13 @@ public class Slider : ValueSettingsBase<float>
         OnInitialValueInt = intialValueAction;
         return this;
     }
+
+    public override void CopyValue(SettingsBase setting)
+    {
+        base.CopyValue(setting);
+        if (setting is Slider slider)
+        {
+            Setting.SyncFloatValue = slider.Setting.SyncFloatValue;
+        }
+    }
 }
