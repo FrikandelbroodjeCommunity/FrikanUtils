@@ -18,6 +18,17 @@ The audio module assists in playing music files through dummies or speakers.
 Place the [latest release](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest) for "
 FrikanUtils_Audio.dll" in the LabAPI plugin folder.
 
+## Adding audio files
+
+The audio module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your audio files
+in the `/LabAPI/configs/{port or global}/FrikanUtils/Audio` folder.
+
+If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
+
+> [!WARNING]
+> For the Audio API to work the audio file needs to be in a <code>.ogg</code> file with <code>mono</code> audio and
+> a refresh rate of <code>48000hz</code>.
+
 # Features
 
 This plugin is a library plugin which plugin developers can build on, most features below won't add anything on their
