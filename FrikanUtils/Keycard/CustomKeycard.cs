@@ -259,6 +259,7 @@ public class CustomKeycard : IDoorPermissionProvider
 
     private void ReadDetails()
     {
+        PermissionsColor = CustomKeycardUtilities.GetDefaultPermsColor(Keycard.Type);
         Permissions = Keycard.Levels;
         ItemName = Keycard.Base.Name;
 
