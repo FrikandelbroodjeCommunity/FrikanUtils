@@ -5,5 +5,7 @@
         <Copy SourceFiles="$(TargetPath)" DestinationFolder="$(SolutionDir)/AllPlugins"/>
         <Message Text="Copying mod pdb to build directory"/>
         <Copy SourceFiles="$(TargetDir)$(TargetName).pdb" DestinationFolder="$(SolutionDir)/AllPlugins"/>
+        <Message Text="Copying mod documentation to build directory"/>
+        <Copy SourceFiles="$(TargetDir)$(TargetName).xml" DestinationFolder="$(SolutionDir)/AllPlugins"/>
     </Target>
 </Project>

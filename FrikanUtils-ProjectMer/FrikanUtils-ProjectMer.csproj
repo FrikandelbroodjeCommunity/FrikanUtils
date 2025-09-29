@@ -33,6 +33,7 @@
         <DefineConstants>TRACE</DefineConstants>
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
+        <DocumentationFile>bin\Release\FrikanUtils_ProjectMer.xml</DocumentationFile>
     </PropertyGroup>
     <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SoftDeploy|AnyCPU' ">
         <DebugType>pdbonly</DebugType>
@@ -41,6 +42,7 @@
         <ErrorReport>prompt</ErrorReport>
         <WarningLevel>4</WarningLevel>
         <OutputPath>bin\SoftDeploy\</OutputPath>
+        <DocumentationFile>bin\SoftDeploy\FrikanUtils_ProjectMer.xml</DocumentationFile>
     </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
