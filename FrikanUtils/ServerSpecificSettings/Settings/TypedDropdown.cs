@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using FrikanUtils.ServerSpecificSettings.Helpers;
 using UserSettings.ServerSpecific;
 
@@ -25,11 +26,12 @@ public class TypedDropdown<T> : Dropdown
         set
         {
             _internalOptions = value;
-            Setting.SendDropdownUpdate(value.Select(x => x.ToString()).ToArray());
+            Setting.SendDropdownUpdate(value.Select(x => _toString(x)).ToArray());
         }
     }
 
     private T[] _internalOptions;
+    private readonly Func<T, string> _toString;
 
     public TypedDropdown(
         ushort? id,
@@ -38,10 +40,13 @@ public class TypedDropdown<T> : Dropdown
         int defaultOptionIndex = 0,
         SSDropdownSetting.DropdownEntryType entryType = SSDropdownSetting.DropdownEntryType.Regular,
         string hint = null,
-        ServerOnlyType isServerOnly = ServerOnlyType.Client)
+        ServerOnlyType isServerOnly = ServerOnlyType.Client,
+        Func<T, string> toString = null)
         :
-        base(id, label, options.Select(x => x.ToString()).ToArray(), defaultOptionIndex, entryType, hint, isServerOnly)
+        base(id, label, options.Select(x => toString == null ? x.ToString() : toString(x)).ToArray(),
+            defaultOptionIndex, entryType, hint, isServerOnly)
     {
         _internalOptions = options;
+        _toString = toString ?? (x => x.ToString());
     }
 }
