@@ -77,4 +77,25 @@ public static class CustomKeycardUtilities
                 return ItemType.None;
         }
     }
+
+    /// <summary>
+    /// Get the default permissions color for a custom keycard.
+    /// This needs to be done as passing a null color now results in white, instead of the default color.
+    /// </summary>
+    /// <returns></returns>
+    public static Color32 GetDefaultPermsColor(ItemType keycardType)
+    {
+        var customType = CustomTypeForKeycard(keycardType);
+        switch (customType)
+        {
+            case ItemType.KeycardCustomSite02:
+            case ItemType.KeycardCustomManagement:
+            case ItemType.KeycardCustomMetalCase:
+                return new Color32(0, 0, 0, byte.MaxValue);
+            case ItemType.KeycardCustomTaskForce:
+                return new Color32(211, 181, 46, byte.MaxValue);
+        }
+
+        return new Color32(0, 0, 0, 0);
+    }
 }

@@ -18,6 +18,13 @@ The audio module assists in playing music files through dummies or speakers.
 Place the [latest release](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest) for "
 FrikanUtils_ProjectMer.dll" in the LabAPI plugin folder.
 
+## Adding ProjectMER files
+
+The audio module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your ProjectMER
+schematics in the `/LabAPI/configs/{port or global}/FrikanUtils/Maps` folder.
+
+If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
+
 # Features
 
 This plugin is a library plugin which plugin developers can build on, most features below won't add anything on their
@@ -40,5 +47,6 @@ Allows for certain objects to only be spawned when a holiday is active. In order
 convention `{holidays};{name}` where `{holidays}` are the, comma separated, holidays for which this block, and all child
 blocks, should be spawned and `{name}` can be anything you want.
 
-An example would be `Christmas,Halloween;window`, which would be an object named window that would only spawn when the christmas or halloween
+An example would be `Christmas,Halloween;window`, which would be an object named window that would only spawn when the
+christmas or halloween
 holiday is active.
