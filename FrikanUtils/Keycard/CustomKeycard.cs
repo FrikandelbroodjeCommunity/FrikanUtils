@@ -216,11 +216,10 @@ public class CustomKeycard : IDoorPermissionProvider
     /// </summary>
     /// <param name="keycard">The custom keycard to copy</param>
     /// <param name="player">The player to give the item to</param>
-    /// <param name="targetKeycard">The type of the new custom keycard</param>
     /// <returns>The cloned custom keycard</returns>
-    public static CustomKeycard CopyData(CustomKeycard keycard, Player player, ItemType targetKeycard)
+    public static CustomKeycard CopyData(CustomKeycard keycard, Player player)
     {
-        var newInstance = Create(player, targetKeycard);
+        var newInstance = Create(player, keycard.Keycard.Type);
         newInstance.RepresentativeType = keycard.RepresentativeType;
         newInstance.ItemName = keycard.ItemName;
         newInstance.Label = keycard.Label;

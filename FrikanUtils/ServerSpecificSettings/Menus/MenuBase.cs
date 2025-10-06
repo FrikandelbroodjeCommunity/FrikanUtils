@@ -40,6 +40,53 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
     /// <returns>Returns a list of settings to show</returns>
     public abstract IEnumerable<IServerSpecificSetting> GetSettings(Player player);
 
+    /// <summary>
+    /// Update this for all players. Any player who can see this menu will have their menu updated.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
+    /// </summary>
+    /// <param name="force">Whether to force the update</param>
+    public void UpdateAll(bool force) => SSSHandler.UpdateAll(this, force);
+
+    /// <summary>
+    /// Update this menu for a specific player. The menu will only be updated if the player can see the menu.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
+    /// </summary>
+    /// <param name="player">Player to update the menu for</param>
+    /// <param name="force">Whether to force the update</param>
+    public void UpdateForPlayer(Player player, bool force) => SSSHandler.UpdatePlayer(player, this, force);
+
+    /// <summary>
+    /// Get all fields with the given ID.
+    /// </summary>
+    /// <param name="settingId">The unique ID of the fields</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found fields</returns>
+    public IEnumerable<T> GetAllFields<T>(ushort settingId) where T : SettingsBase =>
+        SSSHandler.GetAllFields<T>(this, settingId);
+
+    /// <summary>
+    /// Try to get a specific field for a player.
+    /// </summary>
+    /// <param name="player">The player to   get the field for</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <param name="result">The resulting field or null</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>Whether the field was found</returns>
+    public bool TryGetField<T>(Player player, ushort settingId, out T result) where T : SettingsBase =>
+        SSSHandler.TryGetField(player, this, settingId, out result);
+
+    /// <summary>
+    /// Get a specific field for a player. Will return null if the field could not be found or had the wrong type.
+    /// </summary>
+    /// <param name="player">The player to get the field for</param>
+    /// <param name="settingId">The unique ID of the field</param>
+    /// <typeparam name="T">The expected field type</typeparam>
+    /// <returns>The found field or null</returns>
+    public T GetField<T>(Player player, ushort settingId) where T : SettingsBase =>
+        SSSHandler.GetField<T>(player, this, settingId);
+
     internal bool InternalHasPermission(Player player)
     {
         try
