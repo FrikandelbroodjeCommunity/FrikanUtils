@@ -12,7 +12,6 @@ public abstract class CollapsableSubMenu : SubMenu
     protected abstract bool FirstRenderCollapsed { get; }
     protected abstract ServerOnlyType CollapseSelectorServerType { get; }
 
-    private MenuBase _menuOwner;
     private readonly ushort _settingId;
 
     public CollapsableSubMenu(ushort settingId)
@@ -20,11 +19,9 @@ public abstract class CollapsableSubMenu : SubMenu
         _settingId = settingId;
     }
 
-    public override void RenderForMenu(MenuBase menu, PlayerMenu playerMenu)
+    protected override void RenderContents(MenuBase menu, PlayerMenu playerMenu)
     {
-        _menuOwner = menu;
-
-        new TwoButtonSetting(_settingId, $"Collapse {Label}", "Expanded", "Collapsed", DefaultCollapsed,
+        new TwoButtonSetting(_settingId, $"Collapse: {Label}", "Expanded", "Collapsed", DefaultCollapsed,
                 isServerOnly: CollapseSelectorServerType)
             .RegisterChangedAction(CollapsedUpdated)
             .RenderForMenu(menu, playerMenu);
@@ -39,10 +36,7 @@ public abstract class CollapsableSubMenu : SubMenu
 
         if (shouldRender)
         {
-            foreach (var setting in GetSettings(playerMenu.TargetPlayer))
-            {
-                setting.RenderForMenu(menu, playerMenu);
-            }
+            base.RenderContents(menu, playerMenu);
         }
     }
 
@@ -50,7 +44,7 @@ public abstract class CollapsableSubMenu : SubMenu
     {
         if (oldValue != collapsed)
         {
-            SSSHandler.UpdatePlayer(player, _menuOwner, false);
+            SSSHandler.UpdatePlayer(player, OwnerMenu, false);
         }
     }
 }
