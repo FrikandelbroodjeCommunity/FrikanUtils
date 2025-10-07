@@ -11,7 +11,7 @@ public class ProjectMerPlugin : Plugin
     public override string Name => "FrikanUtils-ProjectMer";
     public override string Description => "ProjectMer extension for FrikanUtils";
     public override string Author => "gamendegamer321";
-    public override Version Version => new(1, 0, 0);
+    public override Version Version => new(1, 1, 0);
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
 
     public static ProjectMerPlugin Instance { get; private set; }

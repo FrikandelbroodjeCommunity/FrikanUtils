@@ -22,7 +22,7 @@ public class UtilitiesPlugin : Plugin<Config>
     public override string Name => "FrikanUtils";
     public override string Description => "";
     public override string Author => "gamendegamer321";
-    public override Version Version => new(1, 0, 0);
+    public override Version Version => new(1, 1, 0);
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
     public override LoadPriority Priority => LoadPriority.Highest;
 

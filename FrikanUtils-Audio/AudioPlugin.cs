@@ -11,7 +11,7 @@ public class AudioPlugin : Plugin<AudioConfig>
     public override string Name => "FrikanUtils-Audio";
     public override string Description => "Audio extension for FrikanUtils";
     public override string Author => "gamendegamer321";
-    public override Version Version => new(1, 0, 0);
+    public override Version Version => new(1, 1, 0);
     public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
 
     public static AudioPlugin Instance { get; private set; }
