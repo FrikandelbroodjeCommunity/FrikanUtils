@@ -39,7 +39,7 @@ public abstract class TabsSubMenu : SubMenu
         var subMenus = GetSubMenus(player, _settingId).ToArray();
 
         yield return new TypedDropdown<SubMenu>(_settingId, Label, subMenus, DefaultIndex, DropdownType,
-                isServerOnly: DropdownServerType)
+                isServerOnly: DropdownServerType, toString: MenuToString)
             .RegisterChangedAction(SelectionUpdated);
 
         var menu = subMenus[DefaultIndex];
@@ -71,5 +71,11 @@ public abstract class TabsSubMenu : SubMenu
         {
             SSSHandler.UpdatePlayer(player, OwnerMenu, false);
         }
+    }
+
+    private string MenuToString(SubMenu menu)
+    {
+        // ReSharper disable once SuspiciousTypeConversion.Global
+        return menu is INamedSubmenu namedMenu ? namedMenu.Name : menu.ToString();
     }
 }

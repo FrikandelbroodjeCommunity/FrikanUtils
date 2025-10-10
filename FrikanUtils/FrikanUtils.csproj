@@ -146,6 +146,7 @@
         <Compile Include="ServerSpecificSettings\Settings\SettingsBase.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Slider.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Submenus\CollapsableSubMenu.cs" />
+        <Compile Include="ServerSpecificSettings\Settings\Submenus\INamedSubmenu.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Submenus\SubMenu.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Submenus\TabsSubMenu.cs" />
         <Compile Include="ServerSpecificSettings\Settings\TextArea.cs" />

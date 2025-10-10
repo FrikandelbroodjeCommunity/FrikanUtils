@@ -19,10 +19,12 @@ namespace FrikanUtils;
 
 public class UtilitiesPlugin : Plugin<Config>
 {
+    public const string CurrentVersion = "1.1.1";
+    
     public override string Name => "FrikanUtils";
     public override string Description => "";
     public override string Author => "gamendegamer321";
-    public override Version Version => new(1, 1, 0);
+    public override Version Version => new(CurrentVersion);
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
     public override LoadPriority Priority => LoadPriority.Highest;
 
