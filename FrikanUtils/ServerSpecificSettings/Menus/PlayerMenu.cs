@@ -7,6 +7,7 @@ using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
 using TMPro;
 using UserSettings.ServerSpecific;
+using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.ServerSpecificSettings.Menus;
 
@@ -24,6 +25,7 @@ public class PlayerMenu
 
     private MenuBase _selectedDynamicMenu;
     private readonly Dictionary<int, SettingsBase> _shownItems = new();
+    private readonly List<SettingsBase> _shownItemsWithoutId = [];
     private readonly List<MenuBase> _shownMenus = [];
     private readonly List<string> _selectorOptions = [];
 
@@ -61,15 +63,24 @@ public class PlayerMenu
         RenderDynamicMenus();
         RenderStaticMenus();
 
+        _shownItemsWithoutId.Clear();
         foreach (var item in RenderingItems)
         {
-            // Keep value if it already existed
-            if (_shownItems.TryGetValue(item.Id, out var setting))
+            if (item.SettingId.HasValue)
             {
-                item.CopyValue(setting);
-            }
+                // Keep value if it already existed
+                if (_shownItems.TryGetValue(item.Id, out var setting))
+                {
+                    item.CopyValue(setting);
+                }
 
-            _shownItems[item.Id] = item;
+                _shownItems[item.Id] = item;
+            }
+            else
+            {
+                // Store these separately as we otherwise risk them not being removed from the dictionary when rerendering.
+                _shownItemsWithoutId.Add(item);
+            }
         }
 
         ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, Rendering.ToArray());
@@ -142,9 +153,21 @@ public class PlayerMenu
 
     internal SettingsBase GetSetting(int settingId, Type expectedType)
     {
-        if (_shownItems.TryGetValue(settingId, out var setting) && setting.Base.GetType() == expectedType)
+        if (settingId < 0)
         {
-            return setting;
+            if (_shownItemsWithoutId.TryGetFirst(x => x.Id == settingId, out var setting) &&
+                setting.Base.GetType() == expectedType)
+            {
+                return setting;
+            }
+        }
+        else
+        {
+            if (_shownItems.TryGetValue(settingId, out var setting) &&
+                setting.Base.GetType() == expectedType)
+            {
+                return setting;
+            }
         }
 
         return null;
