@@ -2,6 +2,9 @@
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with colors.
+/// </summary>
 public static class ColorUtilities
 {
     /// <summary>

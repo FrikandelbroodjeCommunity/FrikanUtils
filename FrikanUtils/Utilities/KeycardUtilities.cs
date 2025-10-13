@@ -6,6 +6,9 @@ using KeycardItem = InventorySystem.Items.Keycards.KeycardItem;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with keycards.
+/// </summary>
 public static class KeycardUtilities
 {
     /// <summary>

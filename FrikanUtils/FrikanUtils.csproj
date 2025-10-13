@@ -108,7 +108,6 @@
         <Compile Include="GlobalSettings\GlobalClientSettingsMenu.cs" />
         <Compile Include="GlobalSettings\HolidayOverrideSetting.cs" />
         <Compile Include="GlobalSettings\IGlobalSetting.cs" />
-        <Compile Include="GlobalSettings\InternalGlobalSettings.cs" />
         <Compile Include="HintSystem\HintHandler.cs" />
         <Compile Include="HintSystem\HintSender.cs" />
         <Compile Include="Keycard\CustomKeycard.cs" />

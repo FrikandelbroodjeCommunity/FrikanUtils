@@ -6,6 +6,9 @@ using RemoteAdmin;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with the execution of commands.
+/// </summary>
 public static class CommandUtilities
 {
     /// <summary>

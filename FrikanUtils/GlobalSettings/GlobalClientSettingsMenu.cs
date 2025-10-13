@@ -6,19 +6,33 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.GlobalSettings;
 
+/// <summary>
+/// Menu for displaying the global client settings.
+/// This displays the global settings that are registered with <see cref="IGlobalSetting.ServerOnly"/> set to <c>false</c>.
+/// </summary>
 public class GlobalClientSettingsMenu : MenuBase
 {
+    /// <inheritdoc />
     public override string Name => ClientId;
+
+    /// <inheritdoc />
     public override MenuType Type => MenuType.Static;
+
+    /// <inheritdoc />
     public override int Priority => MenuPriority.Highest;
 
+    /// <summary>
+    /// The <see cref="Name"/> of this menu as a constant.
+    /// </summary>
     public const string ClientId = "General Settings";
 
+    /// <inheritdoc />
     public override bool HasPermission(Player player)
     {
         return base.HasPermission(player) && GlobalSettingsHandler.ClientSettings.Any(x => x.HasPermissions(player));
     }
 
+    /// <inheritdoc />
     public override IEnumerable<IServerSpecificSetting> GetSettings(Player player)
     {
         var updated = false;

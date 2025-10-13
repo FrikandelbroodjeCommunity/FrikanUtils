@@ -7,6 +7,9 @@ using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.Npc;
 
+/// <summary>
+/// Set of helper functions to make working with NPCs/Dummies easier.
+/// </summary>
 public static class NpcSystem
 {
     internal static readonly List<Player> Npcs = [];
@@ -47,7 +50,7 @@ public static class NpcSystem
     /// <param name="npc">Player that is no longer an NPC</param>
     public static void UnregisterNpc(Player npc) => Npcs.Remove(npc);
 
-    public class FakeConnection : NetworkConnectionToClient
+    private class FakeConnection : NetworkConnectionToClient
     {
         public readonly bool GiveUserId;
 

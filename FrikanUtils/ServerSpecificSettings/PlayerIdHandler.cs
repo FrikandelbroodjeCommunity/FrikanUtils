@@ -1,9 +1,8 @@
-﻿using FrikanUtils.ServerSpecificSettings.Helpers;
-using LabApi.Features.Console;
+﻿using LabApi.Features.Console;
 
 namespace FrikanUtils.ServerSpecificSettings;
 
-public class PlayerIdHandler
+internal class PlayerIdHandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 

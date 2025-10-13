@@ -5,6 +5,12 @@ using MapGeneration.Holidays;
 
 namespace FrikanUtils.FileSystem;
 
+/// <summary>
+/// Represents a file provider used by the <see cref="FileHandler"/>.
+/// A default implementation can be found in <see cref="LocalFileProvider"/>.
+///
+/// It allows for asynchronous functions, this way a provider has full control over how files are found.
+/// </summary>
 public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
 {
     /// <summary>
@@ -15,8 +21,6 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <summary>
     /// Search for the full path on the disk for a target file.
     /// This is an async method, allowing files to be downloaded and written to the drive during execution.
-    ///
-    /// This also searches for special "event" files. (e.g. "Halloween-{filename}")
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
@@ -25,10 +29,8 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
 
     /// <summary>
     /// Search for the file and convert it into the data as needed.
-    /// Will return <code>default</code> if the file was not found, or it could not be parsed.
+    /// Will return <c>null</c> if the file was not found, or it could not be parsed.
     /// This is an async method, allowing files to be downloaded and then parsed during execution.
-    /// 
-    /// This also searches for special "event" files. (e.g. "Halloween-{filename}")
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
@@ -42,7 +44,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// </summary>
     /// <param name="filename">The original filename</param>
     /// <returns>All holiday filenames</returns>
-    protected IEnumerable<string> GetHolidayFilenames(string filename)
+    protected static IEnumerable<string> GetHolidayFilenames(string filename)
     {
         foreach (HolidayType type in Enum.GetValues(typeof(HolidayType)))
         {
@@ -53,6 +55,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
         yield return filename;
     }
 
+    /// <inheritdoc/>
     public bool Equals(BaseFileProvider other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -60,6 +63,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
         return Name == other.Name;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object obj)
     {
         if (ReferenceEquals(null, obj)) return false;
@@ -68,6 +72,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
         return Equals((BaseFileProvider)obj);
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return (Name != null ? Name.GetHashCode() : 0);

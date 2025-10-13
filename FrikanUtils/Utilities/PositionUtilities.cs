@@ -45,16 +45,23 @@ public static class PositionUtilities
     /// </summary>
     public struct PositionAndRotation
     {
+        /// <summary>
+        /// The position for this point.
+        /// </summary>
         public Vector3 Position;
+
+        /// <summary>
+        /// The rotation for this point.
+        /// </summary>
         public Quaternion Rotation;
 
-        public PositionAndRotation(Vector3 position, Quaternion rotation)
+        internal PositionAndRotation(Vector3 position, Quaternion rotation)
         {
             Position = position;
             Rotation = rotation;
         }
 
-        public PositionAndRotation(Vector3 position, Vector3 rotation) : this(position, Quaternion.Euler(rotation))
+        internal PositionAndRotation(Vector3 position, Vector3 rotation) : this(position, Quaternion.Euler(rotation))
         {
         }
     }

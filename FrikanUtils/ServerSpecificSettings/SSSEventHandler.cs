@@ -87,9 +87,10 @@ internal static class SSSEventHandler
             }
 
             var previous = slider.Value;
+            var previousInt = slider.IntValue;
             field.Base.DeserializeValue(reader);
 
-            slider.OnChangedInt?.Invoke(player, ((SSSliderSetting)slider.Base).SyncIntValue);
+            slider.OnChangedInt?.Invoke(player, previousInt, ((SSSliderSetting)slider.Base).SyncIntValue);
             slider.OnValueChanged(player, previous, ((SSSliderSetting)slider.Base).SyncFloatValue);
         }
         else if (field is TextInput text)

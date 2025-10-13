@@ -7,18 +7,39 @@ using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings.Submenus;
 
+/// <summary>
+/// A menu which shows the submenu selected by the player out of multiple submenus.
+/// </summary>
 public abstract class TabsSubMenu : SubMenu
 {
+    /// <summary>
+    /// Label to show on the menu selector.
+    /// </summary>
     protected abstract string Label { get; }
+
+    /// <summary>
+    /// The index of the menu that is selected by default.
+    /// </summary>
     protected abstract int DefaultIndex { get; }
+
+    /// <summary>
+    /// The <see cref="ServerOnlyType"/> for the tab dropdown setting.
+    /// </summary>
     protected abstract ServerOnlyType DropdownServerType { get; }
 
+    /// <summary>
+    /// The way the dropdown should be shown. <seealso cref="Dropdown"/>
+    /// </summary>
     protected virtual SSDropdownSetting.DropdownEntryType DropdownType =>
         SSDropdownSetting.DropdownEntryType.Scrollable;
 
     private readonly ushort _settingId;
 
-    public TabsSubMenu(ushort settingId)
+    /// <summary>
+    /// The new tab sub menu, the ID the dropdown setting should be given.
+    /// </summary>
+    /// <param name="settingId">Free ID for the dropdown</param>
+    protected TabsSubMenu(ushort settingId)
     {
         _settingId = settingId;
     }
@@ -34,6 +55,7 @@ public abstract class TabsSubMenu : SubMenu
     /// <returns>All menus the player can choose from</returns>
     protected abstract IEnumerable<SubMenu> GetSubMenus(Player player, ushort settingId);
 
+    /// <inheritdoc />
     public override IEnumerable<IServerSpecificSetting> GetSettings(Player player)
     {
         var subMenus = GetSubMenus(player, _settingId).ToArray();

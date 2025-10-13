@@ -8,8 +8,14 @@ using UnityEngine;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with players.
+/// </summary>
 public static class PlayerUtilities
 {
+    /// <summary>
+    /// List of roles that are ignored when getting players.
+    /// </summary>
     public static IEnumerable<RoleTypeId> BlacklistedRoles => BlacklistedRolesInternal;
 
     private static readonly RoleTypeId[] BlacklistedRolesInternal =

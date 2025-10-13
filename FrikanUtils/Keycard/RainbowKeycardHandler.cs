@@ -5,17 +5,13 @@ using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.Keycard;
 
+/// <summary>
+/// Handles the color change for rainbow keycards.
+/// </summary>
 public class RainbowKeycardHandler : MonoBehaviour
 {
-    public static RainbowKeycardHandler Instance { get; private set; }
-
     internal static readonly List<CustomKeycard> Keycards = [];
     private static float _hue;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     private void Update()
     {

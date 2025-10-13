@@ -1,5 +1,8 @@
 ﻿namespace FrikanUtils.ServerSpecificSettings.Helpers;
 
+/// <summary>
+/// The different ways of storing the values for Server Specific Settings.
+/// </summary>
 public enum ServerOnlyType
 {
     /// <summary>

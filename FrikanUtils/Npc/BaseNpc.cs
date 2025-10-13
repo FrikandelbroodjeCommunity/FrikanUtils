@@ -8,6 +8,9 @@ using Mirror;
 
 namespace FrikanUtils.Npc;
 
+/// <summary>
+/// Base for all NPCs, contains all information that are required for all NPCs and some basic logic for destroying NPCs.
+/// </summary>
 public abstract class BaseNpc
 {
     internal static readonly Dictionary<Player, BaseNpc> NpcsMapped = new();
@@ -50,10 +53,18 @@ public abstract class BaseNpc
     /// </summary>
     public bool CanEscape;
 
+    /// <summary>
+    /// Create a new dummy for this NPC with the given name.
+    /// </summary>
+    /// <param name="name">Name of the new dummy</param>
     public BaseNpc(string name) : this(NpcSystem.CreateHiddenDummy(name))
     {
     }
 
+    /// <summary>
+    /// Use the given dummy for this NPC.
+    /// </summary>
+    /// <param name="dummy">Dummy to use for this NPC</param>
     public BaseNpc(Player dummy)
     {
         Dummy = dummy;
@@ -64,6 +75,10 @@ public abstract class BaseNpc
         NpcsMapped[Dummy] = this;
     }
 
+    /// <summary>
+    /// Destroys this NPC with the given reason.
+    /// </summary>
+    /// <param name="reason">The reason why the NPC was destroyed</param>
     public virtual void Destroy(DestroyReason reason)
     {
         OnDestroy?.Invoke(reason);

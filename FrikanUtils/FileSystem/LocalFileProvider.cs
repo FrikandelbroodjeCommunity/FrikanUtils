@@ -8,12 +8,14 @@ namespace FrikanUtils.FileSystem;
 
 /// <summary>
 /// Provider for local files that are available on the drive of the server.
-/// Will only search for files and folders that are in the <code>FrikanUtils</code> config folder.
+/// Will only search for files and folders that are in the <c>FrikanUtils</c> config folder.
 /// </summary>
 public class LocalFileProvider : BaseFileProvider
 {
+    /// <inheritdoc/>
     public override string Name => "LocalFileProvider";
 
+    /// <inheritdoc/>
     public override Task<string> SearchFullPath(string filename, string folder)
     {
         var directory = string.IsNullOrEmpty(folder)
@@ -32,6 +34,7 @@ public class LocalFileProvider : BaseFileProvider
         return Task.FromResult<string>(null);
     }
 
+    /// <inheritdoc/>
     public override Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class
     {
         var path = SearchFullPath(filename, folder).Result;

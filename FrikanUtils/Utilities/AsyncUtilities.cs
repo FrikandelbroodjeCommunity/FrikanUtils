@@ -5,6 +5,9 @@ using Logger = LabApi.Features.Console.Logger;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help re-sync asynchronous functions.
+/// </summary>
 public static class AsyncUtilities
 {
     private static readonly ConcurrentQueue<Action> NextFrame = new();

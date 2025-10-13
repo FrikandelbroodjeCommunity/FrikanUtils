@@ -3,6 +3,9 @@ using PlayerRoles;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Couple of extensions to help determine whether someone is a main SCP.
+/// </summary>
 public static class ScpExtension
 {
     /// <summary>

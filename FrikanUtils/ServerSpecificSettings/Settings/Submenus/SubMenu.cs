@@ -4,6 +4,10 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings.Submenus;
 
+/// <summary>
+/// Represents a sub-menu, used to group settings.
+/// Can be returned as a normal setting for other <see cref="SubMenu"/>s or <see cref="MenuBase"/>.
+/// </summary>
 public abstract class SubMenu : IServerSpecificSetting
 {
     /// <summary>
@@ -38,6 +42,7 @@ public abstract class SubMenu : IServerSpecificSetting
         }
     }
 
+    /// <inheritdoc />
     public void RenderForMenu(MenuBase menu, PlayerMenu playerMenu)
     {
         OwnerMenu = menu;

@@ -4,6 +4,9 @@ using System.Linq;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with lists.
+/// </summary>
 public static class ListUtilities
 {
     private static readonly Random Random = new();

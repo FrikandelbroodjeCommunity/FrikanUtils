@@ -3,8 +3,13 @@ using System.Collections.Generic;
 
 namespace FrikanUtils.GlobalSettings;
 
+/// <summary>
+/// Comparer to determine the display order of global settings.
+/// Uses the <see cref="IGlobalSetting.Label"/> to sort in alphabetical order.
+/// </summary>
 public class GlobalSettingComparer : IComparer<IGlobalSetting>
 {
+    /// <inheritdoc />
     public int Compare(IGlobalSetting x, IGlobalSetting y)
     {
         if (ReferenceEquals(x, y)) return 0;

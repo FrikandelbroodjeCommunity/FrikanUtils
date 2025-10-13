@@ -7,6 +7,10 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings;
 
+/// <summary>
+/// Handles the Server Specific Settings system.
+/// Keeps track of the menus and settings shown to players.
+/// </summary>
 public static class SSSHandler
 {
     internal const int LowestReservedId = -4;
@@ -14,6 +18,11 @@ public static class SSSHandler
     internal static readonly List<MenuBase> RegisteredMenus = [];
     internal static readonly Dictionary<Player, PlayerMenu> PlayerMenus = new();
 
+    /// <summary>
+    /// Register a new menu, will update the players that can see the menu.
+    /// If a duplicate menu is registered, the old menu will be removed and replaced with the new one.
+    /// </summary>
+    /// <param name="menu"></param>
     public static void RegisterMenu(MenuBase menu)
     {
         if (UnregisterMenu(menu))
@@ -25,6 +34,12 @@ public static class SSSHandler
         UpdateAll(menu, true);
     }
 
+    /// <summary>
+    /// Unregister a menu, will update the players that had it visible.
+    /// After unregistering a menu it will no longer be visible.
+    /// </summary>
+    /// <param name="menu">The menu to unregister</param>
+    /// <returns>Whether the menu was registered before</returns>
     public static bool UnregisterMenu(MenuBase menu)
     {
         if (!RegisteredMenus.Remove(menu)) return false;

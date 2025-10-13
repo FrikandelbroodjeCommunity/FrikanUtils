@@ -11,6 +11,10 @@ using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.ServerSpecificSettings.Menus;
 
+/// <summary>
+/// Represents the menu information for a player.
+/// For getting settings, use <see cref="SSSHandler"/> instead.
+/// </summary>
 public class PlayerMenu
 {
     internal SSDropdownSetting MenuSelection;

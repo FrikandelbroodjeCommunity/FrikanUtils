@@ -249,11 +249,20 @@ public class CustomKeycard : IDoorPermissionProvider
         return CustomKeycards.TryGetFirst(x => x.Serial == serial, out keycard);
     }
 
+    /// <summary>
+    /// Gets the door permissions, added so custom keycards can more easily function as a <see cref="IDoorPermissionProvider"/>.
+    /// </summary>
+    /// <param name="requester">The door permission requester</param>
+    /// <returns>The permissions granted by the keycard</returns>
     public DoorPermissionFlags GetPermissions(IDoorPermissionRequester requester)
     {
         return Permissions.Permissions;
     }
 
+    /// <summary>
+    /// Callback for when the permissions are used.
+    /// Links to the <see cref="InventorySystem.Items.Keycards.KeycardItem.PermissionsUsedCallback"/> of the base keycard.
+    /// </summary>
     public PermissionUsed PermissionsUsedCallback => Keycard.Base.PermissionsUsedCallback;
 
     private void ReadDetails()

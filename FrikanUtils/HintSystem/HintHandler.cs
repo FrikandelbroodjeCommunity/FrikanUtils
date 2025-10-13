@@ -9,11 +9,17 @@ using MEC;
 
 namespace FrikanUtils.HintSystem;
 
+/// <summary>
+/// Handles hints that need to be shown constantly on screen.
+/// </summary>
 public static class HintHandler
 {
     private static readonly List<Func<Player, string>> LobbyHints = [];
     private static readonly List<Func<Player, string>> GameHints = [];
 
+    /// <summary>
+    /// When enabled, it will forcefully disable the lobby hints for the current round.
+    /// </summary>
     public static bool ForceDisableLobby;
 
     /// <summary>

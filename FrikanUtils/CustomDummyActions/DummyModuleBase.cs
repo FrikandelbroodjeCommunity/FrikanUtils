@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
 using RemoteAdmin.Communication;
 
@@ -14,6 +13,7 @@ public abstract class DummyModuleBase : IEquatable<DummyModuleBase>
 {
     /// <summary>
     /// Name of the module.
+    /// <b>This must be unique to prevent conflicts!</b>
     /// </summary>
     public abstract string Name { get; }
 
@@ -62,11 +62,13 @@ public abstract class DummyModuleBase : IEquatable<DummyModuleBase>
         return executable;
     }
 
+    /// <inheritdoc/>
     public bool Equals(DummyModuleBase other)
     {
         return Name == other.Name;
     }
 
+    /// <inheritdoc/>
     public override bool Equals(object obj)
     {
         if (ReferenceEquals(null, obj)) return false;
@@ -75,6 +77,7 @@ public abstract class DummyModuleBase : IEquatable<DummyModuleBase>
         return Equals((DummyModuleBase)obj);
     }
 
+    /// <inheritdoc/>
     public override int GetHashCode()
     {
         return Name != null ? Name.GetHashCode() : 0;

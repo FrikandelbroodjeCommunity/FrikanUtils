@@ -3,6 +3,10 @@ using LabApi.Features.Console;
 
 namespace FrikanUtils.CustomDummyActions;
 
+/// <summary>
+/// Handles the custom dummy system.
+/// You should register the modules you want to be visible here.
+/// </summary>
 public static class RaHandler
 {
     internal static readonly List<DummyModuleBase> Modules = [];
@@ -10,7 +14,7 @@ public static class RaHandler
     /// <summary>
     /// Registers a dummy module.
     /// If a duplicate is found (another module with the same name),
-    /// lthe duplicate will be removed and this module added.
+    /// the duplicate will be removed and this module added.
     /// </summary>
     /// <param name="module">Module to add</param>
     public static void RegisterModule(DummyModuleBase module)

@@ -5,6 +5,10 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings.Menus;
 
+/// <summary>
+/// Base for menus, can be used to create custom SSS menus.
+/// Has some helper methods to get fields for this menu.
+/// </summary>
 public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
 {
     /// <summary>
@@ -100,6 +104,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
     }
 
     // Comparison requirements (Sort based on priority)
+    /// <inheritdoc />
     public int CompareTo(MenuBase other)
     {
         if (ReferenceEquals(this, other)) return 0;
@@ -107,6 +112,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
         return Priority.CompareTo(other.Priority) * -1;
     }
 
+    /// <inheritdoc />
     public bool Equals(MenuBase other)
     {
         if (ReferenceEquals(null, other)) return false;
@@ -114,6 +120,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
         return Name == other.Name;
     }
 
+    /// <inheritdoc />
     public override bool Equals(object obj)
     {
         if (ReferenceEquals(null, obj)) return false;
@@ -121,6 +128,7 @@ public abstract class MenuBase : IEquatable<MenuBase>, IComparable<MenuBase>
         return obj.GetType() == GetType() && Equals((MenuBase)obj);
     }
 
+    /// <inheritdoc />
     public override int GetHashCode()
     {
         return Name != null ? Name.GetHashCode() : 0;

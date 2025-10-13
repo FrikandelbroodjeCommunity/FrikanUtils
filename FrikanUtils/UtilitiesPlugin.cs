@@ -1,5 +1,4 @@
 ﻿using System;
-using FrikanUtils.FileSystem;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
@@ -17,17 +16,37 @@ using Object = UnityEngine.Object;
 
 namespace FrikanUtils;
 
+/// <summary>
+/// The plugin for Frikan Utils.
+/// </summary>
 public class UtilitiesPlugin : Plugin<Config>
 {
+    /// <summary>
+    /// The version of the current assembly.
+    /// </summary>
     public const string CurrentVersion = "1.1.1";
-    
+
+    /// <inheritdoc />
     public override string Name => "FrikanUtils";
+
+    /// <inheritdoc />
     public override string Description => "";
+
+    /// <inheritdoc />
     public override string Author => "gamendegamer321";
+
+    /// <inheritdoc />
     public override Version Version => new(CurrentVersion);
+
+    /// <inheritdoc />
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
+
+    /// <inheritdoc />
     public override LoadPriority Priority => LoadPriority.Highest;
 
+    /// <summary>
+    /// The instance of the frikan utils plugin.
+    /// </summary>
     public static UtilitiesPlugin Instance { get; private set; }
 
     internal static Config PluginConfig => Instance.Config;
@@ -37,6 +56,7 @@ public class UtilitiesPlugin : Plugin<Config>
 
     internal static void Save() => Instance.SaveConfig();
 
+    /// <inheritdoc />
     public override void Enable()
     {
         Instance = this;
@@ -50,7 +70,7 @@ public class UtilitiesPlugin : Plugin<Config>
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
         // Register global settings
-        InternalGlobalSettings.RegisterInternalSettings();
+        GlobalSettingsHandler.RegisterMenus();
 
         // Register all monobehaviour handles
         _handlerObject = new GameObject("FrikanUtils Handler Object");
@@ -60,6 +80,7 @@ public class UtilitiesPlugin : Plugin<Config>
         Object.DontDestroyOnLoad(_handlerObject);
     }
 
+    /// <inheritdoc />
     public override void Disable()
     {
         _harmony.UnpatchAll();
@@ -72,7 +93,7 @@ public class UtilitiesPlugin : Plugin<Config>
         SSSEventHandler.UnregisterEvents();
 
         // Unregister global settings
-        InternalGlobalSettings.UnregisterInternalSettings();
+        GlobalSettingsHandler.UnregisterMenus();
 
         // Delete all monobehaviour handles
         Object.Destroy(_handlerObject);

@@ -2,6 +2,8 @@
 using System.ComponentModel;
 using MapGeneration.Holidays;
 
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
+
 namespace FrikanUtils;
 
 public class Config

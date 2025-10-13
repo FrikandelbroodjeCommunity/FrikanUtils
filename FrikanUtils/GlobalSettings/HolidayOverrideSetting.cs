@@ -7,7 +7,7 @@ using MapGeneration.Holidays;
 
 namespace FrikanUtils.GlobalSettings;
 
-public class HolidayOverrideSetting : IGlobalSetting
+internal class HolidayOverrideSetting : IGlobalSetting
 {
     public string Label => "[Debug] Override holiday";
     public bool ServerOnly => true;

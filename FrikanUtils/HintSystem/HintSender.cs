@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace FrikanUtils.HintSystem;
 
-public class HintSender : MonoBehaviour
+internal class HintSender : MonoBehaviour
 {
     private int _color;
     private int _colorUpdate;

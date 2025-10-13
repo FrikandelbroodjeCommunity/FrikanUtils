@@ -7,6 +7,9 @@ using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.FileSystem;
 
+/// <summary>
+/// Handles getting paths and file from the file providers.
+/// </summary>
 public static class FileHandler
 {
     private static readonly List<BaseFileProvider> FileProviders =
@@ -14,6 +17,10 @@ public static class FileHandler
         new LocalFileProvider()
     ];
 
+    /// <summary>
+    /// Register a file provider, only once registered a provider will be used.
+    /// </summary>
+    /// <param name="provider">Provider to register</param>
     public static void RegisterProvider(BaseFileProvider provider)
     {
         if (FileProviders.Contains(provider))
@@ -29,8 +36,6 @@ public static class FileHandler
     /// <summary>
     /// Use all file providers to search for a file on the disk.
     /// This is an async method, allowing files to be downloaded and written to the drive during execution.
-    ///
-    /// This also searches for special "event" files. (e.g. "Halloween-{filename}")
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
@@ -72,10 +77,8 @@ public static class FileHandler
 
     /// <summary>
     /// Use all file providers to try and Search for the file and convert it into the data as needed.
-    /// Will return <code>default</code> if the file was not found, or it could not be parsed.
+    /// Will return <c>null</c> if the file was not found, or it could not be parsed.
     /// This is an async method, allowing files to be downloaded and then parsed during execution.
-    /// 
-    /// This also searches for special "event" files. (e.g. "Halloween-{filename}")
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>

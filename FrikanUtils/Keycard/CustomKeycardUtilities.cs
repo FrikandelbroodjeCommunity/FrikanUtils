@@ -4,6 +4,9 @@ using UnityEngine;
 
 namespace FrikanUtils.Keycard;
 
+/// <summary>
+/// Set of helper functions to make working with custom keycards easier.
+/// </summary>
 public static class CustomKeycardUtilities
 {
     /// <summary>

@@ -7,7 +7,7 @@ using Logger = LabApi.Features.Console.Logger;
 
 namespace FrikanUtils.Npc.Following;
 
-public class FollowingNpcComponent : BaseNpcComponent
+internal class FollowingNpcComponent : BaseNpcComponent
 {
     public override BaseNpc NpcData => Data;
 

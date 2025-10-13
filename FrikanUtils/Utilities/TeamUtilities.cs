@@ -9,6 +9,9 @@ using Random = System.Random;
 
 namespace FrikanUtils.Utilities;
 
+/// <summary>
+/// Set of utilities to help with creating and keeping track of teams.
+/// </summary>
 public static class TeamUtilities
 {
     /// <summary>
@@ -17,6 +20,10 @@ public static class TeamUtilities
     /// </summary>
     public static readonly Dictionary<string, RoleTypeId> PlayerTeams = new();
 
+    /// <summary>
+    /// The possible roles that can be made into teams.
+    /// There cannot be more teams than roles listed here.
+    /// </summary>
     public static readonly RoleTypeId[] TeamRoles =
     [
         RoleTypeId.ClassD,

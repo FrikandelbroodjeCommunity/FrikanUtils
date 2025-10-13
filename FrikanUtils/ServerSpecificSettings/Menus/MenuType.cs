@@ -1,5 +1,8 @@
 ﻿namespace FrikanUtils.ServerSpecificSettings.Menus;
 
+/// <summary>
+/// Types of menus that can be used.
+/// </summary>
 public enum MenuType
 {
     /// <summary>
