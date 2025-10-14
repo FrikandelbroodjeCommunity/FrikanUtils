@@ -7,8 +7,14 @@ using Utils.NonAllocLINQ;
 
 namespace FrikanUtils.Audio;
 
+/// <summary>
+/// Handles the audio system, keeping track of the existing instances and which players have the audio muted.
+/// </summary>
 public static class AudioSystem
 {
+    /// <summary>
+    /// List of all audio players.
+    /// </summary>
     public static readonly List<AudioPlayerBase> AudioPlayers = [];
 
     internal static readonly Dictionary<string, bool> MusicPreference = new();
@@ -30,15 +36,6 @@ public static class AudioSystem
         }
 
         return false;
-    }
-
-    internal static void UpdateVolumes()
-    {
-        foreach (var player in AudioPlayers)
-        {
-            // Update by setting the override value again
-            player.OverrideVolume = player.OverrideVolume;
-        }
     }
 
     internal static void SetUserPreference(Player ply, bool _, bool preference)
@@ -66,7 +63,7 @@ public static class AudioSystem
     {
         DefaultFilterList.Remove(id);
     }
-    
+
     private static bool IsMuted(Player player)
     {
         // Unauthenticated users and dummys are muted by default

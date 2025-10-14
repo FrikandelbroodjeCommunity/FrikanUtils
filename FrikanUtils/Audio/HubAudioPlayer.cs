@@ -11,8 +11,12 @@ using VoiceChat.Networking;
 
 namespace FrikanUtils.Audio;
 
+/// <summary>
+/// An audio player which plays audio through the mic of a dummy.
+/// </summary>
 public class HubAudioPlayer : AudioPlayerBase
 {
+    /// <inheritdoc />
     public override bool IsValid => !Player.IsDestroyed;
 
     /// <summary>
@@ -25,11 +29,21 @@ public class HubAudioPlayer : AudioPlayerBase
     /// </summary>
     public VoiceChatChannel TargetChannel = VoiceChatChannel.RoundSummary;
 
+    /// <summary>
+    /// Create a new dummy and attach the audio player to that.
+    /// </summary>
+    /// <param name="botName">The desired name of the bot</param>
+    /// <param name="enableGodmode">Whether the dummy should have godmode</param>
+    /// <param name="canSpectate">Whether the dummy can be spectated</param>
     public HubAudioPlayer(string botName = null, bool enableGodmode = true, bool canSpectate = false)
     {
         CreateDummy(botName, enableGodmode, canSpectate);
     }
 
+    /// <summary>
+    /// Attach the audio player to the given dummy.
+    /// </summary>
+    /// <param name="player">Dummy to attach to</param>
     public HubAudioPlayer(Player player)
     {
         Player = player;
@@ -40,12 +54,17 @@ public class HubAudioPlayer : AudioPlayerBase
         comp.AudioPlayer = this;
     }
 
+    /// <inheritdoc />
     protected override void InternalCleanup()
     {
         NetworkServer.Destroy(Player.ReferenceHub.gameObject);
         NpcSystem.UnregisterNpc(Player);
     }
 
+    /// <summary>
+    /// Change the username of the dummy that plays the audio.
+    /// </summary>
+    /// <param name="name">New name for the dummy</param>
     public void SetUsername(string name)
     {
         try
@@ -58,6 +77,7 @@ public class HubAudioPlayer : AudioPlayerBase
         }
     }
 
+    /// <inheritdoc />
     protected internal override void SendMessage(byte[] data, int length)
     {
         var audioMessage = new VoiceMessage(Player.ReferenceHub, TargetChannel, data, length, false);

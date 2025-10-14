@@ -5,19 +5,31 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.ServerSpecificSettings.Settings;
 
+/// <summary>
+/// A setting which stores a value on the server or client.
+/// </summary>
+/// <typeparam name="T">The type of the value stored</typeparam>
 public abstract class ValueSettingsBase<T> : SettingsBase
 {
+    /// <summary>
+    /// Value currently known.
+    /// </summary>
     public abstract T Value { get; set; }
 
     internal bool ReceivedInitialValue;
-    internal bool GlobalSetting;
 
-    protected Action<Player, T, T> OnChanged;
-    protected Action<Player, T> OnInitialValue;
+    private readonly bool _globalSetting;
+    private Action<Player, T, T> _onChanged;
+    private Action<Player, T> _onInitialValue;
 
+    /// <summary>
+    /// Create a new value setting with the given settings.
+    /// </summary>
+    /// <param name="settingId">ID of the setting</param>
+    /// <param name="isServerOnly">The server only type</param>
     protected ValueSettingsBase(ushort? settingId, ServerOnlyType isServerOnly) : base(settingId, isServerOnly)
     {
-        GlobalSetting = isServerOnly == ServerOnlyType.GlobalServerOnly;
+        _globalSetting = isServerOnly == ServerOnlyType.GlobalServerOnly;
     }
 
     /// <summary>
@@ -31,7 +43,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
     /// <returns>The instance, to chain operations</returns>
     public ValueSettingsBase<T> RegisterChangedAction(Action<Player, T, T> changedAction)
     {
-        OnChanged = changedAction;
+        _onChanged = changedAction;
         return this;
     }
 
@@ -45,7 +57,7 @@ public abstract class ValueSettingsBase<T> : SettingsBase
     /// <returns>The instance, to chain operations</returns>
     public ValueSettingsBase<T> RegisterInitialValueAction(Action<Player, T> intialValueAction)
     {
-        OnInitialValue = intialValueAction;
+        _onInitialValue = intialValueAction;
         return this;
     }
 
@@ -54,14 +66,14 @@ public abstract class ValueSettingsBase<T> : SettingsBase
         if (!ReceivedInitialValue)
         {
             ReceivedInitialValue = true;
-            OnInitialValue?.Invoke(player, value);
+            _onInitialValue?.Invoke(player, value);
         }
 
-        OnChanged?.Invoke(player, oldValue, value);
+        _onChanged?.Invoke(player, oldValue, value);
 
         // For global settings, set the value of all instances
         // We do however require the id as we otherwise cannot find the other fields
-        if (!GlobalSetting || !SettingId.HasValue) return;
+        if (!_globalSetting || !SettingId.HasValue) return;
         foreach (var setting in SSSHandler.GetAllFields<ValueSettingsBase<T>>(MenuOwner, SettingId.Value))
         {
             setting.Value = value;
