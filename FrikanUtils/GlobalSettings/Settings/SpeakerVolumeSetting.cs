@@ -5,9 +5,9 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.GlobalSettings.Settings;
 
-internal class VolumeSetting : IGlobalSetting
+internal class SpeakerVolumeSetting : IGlobalSetting
 {
-    public string Label => "Music volume (Dummy)";
+    public string Label => "Music volume (Speaker)";
     public bool ServerOnly => true;
 
     public SettingsBase Get(ushort settingId)
@@ -17,7 +17,7 @@ internal class VolumeSetting : IGlobalSetting
             Label,
             0,
             200,
-            UtilitiesPlugin.PluginConfig.AudioConfig.Volume,
+            UtilitiesPlugin.PluginConfig.AudioConfig.VolumeSpeaker,
             isServerOnly: ServerOnlyType.GlobalServerOnly
         ).RegisterChangedAction(UpdateValue);
     }
@@ -31,7 +31,7 @@ internal class VolumeSetting : IGlobalSetting
             return;
         }
 
-        UtilitiesPlugin.PluginConfig.AudioConfig.Volume = value;
+        UtilitiesPlugin.PluginConfig.AudioConfig.VolumeSpeaker = value;
         UtilitiesPlugin.Save();
     }
 }

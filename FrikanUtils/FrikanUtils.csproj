@@ -131,6 +131,7 @@
         <Compile Include="GlobalSettings\IGlobalSetting.cs"/>
         <Compile Include="GlobalSettings\Settings\HolidayOverrideSetting.cs" />
         <Compile Include="GlobalSettings\Settings\MuteSetting.cs" />
+        <Compile Include="GlobalSettings\Settings\SpeakerVolumeSetting.cs" />
         <Compile Include="GlobalSettings\Settings\VolumeSetting.cs" />
         <Compile Include="HintSystem\HintHandler.cs" />
         <Compile Include="HintSystem\HintSender.cs" />
