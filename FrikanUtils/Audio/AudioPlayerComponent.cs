@@ -15,7 +15,7 @@ namespace FrikanUtils.Audio;
 public class AudioPlayerComponent : MonoBehaviour
 {
     /// <summary>
-    /// The audio player that this component sends for.
+    /// The audio player that controls this component and should be used for sending packets.
     /// </summary>
     [NonSerialized] public AudioPlayerBase AudioPlayer;
 

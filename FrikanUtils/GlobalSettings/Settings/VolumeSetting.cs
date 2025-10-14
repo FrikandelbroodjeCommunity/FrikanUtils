@@ -7,7 +7,7 @@ namespace FrikanUtils.GlobalSettings.Settings;
 
 internal class VolumeSetting : IGlobalSetting
 {
-    public string Label => "Music volume";
+    public string Label => "Music volume (Dummy)";
     public bool ServerOnly => true;
 
     public SettingsBase Get(ushort settingId)

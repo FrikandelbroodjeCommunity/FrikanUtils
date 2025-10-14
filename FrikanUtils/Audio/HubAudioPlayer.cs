@@ -17,6 +17,9 @@ namespace FrikanUtils.Audio;
 public class HubAudioPlayer : AudioPlayerBase
 {
     /// <inheritdoc />
+    public override float ConfigVolume => AudioPlugin.Instance.Config.Volume;
+
+    /// <inheritdoc />
     public override bool IsValid => !Player.IsDestroyed;
 
     /// <summary>
@@ -54,13 +57,6 @@ public class HubAudioPlayer : AudioPlayerBase
         comp.AudioPlayer = this;
     }
 
-    /// <inheritdoc />
-    protected override void InternalCleanup()
-    {
-        NetworkServer.Destroy(Player.ReferenceHub.gameObject);
-        NpcSystem.UnregisterNpc(Player);
-    }
-
     /// <summary>
     /// Change the username of the dummy that plays the audio.
     /// </summary>
@@ -76,7 +72,14 @@ public class HubAudioPlayer : AudioPlayerBase
             // Ignore exception
         }
     }
-
+    
+    /// <inheritdoc />
+    protected override void InternalCleanup()
+    {
+        NetworkServer.Destroy(Player.ReferenceHub.gameObject);
+        NpcSystem.UnregisterNpc(Player);
+    }
+    
     /// <inheritdoc />
     protected internal override void SendMessage(byte[] data, int length)
     {
