@@ -23,11 +23,6 @@ namespace FrikanUtils;
 /// </summary>
 public class UtilitiesPlugin : Plugin<Config>
 {
-    /// <summary>
-    /// The version of the current assembly.
-    /// </summary>
-    public const string CurrentVersion = "1.1.1";
-
     /// <inheritdoc />
     public override string Name => "FrikanUtils";
 
@@ -38,7 +33,7 @@ public class UtilitiesPlugin : Plugin<Config>
     public override string Author => "gamendegamer321";
 
     /// <inheritdoc />
-    public override Version Version => new(CurrentVersion);
+    public override Version Version => new(1, 2, 0);
 
     /// <inheritdoc />
     public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
