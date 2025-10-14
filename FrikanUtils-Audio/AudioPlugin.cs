@@ -33,6 +33,7 @@ public class AudioPlugin : Plugin<AudioConfig>
 
     private readonly MuteSetting _muteSetting = new();
     private readonly VolumeSetting _volumeSetting = new();
+    private readonly SpeakerVolumeSetting _speakerVolumeSetting = new();
 
     /// <inheritdoc />
     public override void Enable()
@@ -42,6 +43,7 @@ public class AudioPlugin : Plugin<AudioConfig>
 
         GlobalSettingsHandler.RegisterSetting(_muteSetting);
         GlobalSettingsHandler.RegisterSetting(_volumeSetting);
+        GlobalSettingsHandler.RegisterSetting(_speakerVolumeSetting);
     }
 
     /// <inheritdoc />
@@ -51,5 +53,6 @@ public class AudioPlugin : Plugin<AudioConfig>
 
         GlobalSettingsHandler.UnregisterSetting(_muteSetting);
         GlobalSettingsHandler.UnregisterSetting(_volumeSetting);
+        GlobalSettingsHandler.UnregisterSetting(_speakerVolumeSetting);
     }
 }
