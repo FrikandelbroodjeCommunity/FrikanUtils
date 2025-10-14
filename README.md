@@ -37,6 +37,13 @@ conflict with other plugins.
 
 # Installation
 
+Download the [latest release](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest) and place it in
+your LabAPI plugins folder.
+
+> [!IMPORTANT]
+> Some features may require additional dependencies. To check which additional dependencies are required consult
+> the [features list](#features).
+
 # Features
 
 Below are small descriptions for what features are included in the plugin. It also contains important notes like
@@ -51,7 +58,7 @@ possible conflict and required dependencies.
 Allows custom menus within the Dummies section of the Remote Admin menu. The image below is an example of how a jail
 system could look, allowing moderators to select players in their RA and add/remove them from the jail.
 
-![image](../Images/CustomDummyActions.png)
+![image](Images/CustomDummyActions.png)
 
 > [!WARNING]
 > This will cause issues with plugins that use other Dummy Action implementations. In the future ways to
@@ -75,7 +82,7 @@ during the game more easily.
 
 To use rainbow text, you can use `<color=rainbow>`. This will only work for hints sent using this hint system.
 
-![image](../Images/HintSystem.png)
+![image](Images/HintSystem.png)
 
 ## Keycards
 
