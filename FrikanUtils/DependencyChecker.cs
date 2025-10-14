@@ -1,16 +1,18 @@
 ﻿using System;
 using LabApi.Features.Console;
-using ProjectMER.Features.Objects;
+using NVorbis;
 using ProjectMER.Features.Serializable;
 
 namespace FrikanUtils;
 
 internal static class DependencyChecker
 {
+    public static bool AudioModule;
     public static bool ProjectMerModule;
 
     public static void CheckDependencies()
     {
+        AudioModule = CheckDependency("Audio Module", CheckAudioModule);
         ProjectMerModule = CheckDependency("Project MER Module", CheckProjectMerModule);
     }
 
@@ -30,5 +32,6 @@ internal static class DependencyChecker
         return true;
     }
 
+    private static void CheckAudioModule() => _ = typeof(VorbisReader);
     private static void CheckProjectMerModule() => _ = new MapSchematic();
 }

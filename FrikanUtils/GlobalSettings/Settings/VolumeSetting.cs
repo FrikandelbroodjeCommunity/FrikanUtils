@@ -3,9 +3,9 @@ using FrikanUtils.ServerSpecificSettings.Settings;
 using LabApi.Features.Permissions;
 using LabApi.Features.Wrappers;
 
-namespace FrikanUtils.GlobalSettings;
+namespace FrikanUtils.GlobalSettings.Settings;
 
-public class VolumeSetting : IGlobalSetting
+internal class VolumeSetting : IGlobalSetting
 {
     public string Label => "Music volume";
     public bool ServerOnly => true;
@@ -17,7 +17,7 @@ public class VolumeSetting : IGlobalSetting
             Label,
             0,
             200,
-            AudioPlugin.Instance.Config.Volume,
+            UtilitiesPlugin.PluginConfig.AudioConfig.Volume,
             isServerOnly: ServerOnlyType.GlobalServerOnly
         ).RegisterChangedAction(UpdateValue);
     }
@@ -31,7 +31,7 @@ public class VolumeSetting : IGlobalSetting
             return;
         }
 
-        AudioPlugin.Instance.Config.Volume = value;
-        AudioPlugin.Instance.SaveConfig();
+        UtilitiesPlugin.PluginConfig.AudioConfig.Volume = value;
+        UtilitiesPlugin.Save();
     }
 }

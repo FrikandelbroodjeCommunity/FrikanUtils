@@ -87,19 +87,19 @@ public class HubAudioPlayer : AudioPlayerBase
     {
         if (HolidayType.Halloween.IsActive())
         {
-            return AudioPlugin.Instance.Config.DefaultHalloweenName;
+            return UtilitiesPlugin.PluginConfig.AudioConfig.DefaultHalloweenName;
         }
 
         if (HolidayType.Christmas.IsActive())
         {
-            return AudioPlugin.Instance.Config.DefaultChristmasName;
+            return UtilitiesPlugin.PluginConfig.AudioConfig.DefaultChristmasName;
         }
 
         if (HolidayType.AprilFools.IsActive())
         {
-            return AudioPlugin.Instance.Config.DefaultAprilFoolsName;
+            return UtilitiesPlugin.PluginConfig.AudioConfig.DefaultAprilFoolsName;
         }
 
-        return AudioPlugin.Instance.Config.DefaultName;
+        return UtilitiesPlugin.PluginConfig.AudioConfig.DefaultName;
     }
 }

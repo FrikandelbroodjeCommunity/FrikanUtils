@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using FrikanUtils.GlobalSettings.Settings;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.ServerSpecificSettings.Settings;
 using LabApi.Features.Console;

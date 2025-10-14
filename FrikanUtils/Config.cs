@@ -23,6 +23,9 @@ public class Config
     [Description("Whether the server specific settings system should be enabled")]
     public bool UseServerSpecificSettings { get; set; } = true;
 
+    [Description("The configuration for the audio module")]
+    public AudioConfig AudioConfig { get; set; } = new();
+
     [Description("Colors used for rainbows")]
     public string[] RainbowTextColors { get; set; } =
     [
@@ -62,4 +65,22 @@ public class Config
                                             "This server uses the Server Specific Settings system.\n" +
                                             "Go and check it out in your settings menu!\n" +
                                             "<i>Esc -> Settings -> Server-specific</i></size>";
+}
+
+public class AudioConfig
+{
+    [Description("Default audio bot name")]
+    public string DefaultName { get; set; } = "Music Bot";
+
+    [Description("Default audio bot name during halloween")]
+    public string DefaultHalloweenName { get; set; } = "Ghost";
+
+    [Description("Default audio bot name during christmas")]
+    public string DefaultChristmasName { get; set; } = "Santa's elve";
+
+    [Description("Default audio bot anme during april fools")]
+    public string DefaultAprilFoolsName { get; set; } = "Herobrine";
+
+    [Description("Default volume of the music bot")]
+    public float Volume { get; set; } = 5f;
 }

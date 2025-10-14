@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.Audio;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
@@ -68,6 +69,7 @@ public class UtilitiesPlugin : Plugin<Config>
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
         ServerEvents.RoundStarted += RoundStarted;
+        if (DependencyChecker.AudioModule) AudioEventHandler.RegisterEvents();
         CustomKeycardEventHandler.RegisterEvents();
         NpcEventHandler.RegisterEvents();
         if (DependencyChecker.ProjectMerModule) MerEventHandler.RegisterEvents();
@@ -92,6 +94,7 @@ public class UtilitiesPlugin : Plugin<Config>
         // Unregister events
         ServerEvents.WaitingForPlayers -= Reset;
         ServerEvents.RoundStarted -= RoundStarted;
+        AudioEventHandler.UnregisterEvents();
         CustomKeycardEventHandler.UnregisterEvents();
         NpcEventHandler.UnregisterEvents();
         MerEventHandler.UnregisterEvents();
@@ -106,6 +109,8 @@ public class UtilitiesPlugin : Plugin<Config>
 
     private static void Reset()
     {
+        AudioSystem.AudioPlayers.RemoveAll(x => !x.IsValid);
+        AudioSystem.DefaultFilterList.Clear();
         CustomKeycard.CustomKeycards.Clear();
         RainbowKeycardHandler.Keycards.Clear();
         NpcSystem.Npcs.Clear();

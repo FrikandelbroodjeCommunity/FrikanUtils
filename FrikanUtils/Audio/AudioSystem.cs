@@ -32,18 +32,6 @@ public static class AudioSystem
         return false;
     }
 
-    internal static void RegisterEvents()
-    {
-        PlayerEvents.ChangingRole += OnRoleChange;
-        ServerEvents.WaitingForPlayers += OnWaitingForPlayers;
-    }
-
-    internal static void UnregisterEvents()
-    {
-        PlayerEvents.ChangingRole -= OnRoleChange;
-        ServerEvents.WaitingForPlayers -= OnWaitingForPlayers;
-    }
-
     internal static void UpdateVolumes()
     {
         foreach (var player in AudioPlayers)
@@ -78,39 +66,7 @@ public static class AudioSystem
     {
         DefaultFilterList.Remove(id);
     }
-
-    private static void OnWaitingForPlayers()
-    {
-        DefaultFilterList.Clear();
-        AudioPlayers.RemoveAll(x => !x.IsValid);
-    }
-
-    private static void OnRoleChange(PlayerChangingRoleEventArgs ev)
-    {
-        if (ev.Player.IsPlayer)
-        {
-            if (ev.NewRole == RoleTypeId.Tutorial)
-            {
-                RemoverUser(ev.Player.PlayerId);
-            }
-            else if (ev.OldRole.RoleTypeId == RoleTypeId.Tutorial)
-            {
-                AddUser(ev.Player);
-            }
-        }
-
-        // For NPCs check if it's one of the audio players, as they are not allowed to change role at round start.
-        if (ev.Player.IsPlayer || ev.ChangeReason != RoleChangeReason.RoundStart) return;
-
-        foreach (var audioPlayer in AudioPlayers)
-        {
-            if (audioPlayer is not HubAudioPlayer hubPlayer || hubPlayer.Player != ev.Player) continue;
-
-            ev.IsAllowed = false;
-            break;
-        }
-    }
-
+    
     private static bool IsMuted(Player player)
     {
         // Unauthenticated users and dummys are muted by default

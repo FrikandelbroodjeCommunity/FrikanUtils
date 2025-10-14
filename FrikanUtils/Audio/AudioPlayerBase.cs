@@ -7,6 +7,9 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.Audio;
 
+/// <summary>
+/// 
+/// </summary>
 public abstract class AudioPlayerBase
 {
     /// <summary>
@@ -28,7 +31,7 @@ public abstract class AudioPlayerBase
     /// <summary>
     /// The volume the player should use. Will be the global volume or the <see cref="OverrideVolume"/>.
     /// </summary>
-    public float Volume => OverrideVolume < 0 ? AudioPlugin.Instance.Config.Volume : OverrideVolume;
+    public float Volume => OverrideVolume < 0 ? UtilitiesPlugin.PluginConfig.AudioConfig.Volume : OverrideVolume;
 
     /// <summary>
     /// Whether the player is still valid, should be false after being cleaned up.

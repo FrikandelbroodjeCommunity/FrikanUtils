@@ -5,7 +5,7 @@ using LabApi.Features.Permissions;
 using LabApi.Features.Wrappers;
 using MapGeneration.Holidays;
 
-namespace FrikanUtils.GlobalSettings;
+namespace FrikanUtils.GlobalSettings.Settings;
 
 internal class HolidayOverrideSetting : IGlobalSetting
 {
