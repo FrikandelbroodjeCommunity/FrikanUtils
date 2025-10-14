@@ -17,6 +17,9 @@ namespace FrikanUtils.Audio;
 public class HubAudioPlayer : AudioPlayerBase
 {
     /// <inheritdoc />
+    public override float ConfigVolume => AudioPlugin.Instance.Config.Volume;
+
+    /// <inheritdoc />
     public override bool IsValid => !Player.IsDestroyed;
 
     /// <summary>

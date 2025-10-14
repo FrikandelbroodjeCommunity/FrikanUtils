@@ -11,6 +11,9 @@ namespace FrikanUtils.Audio;
 public class SpeakerAudioPlayer : AudioPlayerBase
 {
     /// <inheritdoc />
+    public override float ConfigVolume => AudioPlugin.Instance.Config.VolumeSpeaker;
+
+    /// <inheritdoc />
     public override bool IsValid => !Speaker.IsDestroyed;
 
     /// <summary>

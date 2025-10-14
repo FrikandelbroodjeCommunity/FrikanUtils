@@ -20,4 +20,7 @@ public class AudioConfig
 
     [Description("Default volume of the music bot")]
     public float Volume { get; set; } = 5f;
+
+    [Description("Default volume of the speakers")]
+    public float VolumeSpeaker { get; set; } = 5f;
 }

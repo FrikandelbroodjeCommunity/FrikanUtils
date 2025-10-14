@@ -97,6 +97,7 @@
         <Compile Include="Audio\PlayerSpeakerAudioPlayer.cs" />
         <Compile Include="Audio\SpeakerAudioPlayer.cs" />
         <Compile Include="GlobalSettings\MuteSetting.cs" />
+        <Compile Include="GlobalSettings\SpeakerVolumeSetting.cs" />
         <Compile Include="GlobalSettings\VolumeSetting.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
     </ItemGroup>
