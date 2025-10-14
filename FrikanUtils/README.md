@@ -35,6 +35,9 @@ The file system allows all files accessed using this system to be placed in the 
 developers can create their own extensions to this system, allowing for custom search functions. Searching in other
 locations, or another method.
 
+The default implementation searches the following path depending on the given folder and file name:
+```/LabAPI/configs/{port/global}/FrikanUtils/{folder}/{filename}```
+
 > [!TIP]
 > Using a custom extension it is possible to download file from a central server. Useful for when you have multiple
 > servers which require the same files.

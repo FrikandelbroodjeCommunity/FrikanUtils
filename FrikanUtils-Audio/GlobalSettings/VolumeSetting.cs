@@ -5,7 +5,7 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.GlobalSettings;
 
-public class VolumeSetting : IGlobalSetting
+internal class VolumeSetting : IGlobalSetting
 {
     public string Label => "Music volume";
     public bool ServerOnly => true;

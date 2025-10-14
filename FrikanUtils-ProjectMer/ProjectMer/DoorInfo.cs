@@ -7,6 +7,13 @@ namespace FrikanUtils.ProjectMer;
 /// </summary>
 public struct DoorInfo
 {
+    /// <summary>
+    /// The door that was spawned.
+    /// </summary>
     public DoorVariant Door;
+
+    /// <summary>
+    /// The full name of the object that caused the door to spawn.
+    /// </summary>
     public string DoorId;
 }

@@ -7,6 +7,9 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.Audio;
 
+/// <summary>
+/// Base for every audio player, contains the shared logic for all of them.
+/// </summary>
 public abstract class AudioPlayerBase
 {
     /// <summary>
@@ -53,6 +56,9 @@ public abstract class AudioPlayerBase
     internal bool BreakCurrentFile;
     internal readonly List<string> Files = [];
 
+    /// <summary>
+    /// Initialize the audio player, registers it.
+    /// </summary>
     protected AudioPlayerBase()
     {
         AudioSystem.AudioPlayers.Add(this);

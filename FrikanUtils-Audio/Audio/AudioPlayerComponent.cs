@@ -9,8 +9,14 @@ using Logger = LabApi.Features.Console.Logger;
 
 namespace FrikanUtils.Audio;
 
+/// <summary>
+/// Component used to read the audio file and send the audio packets.
+/// </summary>
 public class AudioPlayerComponent : MonoBehaviour
 {
+    /// <summary>
+    /// The audio player that controls this component and should be used for sending packets.
+    /// </summary>
     [NonSerialized] public AudioPlayerBase AudioPlayer;
 
     private const int BufferSize = 11520;

@@ -4,7 +4,7 @@ using LabApi.Features.Wrappers;
 
 namespace FrikanUtils.GlobalSettings;
 
-public class MuteSetting : IGlobalSetting
+internal class MuteSetting : IGlobalSetting
 {
     public string Label => "Audio preference";
     public bool ServerOnly => false;

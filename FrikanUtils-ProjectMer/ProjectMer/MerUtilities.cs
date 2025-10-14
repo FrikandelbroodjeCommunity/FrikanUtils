@@ -99,14 +99,36 @@ public static class MerUtilities
         return schematic.Init(data);
     }
 
+    /// <summary>
+    /// Make this primitive toy interactable.
+    /// </summary>
+    /// <param name="transform">Primitive toy</param>
+    /// <param name="pickingUp">Action executed when a player starts the pickup</param>
+    /// <param name="id">ID to use for distinguishing between interactables</param>
+    /// <param name="duration">How long the player needs to interact to complete</param>
     public static void RegisterPickupAction(this Transform transform, Func<Player, string, bool> pickingUp, string id,
         float duration)
         => transform.RegisterPickupAction(pickingUp, null, id, duration);
 
+    /// <summary>
+    /// Make this primitive toy interactable.
+    /// </summary>
+    /// <param name="transform">Primitive toy</param>
+    /// <param name="action">Action exectued when a player finishes the pickup</param>
+    /// <param name="id">ID to use for distinguishing between interactables</param>
+    /// <param name="duration">How long the player needs to interact to complete</param>
     public static void RegisterPickupAction(this Transform transform, Action<Player, string> action, string id,
         float duration)
         => transform.RegisterPickupAction(null, action, id, duration);
 
+    /// <summary>
+    /// Make this primitive toy interactable.
+    /// </summary>
+    /// <param name="transform">Primitive toy</param>
+    /// <param name="pickingUp">Action executed when a player starts the pickup</param>
+    /// <param name="action">Action exectued when a player finishes the pickup</param>
+    /// <param name="id">ID to use for distinguishing between interactables</param>
+    /// <param name="duration">How long the player needs to interact to complete</param>
     public static void RegisterPickupAction(this Transform transform, Func<Player, string, bool> pickingUp,
         Action<Player, string> action, string id, float duration)
     {

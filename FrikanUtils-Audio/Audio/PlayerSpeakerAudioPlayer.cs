@@ -5,24 +5,24 @@ using VoiceChat.Networking;
 
 namespace FrikanUtils.Audio;
 
-public class PlayerSpeakerAudioPlayer : AudioPlayerBase
+/// <summary>
+/// A <see cref="SpeakerAudioPlayer"/> that follows the players.
+/// Can make it appear like the audio is coming from the player.
+/// </summary>
+public class PlayerSpeakerAudioPlayer : SpeakerAudioPlayer
 {
-    public override bool IsValid => !Speaker.IsDestroyed;
-
     /// <summary>
     /// The player that the speaker is attached to.
     /// </summary>
     public readonly Player Player;
 
     /// <summary>
-    /// The toy that was spawned for this audio player.
+    /// Create a new tracking speaker.
     /// </summary>
-    public readonly SpeakerToy Speaker;
-
-    public PlayerSpeakerAudioPlayer(Player player)
+    /// <param name="player">The player the speaker needs to be attached to</param>
+    public PlayerSpeakerAudioPlayer(Player player) : base(player.Position, Quaternion.identity)
     {
         Player = player;
-        Speaker = SpeakerToy.Create(player.Position, Quaternion.identity);
 
         var comp = Speaker.GameObject.AddComponent<AudioPlayerComponent>();
         comp.AudioPlayer = this;
@@ -31,18 +31,20 @@ public class PlayerSpeakerAudioPlayer : AudioPlayerBase
         attach.AudioPlayer = this;
     }
 
+    /// <inheritdoc />
     protected override void InternalCleanup()
     {
         Speaker.Destroy();
     }
 
+    /// <inheritdoc />
     protected internal override void SendMessage(byte[] data, int length)
     {
         var audioMessage = new AudioMessage(Speaker.ControllerId, data, length);
         audioMessage.SendToHubsConditionally(IsValidPlayer);
     }
 
-    public class AttachmentComponent : MonoBehaviour
+    internal class AttachmentComponent : MonoBehaviour
     {
         public PlayerSpeakerAudioPlayer AudioPlayer;
 

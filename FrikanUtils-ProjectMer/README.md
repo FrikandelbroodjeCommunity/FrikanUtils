@@ -1,6 +1,6 @@
 ﻿# About the project MER module
 
-The audio module assists in playing music files through dummies or speakers.
+The Project MER module assists in loading schematics and spawning them.
 
 > [!NOTE]
 > Documentation for developers is still a work in progress and will be put in
@@ -20,8 +20,8 @@ FrikanUtils_ProjectMer.dll" in the LabAPI plugin folder.
 
 ## Adding ProjectMER files
 
-The audio module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your ProjectMER
-schematics in the `/LabAPI/configs/{port or global}/FrikanUtils/Maps` folder.
+The Project MER module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your
+ProjectMER schematics in the `/LabAPI/configs/{port/global}/FrikanUtils/Maps` folder.
 
 If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
 

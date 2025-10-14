@@ -21,7 +21,7 @@ FrikanUtils_Audio.dll" in the LabAPI plugin folder.
 ## Adding audio files
 
 The audio module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your audio files
-in the `/LabAPI/configs/{port or global}/FrikanUtils/Audio` folder.
+in the `/LabAPI/configs/{port/global}/FrikanUtils/Audio` folder.
 
 If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
 
