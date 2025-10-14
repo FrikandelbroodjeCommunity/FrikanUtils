@@ -30,6 +30,8 @@ conflict with other plugins.
     - [Keycards](#keycards)
         - [Custom Keycards](#custom-keycards)
     - [NPCs](#npcs)
+    - [Project MER](#project-mer)
+        - [Adding Schematics](#adding-schematics)
     - [Server Specific Settings](#server-specific-settings)
         - [Global Settings](#global-settings)
 - [Config](#config)
@@ -109,6 +111,21 @@ uses a custom connection, this way the dummy does not show up in the Remote Admi
 > [!TIP]
 > A very basic AI is provided which is able to follow a player. In the future some more AIs may be
 > added ([see future plans](../README.md#future-plans)).
+
+## Project MER
+
+There are some helpers available which allow you to more easily create maps that are specific for holidays and help
+programmers with spawning maps using the [File System](#file-system).
+
+> [!IMPORTANT]
+> **Dependency required:** [Project MER](https://github.com/Michal78900/ProjectMER/releases/latest)
+
+### Adding Schematics
+
+The Project MER module uses the FrikanUtils file system. By default, you can add your ProjectMER schematics in
+the `/LabAPI/configs/{port/global}/FrikanUtils/map` folder, although some plugins may require a different path.
+
+If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
 
 ## Server Specific Settings
 
