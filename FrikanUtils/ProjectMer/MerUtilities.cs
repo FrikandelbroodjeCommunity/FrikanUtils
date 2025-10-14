@@ -99,14 +99,36 @@ public static class MerUtilities
         return schematic.Init(data);
     }
 
+    /// <summary>
+    /// Adds an interactable toy to the primitive toy.
+    /// </summary>
+    /// <param name="transform">Object to make interactable</param>
+    /// <param name="pickingUp">Action to be executed when player starts picking up</param>
+    /// <param name="id">Id for the interactable, can be used to distinguish between interactables later.</param>
+    /// <param name="duration">Duration that it takes to do the pickup</param>
     public static void RegisterPickupAction(this Transform transform, Func<Player, string, bool> pickingUp, string id,
         float duration)
         => transform.RegisterPickupAction(pickingUp, null, id, duration);
 
+    /// <summary>
+    /// Adds an interactable toy to the primitive toy.
+    /// </summary>
+    /// <param name="transform">Object to make interactable</param>
+    /// <param name="action">Action to be executed when player finishes picking up</param>
+    /// <param name="id">Id for the interactable, can be used to distinguish between interactables later.</param>
+    /// <param name="duration">Duration that it takes to do the pickup</param>
     public static void RegisterPickupAction(this Transform transform, Action<Player, string> action, string id,
         float duration)
         => transform.RegisterPickupAction(null, action, id, duration);
 
+    /// <summary>
+    /// Adds an interactable toy to the primitive toy.
+    /// </summary>
+    /// <param name="transform">Object to make interactable</param>
+    /// <param name="pickingUp">Action to be executed when player starts picking up</param>
+    /// <param name="action">Action to be executed when player finishes picking up</param>
+    /// <param name="id">Id for the interactable, can be used to distinguish between interactables later.</param>
+    /// <param name="duration">Duration that it takes to do the pickup</param>
     public static void RegisterPickupAction(this Transform transform, Func<Player, string, bool> pickingUp,
         Action<Player, string> action, string id, float duration)
     {
