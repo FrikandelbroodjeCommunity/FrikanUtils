@@ -35,15 +35,6 @@
         <WarningLevel>4</WarningLevel>
         <DocumentationFile>bin\Release\FrikanUtils.xml</DocumentationFile>
     </PropertyGroup>
-    <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'SoftDeploy|AnyCPU' ">
-        <DebugType>pdbonly</DebugType>
-        <Optimize>true</Optimize>
-        <DefineConstants>TRACE</DefineConstants>
-        <ErrorReport>prompt</ErrorReport>
-        <WarningLevel>4</WarningLevel>
-        <OutputPath>bin\SoftDeploy\</OutputPath>
-        <DocumentationFile>bin\SoftDeploy\FrikanUtils.xml</DocumentationFile>
-    </PropertyGroup>
     <ItemGroup>
         <Reference Include="0Harmony">
             <HintPath>$(SL_DEPENDENCIES)\0Harmony.dll</HintPath>
