@@ -24,6 +24,10 @@ conflict with other plugins.
 
 - [Installation](#installation)
 - [Features](#features)
+    - [Audio](#audio)
+        - [Adding Audio Files](#adding-audio-files)
+        - [Speaker Types](#speaker-types)
+        - [Global Audio Settings](#global-audio-settings)
     - [Custom Dummy Actions](#custom-dummy-actions)
     - [File System](#file-system)
     - [Hint System](#hint-system)
@@ -55,6 +59,48 @@ possible conflict and required dependencies.
 > A better overview for all features is still a work in progress and will be put in
 > the [wiki](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/wiki).
 
+## Audio
+
+The audio module makes it easier for developers to play audio files in-game and search for files using
+the [File System](#file-system)
+
+> [!IMPORTANT]
+> **Dependency required:** [NVorbis](https://github.com/NVorbis/NVorbis/releases/tag/v0.10.5)
+
+### Adding Audio Files
+
+The audio module uses the FrikanUtils file system. By default, you can add your audio files in
+the `/LabAPI/configs/{port/global}/FrikanUtils/audio` folder, although some plugins may require a different path.
+
+If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
+
+### Speaker Types
+
+Below is a list of all speaker types available for developers.
+
+#### Speaker Audio Player
+
+Allows a plugin to play audio from a file through a speaker. This does not require an NPC, instead playing the audio
+from an invisible point.
+
+#### Hub Audio Player
+
+Allows a plugin to player audio through a dummy. If no name for the dummy is provided, a default name will be used,
+which can be set in the config.
+
+#### Player Speaker Audio Player
+
+Attaches a speaker to a player or dummy. The audio will be played through the speaker, which follows the player,
+allowing audio to be played in proximity chat even for roles that normally don't allow that.
+
+### Global Audio Settings
+
+The mute setting allows each player to determine whether they want to mute the audio played through the speaker and hub
+audio players. A plugin can override this if the audio has its own requirements.
+
+The volume setting allows server staff to set the default value audio is played at. This is automatically synced with
+the config. A plugin can override this if the audio needs its own volume.
+
 ## Custom Dummy Actions
 
 Allows custom menus within the Dummies section of the Remote Admin menu. The image below is an example of how a jail
@@ -71,6 +117,9 @@ system could look, allowing moderators to select players in their RA and add/rem
 The file system allows all files accessed using this system to be placed in the same folder. Additionally, plugin
 developers can create their own extensions to this system, allowing for custom search functions. Searching in other
 locations, or another method.
+
+Plugins can specify the name of the file to look for, and which folder to look in. The default file provider will search
+if the file exists at the following path: `/LabAPI/configs/{port/global}/FrikanUtils/{folder}/{filename}`.
 
 > [!TIP]
 > Using a custom extension it is possible to download file from a central server. Useful for when you have multiple
@@ -149,21 +198,26 @@ things that only trigger during holidays. The `frikanutils.debug` permission is 
 
 # Config
 
-| Config                      | Default | Description                                                                                                                                                                                                                                                                                                   |
-|-----------------------------|---------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `Debug`                     | `false` | When set to true, debug logs will be included in the console. These logs may contain useful information when developing plugins that use FrikanUtils.                                                                                                                                                         |
-| `UseCustomDummyActions`     | `true`  | Whether the [Custom Dummy Actions system](#Custom-Dummy-Actions) is enabled. Disable this if there are conflicts.                                                                                                                                                                                             |
-| `UseHintSystem`             | `true`  | Whether the [Hint System](#Hint-System) is enabled. Disable this if there are conflicts.                                                                                                                                                                                                                      |
-| `UseKeycardImprovements`    | `true`  | Whether the [thrown keycard improvements](#Keycards) are enabled. Disable this if there are conflicts.                                                                                                                                                                                                        |
-| `UseServerSpecificSettings` | `true`  | Whether the [Server Specific Settings system](#Server-Specific-Settings) are enabled. Disable this if there are conflicts.                                                                                                                                                                                    |
-| `RainbowTextColors`         | ...     | The colors the rainbow tag (`<color=rainbow>`) cycles through.                                                                                                                                                                                                                                                |
-| `RainbowColorTicks`         | `2`     | Each time the hints get updated it will attempt to move to the next color, because the time between each update is determined by the refresh rate, this can be used to make sure the colors don't update too often. This indicates how many updates need to happen before the color can continue to the next. |
-| `HintRefreshTime`           | `0.5`   | The time between the updates of the hint. Decreasing the time will update the hint contents more frequently, but increases network traffic.                                                                                                                                                                   |
-| `ServerSettingsMenus`       | ...     | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
-| `GlobalClientSettings`      | ...     | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
-| `NoSettingsText`            | ...     | Displayed when the user has at least 1 menu in the Server Specific Settings, but does not have any static menus.                                                                                                                                                                                              |
-| `OverrideHoliday`           | None    | The holiday override the server currently uses. Can be `None`, `Christmas`, `Halloween`, or `AprilFools`. Can also be set using its Global Setting.                                                                                                                                                           |
-| `LobbyText`                 | ...     | The text that is displayed in the lobby for all players. If you want to disable this text, leave it empty.                                                                                                                                                                                                    |
+| Config                               | Default        | Description                                                                                                                                                                                                                                                                                                   |
+|--------------------------------------|----------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `Debug`                              | `false`        | When set to true, debug logs will be included in the console. These logs may contain useful information when developing plugins that use FrikanUtils.                                                                                                                                                         |
+| `UseCustomDummyActions`              | `true`         | Whether the [Custom Dummy Actions system](#Custom-Dummy-Actions) is enabled. Disable this if there are conflicts.                                                                                                                                                                                             |
+| `UseHintSystem`                      | `true`         | Whether the [Hint System](#Hint-System) is enabled. Disable this if there are conflicts.                                                                                                                                                                                                                      |
+| `UseKeycardImprovements`             | `true`         | Whether the [thrown keycard improvements](#Keycards) are enabled. Disable this if there are conflicts.                                                                                                                                                                                                        |
+| `UseServerSpecificSettings`          | `true`         | Whether the [Server Specific Settings system](#Server-Specific-Settings) are enabled. Disable this if there are conflicts.                                                                                                                                                                                    |
+| `RainbowTextColors`                  | ...            | The colors the rainbow tag (`<color=rainbow>`) cycles through.                                                                                                                                                                                                                                                |
+| `RainbowColorTicks`                  | `2`            | Each time the hints get updated it will attempt to move to the next color, because the time between each update is determined by the refresh rate, this can be used to make sure the colors don't update too often. This indicates how many updates need to happen before the color can continue to the next. |
+| `HintRefreshTime`                    | `0.5`          | The time between the updates of the hint. Decreasing the time will update the hint contents more frequently, but increases network traffic.                                                                                                                                                                   |
+| `ServerSettingsMenus`                | ...            | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
+| `GlobalClientSettings`               | ...            | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
+| `NoSettingsText`                     | ...            | Displayed when the user has at least 1 menu in the Server Specific Settings, but does not have any static menus.                                                                                                                                                                                              |
+| `OverrideHoliday`                    | None           | The holiday override the server currently uses. Can be `None`, `Christmas`, `Halloween`, or `AprilFools`. Can also be set using its Global Setting.                                                                                                                                                           |
+| `LobbyText`                          | ...            | The text that is displayed in the lobby for all players. If you want to disable this text, leave it empty.                                                                                                                                                                                                    |
+| `audio_config.DefaultName`           | `Music Bot`    | The default name the bot uses, if the plugin does not specify a name, and no holiday is active.                                                                                                                                                                                                               |
+| `audio_config.DefaultHalloweenName`  | `Ghost`        | The default name the bot uses, if the plugin does not specify a name, and the Halloween holiday is active.                                                                                                                                                                                                    |
+| `audio_config.DefaultChristmasName`  | `Santa's elve` | The default name the bot uses, if the plugin does not specify a name, and the Christmas holiday is active.                                                                                                                                                                                                    |
+| `audio_config.DefaultAprilFoolsName` | `Herobrine`    | The default name the bot uses, if the plugin does not specify a name, and the AprilFools holiday is active.                                                                                                                                                                                                   |
+| `audio_config.Volume`                | `5`            | The volume that is used by default, if the plugin does not specify a volume.                                                                                                                                                                                                                                  |
 
 # Future plans
 
