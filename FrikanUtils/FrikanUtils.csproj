@@ -58,7 +58,7 @@
             <HintPath>$(SL_REFERENCES)\CommandSystem.Core.dll</HintPath>
         </Reference>
         <Reference Include="LabApi, Version=1.1.3.0, Culture=neutral, processorArchitecture=Amd64">
-          <HintPath>..\packages\Northwood.LabAPI.1.1.3\lib\net48\LabApi.dll</HintPath>
+            <HintPath>..\packages\Northwood.LabAPI.1.1.3\lib\net48\LabApi.dll</HintPath>
         </Reference>
         <Reference Include="Mirror">
             <HintPath>$(SL_REFERENCES)\Mirror.dll</HintPath>
@@ -68,6 +68,9 @@
         </Reference>
         <Reference Include="Pooling">
             <HintPath>$(SL_REFERENCES)\Pooling.dll</HintPath>
+        </Reference>
+        <Reference Include="ProjectMER">
+            <HintPath>$(SL_DEPENDENCIES)\ProjectMER-publicized.dll</HintPath>
         </Reference>
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
@@ -87,92 +90,99 @@
             <HintPath>$(UNITY_REFERENCES)\UnityEngine.PhysicsModule.dll</HintPath>
         </Reference>
         <Reference Include="YamlDotNet, Version=16.0.0.0, Culture=neutral, PublicKeyToken=ec19458f3c15af5e, processorArchitecture=MSIL">
-          <HintPath>..\packages\YamlDotNet.16.3.0\lib\net47\YamlDotNet.dll</HintPath>
+            <HintPath>..\packages\YamlDotNet.16.3.0\lib\net47\YamlDotNet.dll</HintPath>
         </Reference>
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Config.cs"/>
-        <Compile Include="FileSystem\FileHandler.cs" />
-        <Compile Include="FileSystem\BaseFileProvider.cs" />
-        <Compile Include="FileSystem\LocalFileProvider.cs" />
-        <Compile Include="CustomDummyActions\ActionExecutable.cs" />
-        <Compile Include="CustomDummyActions\DummyModuleBase.cs" />
-        <Compile Include="CustomDummyActions\ModuleAction.cs" />
-        <Compile Include="CustomDummyActions\Patches\CachePatch.cs" />
-        <Compile Include="CustomDummyActions\Patches\ExecuteDummyPatch.cs" />
-        <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs" />
-        <Compile Include="CustomDummyActions\RaHandler.cs" />
-        <Compile Include="GlobalSettings\GlobalServerSettingsMenu.cs" />
-        <Compile Include="GlobalSettings\GlobalSettingComparer.cs" />
-        <Compile Include="GlobalSettings\GlobalSettingsHandler.cs" />
-        <Compile Include="GlobalSettings\GlobalClientSettingsMenu.cs" />
-        <Compile Include="GlobalSettings\HolidayOverrideSetting.cs" />
-        <Compile Include="GlobalSettings\IGlobalSetting.cs" />
-        <Compile Include="HintSystem\HintHandler.cs" />
-        <Compile Include="HintSystem\HintSender.cs" />
-        <Compile Include="Keycard\CustomKeycard.cs" />
-        <Compile Include="Keycard\CustomKeycardEventHandler.cs" />
-        <Compile Include="Keycard\CustomKeycardUtilities.cs" />
-        <Compile Include="Keycard\Patches\CustomKeycard914Patch.cs" />
-        <Compile Include="Keycard\Patches\KeycardCollisionPatch.cs" />
-        <Compile Include="Keycard\RainbowKeycardHandler.cs" />
-        <Compile Include="Npc\BaseNpcComponent.cs" />
-        <Compile Include="Npc\Enums\DestroyReason.cs" />
-        <Compile Include="Npc\Enums\OutOfRangeAction.cs" />
-        <Compile Include="Npc\Enums\ReachTargetAction.cs" />
-        <Compile Include="Npc\Following\FollowingNpc.cs" />
-        <Compile Include="Npc\Following\FollowingNpcComponent.cs" />
-        <Compile Include="Npc\BaseNpc.cs" />
-        <Compile Include="Npc\NpcEventHandler.cs" />
-        <Compile Include="Npc\NpcSystem.cs" />
-        <Compile Include="Npc\Patches\MaxMovementSpeedPatch.cs" />
-        <Compile Include="Npc\Patches\TargetPatches.cs" />
-        <Compile Include="Properties\AssemblyInfo.cs" />
-        <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyHelper.cs" />
-        <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyType.cs" />
-        <Compile Include="ServerSpecificSettings\Menus\MenuBase.cs" />
-        <Compile Include="ServerSpecificSettings\Menus\MenuPriority.cs" />
-        <Compile Include="ServerSpecificSettings\Menus\MenuType.cs" />
-        <Compile Include="ServerSpecificSettings\Menus\PlayerMenu.cs" />
-        <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingBasePatch.cs" />
-        <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingSyncPatch.cs" />
-        <Compile Include="ServerSpecificSettings\PlayerIdHandler.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Button.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Dropdown.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\GroupHeader.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\IServerSpecificSetting.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Keybind.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\SettingsBase.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Slider.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Submenus\CollapsableSubMenu.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Submenus\INamedSubmenu.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Submenus\SubMenu.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\Submenus\TabsSubMenu.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\TextArea.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\TextInput.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\TwoButtonSetting.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\TypedDropdown.cs" />
-        <Compile Include="ServerSpecificSettings\Settings\ValueSettingsBase.cs" />
-        <Compile Include="ServerSpecificSettings\SSSEventHandler.cs" />
-        <Compile Include="ServerSpecificSettings\SSSHandler.cs" />
-        <Compile Include="UtilitiesPlugin.cs" />
-        <Compile Include="Utilities\AsyncUtilities.cs" />
-        <Compile Include="Utilities\ColorUtilities.cs" />
-        <Compile Include="Utilities\CommandUtilities.cs" />
-        <Compile Include="Utilities\HolidayUtilities.cs" />
-        <Compile Include="Utilities\KeycardUtilities.cs" />
-        <Compile Include="Utilities\ListUtilities.cs" />
-        <Compile Include="Utilities\PlayerUtilities.cs" />
-        <Compile Include="Utilities\PositionUtilities.cs" />
-        <Compile Include="Utilities\ScpExtension.cs" />
-        <Compile Include="Utilities\TeamUtilities.cs" />
+        <Compile Include="DependencyChecker.cs"/>
+        <Compile Include="FileSystem\FileHandler.cs"/>
+        <Compile Include="FileSystem\BaseFileProvider.cs"/>
+        <Compile Include="FileSystem\LocalFileProvider.cs"/>
+        <Compile Include="CustomDummyActions\ActionExecutable.cs"/>
+        <Compile Include="CustomDummyActions\DummyModuleBase.cs"/>
+        <Compile Include="CustomDummyActions\ModuleAction.cs"/>
+        <Compile Include="CustomDummyActions\Patches\CachePatch.cs"/>
+        <Compile Include="CustomDummyActions\Patches\ExecuteDummyPatch.cs"/>
+        <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs"/>
+        <Compile Include="CustomDummyActions\RaHandler.cs"/>
+        <Compile Include="GlobalSettings\GlobalServerSettingsMenu.cs"/>
+        <Compile Include="GlobalSettings\GlobalSettingComparer.cs"/>
+        <Compile Include="GlobalSettings\GlobalSettingsHandler.cs"/>
+        <Compile Include="GlobalSettings\GlobalClientSettingsMenu.cs"/>
+        <Compile Include="GlobalSettings\HolidayOverrideSetting.cs"/>
+        <Compile Include="GlobalSettings\IGlobalSetting.cs"/>
+        <Compile Include="HintSystem\HintHandler.cs"/>
+        <Compile Include="HintSystem\HintSender.cs"/>
+        <Compile Include="Keycard\CustomKeycard.cs"/>
+        <Compile Include="Keycard\CustomKeycardEventHandler.cs"/>
+        <Compile Include="Keycard\CustomKeycardUtilities.cs"/>
+        <Compile Include="Keycard\Patches\CustomKeycard914Patch.cs"/>
+        <Compile Include="Keycard\Patches\KeycardCollisionPatch.cs"/>
+        <Compile Include="Keycard\RainbowKeycardHandler.cs"/>
+        <Compile Include="Npc\BaseNpcComponent.cs"/>
+        <Compile Include="Npc\Enums\DestroyReason.cs"/>
+        <Compile Include="Npc\Enums\OutOfRangeAction.cs"/>
+        <Compile Include="Npc\Enums\ReachTargetAction.cs"/>
+        <Compile Include="Npc\Following\FollowingNpc.cs"/>
+        <Compile Include="Npc\Following\FollowingNpcComponent.cs"/>
+        <Compile Include="Npc\BaseNpc.cs"/>
+        <Compile Include="Npc\NpcEventHandler.cs"/>
+        <Compile Include="Npc\NpcSystem.cs"/>
+        <Compile Include="Npc\Patches\MaxMovementSpeedPatch.cs"/>
+        <Compile Include="Npc\Patches\TargetPatches.cs"/>
+        <Compile Include="ProjectMer\DoorInfo.cs"/>
+        <Compile Include="ProjectMer\Interactable.cs"/>
+        <Compile Include="ProjectMer\MerEventHandler.cs"/>
+        <Compile Include="ProjectMer\MerUtilities.cs"/>
+        <Compile Include="ProjectMer\Patches\HolidayMerPatch.cs"/>
+        <Compile Include="ProjectMer\TriggerPrimitive.cs"/>
+        <Compile Include="Properties\AssemblyInfo.cs"/>
+        <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyHelper.cs"/>
+        <Compile Include="ServerSpecificSettings\Helpers\ServerOnlyType.cs"/>
+        <Compile Include="ServerSpecificSettings\Menus\MenuBase.cs"/>
+        <Compile Include="ServerSpecificSettings\Menus\MenuPriority.cs"/>
+        <Compile Include="ServerSpecificSettings\Menus\MenuType.cs"/>
+        <Compile Include="ServerSpecificSettings\Menus\PlayerMenu.cs"/>
+        <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingBasePatch.cs"/>
+        <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingSyncPatch.cs"/>
+        <Compile Include="ServerSpecificSettings\PlayerIdHandler.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Button.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Dropdown.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\GroupHeader.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\IServerSpecificSetting.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Keybind.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\SettingsBase.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Slider.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Submenus\CollapsableSubMenu.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Submenus\INamedSubmenu.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Submenus\SubMenu.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\Submenus\TabsSubMenu.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\TextArea.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\TextInput.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\TwoButtonSetting.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\TypedDropdown.cs"/>
+        <Compile Include="ServerSpecificSettings\Settings\ValueSettingsBase.cs"/>
+        <Compile Include="ServerSpecificSettings\SSSEventHandler.cs"/>
+        <Compile Include="ServerSpecificSettings\SSSHandler.cs"/>
+        <Compile Include="UtilitiesPlugin.cs"/>
+        <Compile Include="Utilities\AsyncUtilities.cs"/>
+        <Compile Include="Utilities\ColorUtilities.cs"/>
+        <Compile Include="Utilities\CommandUtilities.cs"/>
+        <Compile Include="Utilities\HolidayUtilities.cs"/>
+        <Compile Include="Utilities\KeycardUtilities.cs"/>
+        <Compile Include="Utilities\ListUtilities.cs"/>
+        <Compile Include="Utilities\PlayerUtilities.cs"/>
+        <Compile Include="Utilities\PositionUtilities.cs"/>
+        <Compile Include="Utilities\ScpExtension.cs"/>
+        <Compile Include="Utilities\TeamUtilities.cs"/>
     </ItemGroup>
     <ItemGroup>
-        <None Include="App.config" />
-        <None Include="packages.config" />
+        <None Include="App.config"/>
+        <None Include="packages.config"/>
     </ItemGroup>
     <ItemGroup>
-      <Content Include="README.md" />
+        <Content Include="README.md"/>
     </ItemGroup>
     <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets"/>
     <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

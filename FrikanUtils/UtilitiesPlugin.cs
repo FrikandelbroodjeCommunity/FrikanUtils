@@ -4,6 +4,7 @@ using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
 using FrikanUtils.Npc;
 using FrikanUtils.Npc.Patches;
+using FrikanUtils.ProjectMer;
 using FrikanUtils.ServerSpecificSettings;
 using FrikanUtils.Utilities;
 using HarmonyLib;
@@ -49,7 +50,7 @@ public class UtilitiesPlugin : Plugin<Config>
     /// </summary>
     public static UtilitiesPlugin Instance { get; private set; }
 
-    internal static Config PluginConfig => Instance.Config;
+    internal static Config PluginConfig => Instance.Config ?? new();
 
     private GameObject _handlerObject;
     private readonly Harmony _harmony = new("com.frikandelbroodje.utils");
@@ -60,6 +61,8 @@ public class UtilitiesPlugin : Plugin<Config>
     public override void Enable()
     {
         Instance = this;
+
+        DependencyChecker.CheckDependencies();
         _harmony.PatchAll();
 
         // Register events
@@ -67,6 +70,7 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.RoundStarted += RoundStarted;
         CustomKeycardEventHandler.RegisterEvents();
         NpcEventHandler.RegisterEvents();
+        if (DependencyChecker.ProjectMerModule) MerEventHandler.RegisterEvents();
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
 
         // Register global settings
@@ -90,6 +94,7 @@ public class UtilitiesPlugin : Plugin<Config>
         ServerEvents.RoundStarted -= RoundStarted;
         CustomKeycardEventHandler.UnregisterEvents();
         NpcEventHandler.UnregisterEvents();
+        MerEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();
 
         // Unregister global settings

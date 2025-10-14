@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using FrikanUtils.Utilities;
 using HarmonyLib;
 using LabApi.Features.Console;
@@ -15,6 +16,12 @@ namespace FrikanUtils.ProjectMer.Patches;
 internal static class HolidayMerPatch
 {
     internal static readonly List<SchematicObject> ApplicableSchematics = [];
+
+    [HarmonyPrepare]
+    public static bool OnPrepare(MethodBase _)
+    {
+        return DependencyChecker.ProjectMerModule;
+    }
 
     [HarmonyPatch(typeof(SchematicObject), nameof(SchematicObject.CreateRecursiveFromID))]
     [HarmonyPrefix]
