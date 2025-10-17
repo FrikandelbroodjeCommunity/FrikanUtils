@@ -56,10 +56,22 @@ public abstract class AudioPlayerBase
     /// </summary>
     public Func<Player, bool> ValidPlayers;
 
-    internal int CurrentPosition;
-    internal bool Playing;
+    /// <summary>
+    /// The files that are currently in the queue.
+    /// </summary>
+    public readonly List<string> QueuedFiles = [];
+
+    /// <summary>
+    /// The current position in the queue.
+    /// </summary>
+    public int CurrentPosition { get; internal set; }
+
+    /// <summary>
+    /// Whether the audio player is currently playing any sounds.
+    /// </summary>
+    public bool Playing { get; internal set; }
+
     internal bool BreakCurrentFile;
-    internal readonly List<string> Files = [];
 
     /// <summary>
     /// Initialize the audio player, registers it.
@@ -114,11 +126,11 @@ public abstract class AudioPlayerBase
     {
         if (position == -1)
         {
-            Files.Add(path);
+            QueuedFiles.Add(path);
         }
         else
         {
-            Files.Insert(position, path);
+            QueuedFiles.Insert(position, path);
         }
     }
 

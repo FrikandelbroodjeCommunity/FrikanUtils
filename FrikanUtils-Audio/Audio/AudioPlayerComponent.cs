@@ -80,7 +80,7 @@ public class AudioPlayerComponent : MonoBehaviour
         _reader = null;
 
         var position = AudioPlayer.CurrentPosition;
-        if (position < 0 || position >= AudioPlayer.Files.Count)
+        if (position < 0 || position >= AudioPlayer.QueuedFiles.Count)
         {
             if (AudioPlayer.Looping) // Loop back to the start
             {
@@ -89,13 +89,13 @@ public class AudioPlayerComponent : MonoBehaviour
             else // No more files and we are not looping
             {
                 AudioPlayer.Playing = false;
-                AudioPlayer.Files.Clear();
+                AudioPlayer.QueuedFiles.Clear();
                 AudioPlayer.Stop();
                 return;
             }
         }
 
-        var path = AudioPlayer.Files[position];
+        var path = AudioPlayer.QueuedFiles[position];
         var reader = new VorbisReader(File.Open(path, FileMode.Open));
         AudioPlayer.CurrentPosition++;
         Logger.Info($"Created reader for {path}, total {reader.TotalSamples}");
