@@ -34,7 +34,7 @@ public class AudioPlayerComponent : MonoBehaviour
         if (AudioPlayer.BreakCurrentFile)
         {
             AudioPlayer.BreakCurrentFile = false;
-            _reader.Dispose();
+            _reader?.Dispose();
             _reader = null;
             return;
         }
