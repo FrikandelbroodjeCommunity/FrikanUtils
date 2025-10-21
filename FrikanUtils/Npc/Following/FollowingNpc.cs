@@ -63,7 +63,7 @@ public class FollowingNpc : BaseNpc
     public OutOfRangeAction OutOfRangeAction = OutOfRangeAction.Teleport;
 
     /// <summary>
-    /// Create a new NPC with the given <see cref="name"/> and have it follow the <see cref="target"/>.
+    /// Create a new NPC with the given name and have it follow the target.
     /// </summary>
     /// <param name="name">The name of the dummy</param>
     /// <param name="target">The player to follow</param>
@@ -73,7 +73,7 @@ public class FollowingNpc : BaseNpc
     }
 
     /// <summary>
-    /// Make the given dummy a follow NPC and have it follow the given <see cref="target"/>.
+    /// Make the given dummy a follow NPC and have it follow the given target.
     /// </summary>
     /// <param name="dummy">Dummy to make an NPC</param>
     /// <param name="target">The player to follow</param>

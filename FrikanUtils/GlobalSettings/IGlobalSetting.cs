@@ -21,14 +21,14 @@ public interface IGlobalSetting
     public bool ServerOnly { get; }
 
     /// <summary>
-    /// Factory function that creates the actual setting. The setting <b>must</b> use the given <see cref="settingId"/>.
+    /// Factory function that creates the actual setting. The setting <b>must</b> use the given settingId.
     /// </summary>
     /// <param name="settingId">ID the setting should have</param>
     /// <returns>Created setting</returns>
     public SettingsBase Get(ushort settingId);
 
     /// <summary>
-    /// Determines whether the given <see cref="player"/> has permissions to view this global setting.
+    /// Determines whether the given player has permissions to view this global setting.
     /// </summary>
     /// <param name="player">Player to check permissions for</param>
     /// <returns>Whether the player has permissions</returns>

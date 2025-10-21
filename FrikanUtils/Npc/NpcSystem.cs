@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using FrikanUtils.Utilities;
 using LabApi.Features.Wrappers;
 using Mirror;
 using NetworkManagerUtils.Dummies;
@@ -39,13 +40,13 @@ public static class NpcSystem
     }
 
     /// <summary>
-    /// Registers a player as an NPC, this will cause them to no longer be included the <see cref="GetPlayers"/>.
+    /// Registers a player as an NPC, this will cause them to no longer be included the <see cref="PlayerUtilities.GetPlayers"/>.
     /// </summary>
     /// <param name="npc">Player that is an NPC</param>
     public static void RegisterNpc(Player npc) => Npcs.AddIfNotContains(npc);
 
     /// <summary>
-    /// Unregisters a player as an NPC, this will cause them to be included in the <see cref="GetPlayers"/> again.
+    /// Unregisters a player as an NPC, this will cause them to be included in the <see cref="PlayerUtilities.GetPlayers"/> again.
     /// </summary>
     /// <param name="npc">Player that is no longer an NPC</param>
     public static void UnregisterNpc(Player npc) => Npcs.Remove(npc);
