@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.FileSystem;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
@@ -78,6 +79,12 @@ public class UtilitiesPlugin : Plugin<Config>
         _handlerObject.AddComponent<RainbowKeycardHandler>();
         if (Config.UseHintSystem) _handlerObject.AddComponent<HintSender>();
         Object.DontDestroyOnLoad(_handlerObject);
+
+        // Register RemoteFileProvider if possible
+        if (!string.IsNullOrEmpty(Config.RemoteFileProviderUrl))
+        {
+            FileHandler.RegisterProvider(new RemoteFileProvider());
+        }
     }
 
     /// <inheritdoc />

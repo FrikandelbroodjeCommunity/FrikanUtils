@@ -41,19 +41,6 @@ public class Config
     [Description("Time between updates of the continuous hints")]
     public float HintRefreshTime { get; set; } = 0.5f;
 
-    [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
-    public List<string> ServerSettingMenus { get; set; } = [];
-
-    [Description(
-        "[Automatically generated] List of Global Client settings, ensuring they are always given the same ID")]
-    public List<string> GlobalClientSettings { get; set; } = [];
-
-    [Description("The text to display when the Server Specific Settings for a user is empty")]
-    public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
-
-    [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
-    public HolidayType OverrideHoliday { get; set; }
-
     [Description("Text shown while in the lobby, leave empty to not show any text by default")]
     public string LobbyText { get; set; } = "<color=rainbow><b>[Server rules]</b></color>\n" +
                                             "Please read our server rules! You can find them in our server info.\n" +
@@ -62,4 +49,22 @@ public class Config
                                             "This server uses the Server Specific Settings system.\n" +
                                             "Go and check it out in your settings menu!\n" +
                                             "<i>Esc -> Settings -> Server-specific</i></size>";
+
+
+    [Description("The text to display when the Server Specific Settings for a user is empty")]
+    public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
+
+    [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
+    public HolidayType OverrideHoliday { get; set; }
+
+    [Description("URL to use for the remote file provider. Before using this, read the owner manual" +
+                 "(https://github.com/FrikandelbroodjeCommunity/FrikanUtils/wiki/Using-the-File-System)")]
+    public string RemoteFileProviderUrl { get; set; } = "";
+
+    [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
+    public List<string> ServerSettingMenus { get; set; } = [];
+
+    [Description("[Automatically generated] List of Global Client settings, " +
+                 "ensuring they are always given the same ID")]
+    public List<string> GlobalClientSettings { get; set; } = [];
 }

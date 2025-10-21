@@ -102,6 +102,7 @@
         <Compile Include="CustomDummyActions\Patches\ExecuteDummyPatch.cs" />
         <Compile Include="CustomDummyActions\Patches\LoadActionsPatch.cs" />
         <Compile Include="CustomDummyActions\RaHandler.cs" />
+        <Compile Include="FileSystem\RemoteFileProvider.cs" />
         <Compile Include="GlobalSettings\GlobalServerSettingsMenu.cs" />
         <Compile Include="GlobalSettings\GlobalSettingComparer.cs" />
         <Compile Include="GlobalSettings\GlobalSettingsHandler.cs" />
