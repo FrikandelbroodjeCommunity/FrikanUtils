@@ -10,8 +10,8 @@ This is the default module that needs to be installed for FrikanUtils. All other
 
 # Installation
 
-Place the [latest release](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest) for "
-FrikanUtils.dll" in the LabAPI plugin folder.
+Place the [latest release](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest) for
+"FrikanUtils.dll" in the LabAPI plugin folder.
 
 # Features
 
@@ -36,7 +36,7 @@ developers can create their own extensions to this system, allowing for custom s
 locations, or another method.
 
 The default implementation searches the following path depending on the given folder and file name:
-```/LabAPI/configs/{port/global}/FrikanUtils/{folder}/{filename}```
+```/LabAPI/configs/{port|global}/FrikanUtils/{folder}/{filename}```
 
 > [!TIP]
 > Using a custom extension it is possible to download file from a central server. Useful for when you have multiple
@@ -113,5 +113,6 @@ things that only trigger during holidays. The `frikanutils.debug` permission is 
 | `ServerSettingsMenus`       | ...     | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
 | `GlobalClientSettings`      | ...     | This is an automatically generated property and should not be changed.                                                                                                                                                                                                                                        |
 | `NoSettingsText`            | ...     | Displayed when the user has at least 1 menu in the Server Specific Settings, but does not have any static menus.                                                                                                                                                                                              |
-| `OverrideHoliday`           | None    | The holiday override the server currently uses. Can be `None`, `Christmas`, `Halloween`, or `AprilFools`. Can also be set using its Global Setting.                                                                                                                                                           |
+| `OverrideHoliday`           | `None`  | The holiday override the server currently uses. Can be `None`, `Christmas`, `Halloween`, or `AprilFools`. Can also be set using its Global Setting.                                                                                                                                                           |
 | `LobbyText`                 | ...     | The text that is displayed in the lobby for all players. If you want to disable this text, leave it empty.                                                                                                                                                                                                    |
+| `RemoteFileProviderUrl`     | Nothing | For instructions on how to use the remote file provider, check the [wiki](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/wiki/Using-the-File-System).                                                                                                                                               |

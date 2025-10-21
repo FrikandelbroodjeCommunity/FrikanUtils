@@ -21,7 +21,7 @@ FrikanUtils_ProjectMer.dll" in the LabAPI plugin folder.
 ## Adding ProjectMER files
 
 The Project MER module uses the [FrikanUtils file system](../FrikanUtils/README.md). By default, you can add your
-ProjectMER schematics in the `/LabAPI/configs/{port/global}/FrikanUtils/Maps` folder.
+ProjectMER schematics in the `/LabAPI/configs/{port|global}/FrikanUtils/Maps` folder.
 
 If you use any custom file providers, you can also add the file to the location accessed by your custom file provider.
 
