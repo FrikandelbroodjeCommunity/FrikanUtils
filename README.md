@@ -1,5 +1,5 @@
 ﻿[![GitHub release](https://flat.badgen.net/github/release/FrikandelbroodjeCommunity/FrikanUtils/)](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/releases/latest)
-[![LabAPI Version](https://flat.badgen.net/static/LabAPI%20Version/v1.1.3)](https://github.com/northwood-studios/LabAPI)
+[![LabAPI Version](https://flat.badgen.net/static/LabAPI%20Version/v1.1.4)](https://github.com/northwood-studios/LabAPI)
 [![License](https://flat.badgen.net/github/license/FrikandelbroodjeCommunity/FrikanUtils/)](https://github.com/FrikandelbroodjeCommunity/FrikanUtils/blob/master/LICENSE)
 
 # About FrikanUtils
