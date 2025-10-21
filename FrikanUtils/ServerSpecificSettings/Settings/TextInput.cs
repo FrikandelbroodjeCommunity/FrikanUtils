@@ -21,7 +21,7 @@ public class TextInput : ValueSettingsBase<string>
     public override string Value
     {
         get => Setting.SyncInputText;
-        set => Setting.SendValueUpdate(value);
+        set => Setting.SendValueUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -98,7 +98,8 @@ public class TextInput : ValueSettingsBase<string>
             placeholder ?? Setting.Placeholder,
             characterLimit ?? (ushort)Setting.CharacterLimit,
             contentType ?? Setting.ContentType,
-            applyOverride
+            applyOverride,
+            UpdateFilter
         );
     }
 
@@ -108,7 +109,7 @@ public class TextInput : ValueSettingsBase<string>
     public void Clear()
     {
         ((SSPlaintextSetting)Base).SyncInputText = "";
-        ((SSPlaintextSetting)Base).SendClearRequest(x => x == Player.ReferenceHub);
+        ((SSPlaintextSetting)Base).SendClearRequest(UpdateFilter);
     }
 
     /// <inheritdoc />

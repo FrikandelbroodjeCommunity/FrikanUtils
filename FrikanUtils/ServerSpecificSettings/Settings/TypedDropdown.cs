@@ -22,7 +22,7 @@ public class TypedDropdown<T> : Dropdown
             var index = _internalOptions.IndexOf(value);
             if (index >= 0)
             {
-                Setting.SendValueUpdate(index);
+                Setting.SendValueUpdate(index, true, UpdateFilter);
             }
         }
     }
@@ -36,7 +36,7 @@ public class TypedDropdown<T> : Dropdown
         set
         {
             _internalOptions = value;
-            Setting.SendDropdownUpdate(value.Select(x => _toString(x)).ToArray());
+            Setting.SendDropdownUpdate(value.Select(x => _toString(x)).ToArray(), true, UpdateFilter);
         }
     }
 

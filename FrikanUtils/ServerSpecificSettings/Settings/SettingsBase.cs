@@ -37,7 +37,7 @@ public abstract class SettingsBase : IServerSpecificSetting
     public string Label
     {
         get => Base.Label;
-        set => Base.SendLabelUpdate(value);
+        set => Base.SendLabelUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -46,7 +46,7 @@ public abstract class SettingsBase : IServerSpecificSetting
     public string HintDescription
     {
         get => Base.HintDescription;
-        set => Base.SendHintUpdate(value);
+        set => Base.SendHintUpdate(value, true, UpdateFilter);
     }
 
     internal Player Player;
@@ -85,7 +85,7 @@ public abstract class SettingsBase : IServerSpecificSetting
     /// <param name="applyOverride">Whether to apply the change immediately</param>
     public void UpdateBase(string newLabel, string newHintDescription, bool applyOverride = true)
     {
-        Base.SendUpdate(newLabel, newHintDescription, applyOverride);
+        Base.SendUpdate(newLabel, newHintDescription, applyOverride, UpdateFilter);
     }
 
     /// <inheritdoc />
@@ -96,5 +96,14 @@ public abstract class SettingsBase : IServerSpecificSetting
         MenuOwner = menu.Name;
         playerMenu.RenderingItems.Add(this);
         playerMenu.Rendering.Add(Base);
+    }
+
+    /// <summary>
+    /// Filter that needs to be used when updating fields.
+    /// Will make sure only the player the field belongs to gets updated.
+    /// </summary>
+    protected bool UpdateFilter(ReferenceHub player)
+    {
+        return Player.ReferenceHub == player;
     }
 }

@@ -22,7 +22,7 @@ public class TwoButtonSetting : ValueSettingsBase<bool>
     public override bool Value
     {
         get => Setting.SyncIsB;
-        set => Setting.SendValueUpdate(value);
+        set => Setting.SendValueUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -81,7 +81,8 @@ public class TwoButtonSetting : ValueSettingsBase<bool>
     /// <param name="applyOverride">Whether to apply the change immediately</param>
     public void Update(string optionA = null, string optionB = null, bool applyOverride = true)
     {
-        Setting.SendTwoButtonUpdate(optionA ?? Setting.OptionA, optionB ?? Setting.OptionB, applyOverride);
+        Setting.SendTwoButtonUpdate(optionA ?? Setting.OptionA, optionB ?? Setting.OptionB, applyOverride,
+            UpdateFilter);
     }
 
     /// <inheritdoc />

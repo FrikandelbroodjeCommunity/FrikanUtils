@@ -25,7 +25,7 @@ public class Dropdown : ValueSettingsBase<string>
             var index = Setting.Options.IndexOf(value);
             if (index >= 0)
             {
-                Setting.SendValueUpdate(index);
+                Setting.SendValueUpdate(index, true, UpdateFilter);
             }
         }
     }
@@ -36,7 +36,7 @@ public class Dropdown : ValueSettingsBase<string>
     public int SelectedIndex
     {
         get => Setting.SyncSelectionIndexValidated;
-        set => Setting.SendValueUpdate(value);
+        set => Setting.SendValueUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -45,7 +45,7 @@ public class Dropdown : ValueSettingsBase<string>
     public string[] Options
     {
         get => Setting.Options;
-        set => Setting.SendDropdownUpdate(value);
+        set => Setting.SendDropdownUpdate(value, true, UpdateFilter);
     }
 
 

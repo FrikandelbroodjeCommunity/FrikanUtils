@@ -72,7 +72,8 @@ public class Button : SettingsBase
     /// <param name="applyOverride">Whether to apply the change immediately</param>
     public void Update(string newText = null, float? newHoldTime = null, bool applyOverride = true)
     {
-        Setting.SendButtonUpdate(newText ?? Setting.ButtonText, newHoldTime ?? Setting.HoldTimeSeconds, applyOverride);
+        Setting.SendButtonUpdate(newText ?? Setting.ButtonText, newHoldTime ?? Setting.HoldTimeSeconds, applyOverride,
+            UpdateFilter);
     }
 
     /// <summary>

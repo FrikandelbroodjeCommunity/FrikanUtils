@@ -22,7 +22,7 @@ public class Slider : ValueSettingsBase<float>
     public override float Value
     {
         get => Setting.SyncFloatValue;
-        set => Setting.SendValueUpdate(value);
+        set => Setting.SendValueUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -31,7 +31,7 @@ public class Slider : ValueSettingsBase<float>
     public int IntValue
     {
         get => Setting.SyncIntValue;
-        set => Setting.SendValueUpdate(value);
+        set => Setting.SendValueUpdate(value, true, UpdateFilter);
     }
 
     /// <summary>
@@ -145,7 +145,8 @@ public class Slider : ValueSettingsBase<float>
             integer ?? Setting.Integer,
             valueToStringFormat ?? Setting.ValueToStringFormat,
             finalDisplayFormat ?? Setting.FinalDisplayFormat,
-            applyOverride
+            applyOverride,
+            UpdateFilter
         );
     }
 
