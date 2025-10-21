@@ -23,7 +23,7 @@ public class RemoteFileProvider : BaseFileProvider
     /// <summary>
     /// Searches for the file on the webserver and downloads it.
     /// The path of the downloaded file will be returned.
-    /// Will return `null` if the file could not be downloaded.
+    /// Will return <c>null</c> if the file could not be downloaded.
     /// </summary>
     /// <inheritdoc/>
     public override async Task<string> SearchFullPath(string filename, string folder)
@@ -58,7 +58,7 @@ public class RemoteFileProvider : BaseFileProvider
     /// <summary>
     /// Searches for the file on the webserver and downloads it.
     /// The parsed contents of the file will be returned.
-    /// Will return `null` if the file could not be downloaded.
+    /// Will return <c>null</c> if the file could not be downloaded.
     /// </summary>
     /// <inheritdoc/>
     public override async Task<T> SearchFile<T>(string filename, string folder, bool json)

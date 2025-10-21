@@ -2,7 +2,7 @@
 
 /// <summary>
 /// Tells the menu system this submenu has a name.
-/// This can be used for <see cref="TabsSubMenu"/>s to display the name properly instead of using <code>ToString</code>.
+/// This can be used for <see cref="TabsSubMenu"/>s to display the name properly instead of using <c>ToString</c>.
 /// </summary>
 public interface INamedSubmenu
 {

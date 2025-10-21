@@ -24,7 +24,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// </summary>
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
-    /// <returns>The full path to the file or null</returns>
+    /// <returns>The full path to the file or <c>null</c></returns>
     public abstract Task<string> SearchFullPath(string filename, string folder);
 
     /// <summary>
@@ -36,7 +36,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <param name="folder">The folder the file should be in</param>
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
-    /// <returns>The file contents as <code>T</code>, or <code>default</code></returns>
+    /// <returns>The file contents as <c>T</c>, or <c>null</c></returns>
     public abstract Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class;
 
     /// <summary>

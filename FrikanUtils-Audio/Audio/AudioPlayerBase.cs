@@ -24,7 +24,7 @@ public abstract class AudioPlayerBase
 
     /// <summary>
     /// The forced volume of the audio.
-    /// If set to -1, the player will use the global volume controlled by the `ut v` command.
+    /// If set to -1, the player will use the global volume controlled by the <c>ut v</c> command.
     /// </summary>
     public float OverrideVolume = -1;
 

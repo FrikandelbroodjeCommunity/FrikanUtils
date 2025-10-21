@@ -48,7 +48,7 @@ public abstract class TabsSubMenu : SubMenu
     /// Get all available submenus for a player. These are the menus the player can choose from.
     /// The ID of the dropdown is given, so fields within the menus can start at the given ID.
     /// 
-    /// <code>ToString</code> will be used to get the text displayed for the given submenu.
+    /// <c>ToString</c> will be used to get the text displayed for the given submenu.
     /// </summary>
     /// <param name="player">The player the submenus need to be for</param>
     /// <param name="settingId">The id of the dropdown</param>

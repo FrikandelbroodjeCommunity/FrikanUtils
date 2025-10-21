@@ -45,7 +45,7 @@ public class TypedDropdown<T> : Dropdown
 
     /// <summary>
     /// Create a new typed dropdown setting with the given settings.
-    /// A custom `toString` method can be given, otherwise it uses the default <see cref="Object.ToString"/> method.
+    /// A custom <c>toString</c> method can be given, otherwise it uses the default <see cref="Object.ToString"/> method.
     /// </summary>
     /// <param name="id">Optional ID that can be used to refer to this setting</param>
     /// <param name="label">Label shown for this setting</param>

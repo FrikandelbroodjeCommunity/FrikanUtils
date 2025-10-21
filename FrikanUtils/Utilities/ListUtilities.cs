@@ -17,7 +17,7 @@ public static class ListUtilities
     /// </summary>
     /// <param name="list">The enumerable to take an element from</param>
     /// <typeparam name="T">The type of the elements</typeparam>
-    /// <returns>A randomly picked element or <code>default</code></returns>
+    /// <returns>A randomly picked element or <c>default</c></returns>
     public static T GetRandomElement<T>(this IEnumerable<T> list)
     {
         var array = list.ToArray();
