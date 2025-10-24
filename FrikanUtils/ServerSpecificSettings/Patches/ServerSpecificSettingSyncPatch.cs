@@ -56,7 +56,10 @@ internal static class ServerSpecificSettingSyncPatch
         }
         catch (Exception e)
         {
-            Logger.Error($"Exception while receiving SSS packet for player {player.LogName}: {e}");
+            if (UtilitiesPlugin.PluginConfig.Debug)
+            {
+                Logger.Error($"Exception while receiving SSS packet for player {player.LogName}: {e}");
+            }
         }
         finally
         {
