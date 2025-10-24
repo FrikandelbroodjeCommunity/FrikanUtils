@@ -28,7 +28,16 @@ public class RemoteFileProvider : BaseFileProvider
     /// <inheritdoc/>
     public override async Task<string> SearchFullPath(string filename, string folder)
     {
-        var contents = await DownloadContents(filename, folder);
+        string contents = null;
+        foreach (var name in GetHolidayFilenames(filename))
+        {
+            contents = await DownloadContents(name, folder);
+            if (!string.IsNullOrEmpty(contents))
+            {
+                break;
+            }
+        }
+
         if (string.IsNullOrEmpty(contents))
         {
             return null;
@@ -63,7 +72,16 @@ public class RemoteFileProvider : BaseFileProvider
     /// <inheritdoc/>
     public override async Task<T> SearchFile<T>(string filename, string folder, bool json)
     {
-        var contents = await DownloadContents(filename, folder);
+        string contents = null;
+        foreach (var name in GetHolidayFilenames(filename))
+        {
+            contents = await DownloadContents(name, folder);
+            if (!string.IsNullOrEmpty(contents))
+            {
+                break;
+            }
+        }
+
         if (string.IsNullOrEmpty(contents))
         {
             return null;
