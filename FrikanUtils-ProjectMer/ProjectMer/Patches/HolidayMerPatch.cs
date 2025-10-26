@@ -16,7 +16,7 @@ internal static class HolidayMerPatch
 {
     internal static readonly List<SchematicObject> ApplicableSchematics = [];
 
-    [HarmonyPatch(typeof(SchematicObject), nameof(SchematicObject.CreateRecursiveFromID))]
+    [HarmonyPatch(typeof(SchematicObject), "CreateRecursiveFromID")]
     [HarmonyPrefix]
     // ReSharper disable once InconsistentNaming
     public static bool OnCreateObject(SchematicObject __instance, int id, List<SchematicBlockData> blocks)
