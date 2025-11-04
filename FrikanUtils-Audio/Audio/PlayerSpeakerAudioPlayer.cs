@@ -24,24 +24,8 @@ public class PlayerSpeakerAudioPlayer : SpeakerAudioPlayer
     {
         Player = player;
 
-        var comp = Speaker.GameObject.AddComponent<AudioPlayerComponent>();
-        comp.AudioPlayer = this;
-
         var attach = Speaker.GameObject.AddComponent<AttachmentComponent>();
         attach.AudioPlayer = this;
-    }
-
-    /// <inheritdoc />
-    protected override void InternalCleanup()
-    {
-        Speaker.Destroy();
-    }
-
-    /// <inheritdoc />
-    protected internal override void SendMessage(byte[] data, int length)
-    {
-        var audioMessage = new AudioMessage(Speaker.ControllerId, data, length);
-        audioMessage.SendToHubsConditionally(IsValidPlayer);
     }
 
     internal class AttachmentComponent : MonoBehaviour

@@ -12,6 +12,7 @@ namespace FrikanUtils.Audio;
 /// <summary>
 /// Component used to read the audio file and send the audio packets.
 /// </summary>
+[DisallowMultipleComponent]
 public class AudioPlayerComponent : MonoBehaviour
 {
     /// <summary>
