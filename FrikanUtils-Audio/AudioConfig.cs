@@ -22,5 +22,5 @@ public class AudioConfig
     public float Volume { get; set; } = 5f;
 
     [Description("Default volume of the speakers")]
-    public float VolumeSpeaker { get; set; } = 5f;
+    public float VolumeSpeaker { get; set; } = 50f;
 }

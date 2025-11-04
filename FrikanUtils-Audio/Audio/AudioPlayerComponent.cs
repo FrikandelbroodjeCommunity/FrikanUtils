@@ -98,7 +98,7 @@ public class AudioPlayerComponent : MonoBehaviour
         var path = AudioPlayer.QueuedFiles[position];
         var reader = new VorbisReader(File.Open(path, FileMode.Open));
         AudioPlayer.CurrentPosition++;
-        Logger.Info($"Created reader for {path}, total {reader.TotalSamples}");
+        Logger.Debug($"Created reader for {path}, total {reader.TotalSamples}", UtilitiesPlugin.Instance.Config.Debug);
 
         if (reader.Channels > 1)
         {

@@ -134,7 +134,7 @@ public static class MerUtilities
     {
         if (!transform.TryGetComponent(out PrimitiveObjectToy toy))
         {
-            Logger.Info("Failed to spawn. No initial toy!");
+            Logger.Warn("Failed to spawn. No initial toy!");
             return;
         }
 
