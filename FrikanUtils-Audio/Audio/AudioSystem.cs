@@ -40,12 +40,14 @@ public static class AudioSystem
 
     internal static void RegisterEvents()
     {
+        PlayerEvents.Joined += OnPlayerJoined;
         PlayerEvents.ChangingRole += OnRoleChange;
         ServerEvents.WaitingForPlayers += OnWaitingForPlayers;
     }
 
     internal static void UnregisterEvents()
     {
+        PlayerEvents.Joined -= OnPlayerJoined;
         PlayerEvents.ChangingRole -= OnRoleChange;
         ServerEvents.WaitingForPlayers -= OnWaitingForPlayers;
     }
@@ -74,6 +76,14 @@ public static class AudioSystem
     private static void RemoverUser(int id)
     {
         DefaultFilterList.Remove(id);
+    }
+
+    private static void OnPlayerJoined(PlayerJoinedEventArgs ev)
+    {
+        if (!MusicPreference.ContainsKey(ev.Player.UserId))
+        {
+            SetUserPreference(ev.Player, false, false);
+        }
     }
 
     private static void OnWaitingForPlayers()
