@@ -62,6 +62,8 @@ public class FollowingNpc : BaseNpc
     /// </summary>
     public OutOfRangeAction OutOfRangeAction = OutOfRangeAction.Teleport;
 
+    public NpcState State { get; internal set; } = NpcState.Paused;
+
     /// <summary>
     /// Create a new NPC with the given name and have it follow the target.
     /// </summary>
