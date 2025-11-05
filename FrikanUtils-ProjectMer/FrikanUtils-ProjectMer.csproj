@@ -72,9 +72,17 @@
         <Reference Include="System"/>
         <Reference Include="System.Core"/>
         <Reference Include="System.Data"/>
+        <Reference Include="System.IO.Compression"/>
+        <Reference Include="System.IO.Compression.FileSystem"/>
         <Reference Include="System.Xml"/>
         <Reference Include="UnityEngine">
             <HintPath>$(UNITY_REFERENCES)\UnityEngine.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>$(UNITY_REFERENCES)\UnityEngine.AnimationModule.dll</HintPath>
+        </Reference>
+        <Reference Include="UnityEngine.PhysicsModule">
+            <HintPath>$(UNITY_REFERENCES)\UnityEngine.AssetBundleModule.dll</HintPath>
         </Reference>
         <Reference Include="UnityEngine.PhysicsModule">
             <HintPath>$(UNITY_REFERENCES)\UnityEngine.PhysicsModule.dll</HintPath>
@@ -94,6 +102,8 @@
         <Compile Include="ProjectMer\DoorInfo.cs" />
         <Compile Include="ProjectMer\Interactable.cs" />
         <Compile Include="ProjectMer\MerEventHandler.cs" />
+        <Compile Include="ProjectMer\MerUtilitiesLoaders.cs" />
+        <Compile Include="ProjectMer\MerUtilitiesSpawners.cs" />
         <Compile Include="ProjectMer\Patches\HolidayMerPatch.cs" />
         <Compile Include="ProjectMer\TriggerPrimitive.cs" />
         <Compile Include="Properties\AssemblyInfo.cs"/>
