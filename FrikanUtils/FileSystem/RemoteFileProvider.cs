@@ -28,17 +28,17 @@ public class RemoteFileProvider : BaseFileProvider
     /// <inheritdoc/>
     public override async Task<string> SearchFullPath(string filename, string folder)
     {
-        string contents = null;
+        byte[] contents = null;
         foreach (var name in GetHolidayFilenames(filename))
         {
-            contents = await DownloadContents(name, folder);
-            if (!string.IsNullOrEmpty(contents))
+            contents = await (await DownloadContents(name, folder)).Content.ReadAsByteArrayAsync();
+            if (contents != null && contents.Length > 0)
             {
                 break;
             }
         }
 
-        if (string.IsNullOrEmpty(contents))
+        if (contents == null || contents.Length == 0)
         {
             return null;
         }
@@ -60,7 +60,7 @@ public class RemoteFileProvider : BaseFileProvider
         }
 
         var path = Path.Combine(dirPath, filename);
-        File.WriteAllText(path, contents);
+        File.WriteAllBytes(path, contents);
         return path;
     }
 
@@ -75,7 +75,7 @@ public class RemoteFileProvider : BaseFileProvider
         string contents = null;
         foreach (var name in GetHolidayFilenames(filename))
         {
-            contents = await DownloadContents(name, folder);
+            contents = await (await DownloadContents(name, folder)).Content.ReadAsStringAsync();
             if (!string.IsNullOrEmpty(contents))
             {
                 break;
@@ -90,7 +90,7 @@ public class RemoteFileProvider : BaseFileProvider
         return json ? JsonSerializer.Deserialize<T>(contents) : YamlConfigParser.Deserializer.Deserialize<T>(contents);
     }
 
-    private static async Task<string> DownloadContents(string filename, string folder)
+    private static async Task<HttpResponseMessage> DownloadContents(string filename, string folder)
     {
         using var client = new HttpClient();
 
@@ -109,6 +109,6 @@ public class RemoteFileProvider : BaseFileProvider
             return null;
         }
 
-        return await response.Content.ReadAsStringAsync();
+        return response;
     }
 }
