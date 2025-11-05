@@ -61,6 +61,10 @@ public class Config
                  "(https://github.com/FrikandelbroodjeCommunity/FrikanUtils/wiki/Using-the-File-System)")]
     public string RemoteFileProviderUrl { get; set; } = "";
 
+    [Description("Whether the remote file provider should attempt to find holiday files. " +
+                 "This may cause additional requests if no holiday file exists and it needs to search for the original file.")]
+    public bool RemoteFileProviderUsesHolidays { get; set; } = false;
+
     [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
     public List<string> ServerSettingMenus { get; set; } = [];
 

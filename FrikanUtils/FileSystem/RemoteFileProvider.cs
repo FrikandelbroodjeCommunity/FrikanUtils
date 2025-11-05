@@ -19,6 +19,7 @@ public class RemoteFileProvider : BaseFileProvider
 
     private const string DownloadDir = "Downloads";
     private static string Url => UtilitiesPlugin.PluginConfig.RemoteFileProviderUrl;
+    private static bool UseHolidays => UtilitiesPlugin.PluginConfig.RemoteFileProviderUsesHolidays;
 
     /// <summary>
     /// Searches for the file on the webserver and downloads it.
@@ -29,7 +30,7 @@ public class RemoteFileProvider : BaseFileProvider
     public override async Task<string> SearchFullPath(string filename, string folder)
     {
         byte[] contents = null;
-        foreach (var name in GetHolidayFilenames(filename))
+        foreach (var name in UseHolidays ? GetHolidayFilenames(filename) : [filename])
         {
             contents = await (await DownloadContents(name, folder)).Content.ReadAsByteArrayAsync();
             if (contents != null && contents.Length > 0)
