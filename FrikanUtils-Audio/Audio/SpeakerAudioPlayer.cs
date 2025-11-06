@@ -1,4 +1,5 @@
-﻿using LabApi.Features.Wrappers;
+﻿using System.Linq;
+using LabApi.Features.Wrappers;
 using UnityEngine;
 using Utils.Networking;
 using VoiceChat.Networking;
@@ -29,6 +30,7 @@ public class SpeakerAudioPlayer : AudioPlayerBase
     public SpeakerAudioPlayer(Vector3 position, Quaternion rotation)
     {
         Speaker = SpeakerToy.Create(position, rotation);
+        Speaker.ControllerId = GetControllerId();
 
         var comp = Speaker.GameObject.AddComponent<AudioPlayerComponent>();
         comp.AudioPlayer = this;
@@ -41,6 +43,7 @@ public class SpeakerAudioPlayer : AudioPlayerBase
     public SpeakerAudioPlayer(Transform transform)
     {
         Speaker = SpeakerToy.Create(transform);
+        Speaker.ControllerId = GetControllerId();
 
         var comp = Speaker.GameObject.AddComponent<AudioPlayerComponent>();
         comp.AudioPlayer = this;
@@ -57,5 +60,23 @@ public class SpeakerAudioPlayer : AudioPlayerBase
     {
         var audioMessage = new AudioMessage(Speaker.ControllerId, data, length);
         audioMessage.SendToHubsConditionally(IsValidPlayer);
+    }
+
+    private static byte GetControllerId()
+    {
+        byte next = 0;
+        foreach (var occupied in SpeakerToy.List.Select(x => x.ControllerId).OrderBy(x => x))
+        {
+            if (occupied == next)
+            {
+                next++;
+            }
+            else
+            {
+                return next;
+            }
+        }
+
+        return byte.MaxValue;
     }
 }
