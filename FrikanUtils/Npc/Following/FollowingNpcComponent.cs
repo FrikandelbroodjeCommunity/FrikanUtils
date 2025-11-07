@@ -24,6 +24,7 @@ internal class FollowingNpcComponent : BaseNpcComponent
         var distance = Vector3.Distance(Data.Dummy.Position, Data.TargetPlayer.Position);
         if (distance >= Data.MaxDistance)
         {
+            Data.State = NpcState.Paused;
             switch (Data.OutOfRangeAction)
             {
                 case OutOfRangeAction.Pause:
@@ -47,14 +48,17 @@ internal class FollowingNpcComponent : BaseNpcComponent
         }
         else if (distance >= Data.SprintDistance)
         {
+            Data.State = NpcState.Sprinting;
             Move(fpcRole, dir, Data.SprintSpeed);
         }
         else if (distance >= Data.IdleDistance)
         {
+            Data.State = NpcState.Walking;
             Move(fpcRole, dir, Data.WalkSpeed);
         }
         else
         {
+            Data.State = NpcState.Paused;
             switch (Data.ReachTargetAction)
             {
                 case ReachTargetAction.Pause:

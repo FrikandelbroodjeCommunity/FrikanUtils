@@ -124,6 +124,11 @@ public abstract class AudioPlayerBase
     /// <param name="position">Position to add the file in the queue (-1 adds it at the end)</param>
     public void QueueFile(string path, int position)
     {
+        if (string.IsNullOrEmpty(path))
+        {
+            return;
+        }
+
         if (position == -1)
         {
             QueuedFiles.Add(path);

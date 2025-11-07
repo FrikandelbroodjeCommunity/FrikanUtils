@@ -119,6 +119,7 @@
         <Compile Include="Keycard\RainbowKeycardHandler.cs" />
         <Compile Include="Npc\BaseNpcComponent.cs" />
         <Compile Include="Npc\Enums\DestroyReason.cs" />
+        <Compile Include="Npc\Enums\NpcState.cs" />
         <Compile Include="Npc\Enums\OutOfRangeAction.cs" />
         <Compile Include="Npc\Enums\ReachTargetAction.cs" />
         <Compile Include="Npc\Following\FollowingNpc.cs" />
