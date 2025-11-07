@@ -40,7 +40,7 @@ public class UtilitiesPlugin : Plugin<Config>
     public override Version Version => new(CurrentVersion);
 
     /// <inheritdoc />
-    public override Version RequiredApiVersion => LabApiProperties.CurrentVersion;
+    public override Version RequiredApiVersion => new(LabApiProperties.CompiledVersion);
 
     /// <inheritdoc />
     public override LoadPriority Priority => LoadPriority.Highest;
