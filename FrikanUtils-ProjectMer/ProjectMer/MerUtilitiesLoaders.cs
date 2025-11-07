@@ -123,6 +123,11 @@ public static partial class MerUtilities
 
     private static void CopyFolder(string folderA, string folderB)
     {
+        if (!Directory.Exists(folderB))
+        {
+            Directory.CreateDirectory(folderB);
+        }
+
         foreach (var file in Directory.GetFiles(folderA).Select(x => new FileInfo(x)))
         {
             var targetPath = Path.Combine(folderB, file.Name);
