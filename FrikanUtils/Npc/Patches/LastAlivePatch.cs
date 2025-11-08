@@ -9,9 +9,10 @@ using PlayerRoles.PlayableScps.HumanTracker;
 
 namespace FrikanUtils.Npc.Patches;
 
+[HarmonyPatch]
 internal static class LastAlivePatch
 {
-    private static readonly MethodInfo IgnoredMethodInfo = typeof(TargetPatches).GetMethod(nameof(IsIgnored));
+    private static readonly MethodInfo IgnoredMethodInfo = typeof(LastAlivePatch).GetMethod(nameof(IsIgnored));
 
     [HarmonyPrepare]
     public static bool OnPrepare(MethodBase _)
