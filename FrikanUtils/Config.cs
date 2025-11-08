@@ -23,6 +23,9 @@ public class Config
     [Description("Whether the server specific settings system should be enabled")]
     public bool UseServerSpecificSettings { get; set; } = true;
 
+    [Description("Whether the last alive patch should be enabled")]
+    public bool UseLastAlive { get; set; } = true;
+
     [Description("Colors used for rainbows")]
     public string[] RainbowTextColors { get; set; } =
     [

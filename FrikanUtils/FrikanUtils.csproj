@@ -127,6 +127,7 @@
         <Compile Include="Npc\BaseNpc.cs" />
         <Compile Include="Npc\NpcEventHandler.cs" />
         <Compile Include="Npc\NpcSystem.cs" />
+        <Compile Include="Npc\Patches\LastAlivePatch.cs" />
         <Compile Include="Npc\Patches\MaxMovementSpeedPatch.cs" />
         <Compile Include="Npc\Patches\TargetPatches.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />

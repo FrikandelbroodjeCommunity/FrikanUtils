@@ -14,6 +14,7 @@ namespace FrikanUtils.Npc;
 public static class NpcSystem
 {
     internal static readonly List<Player> Npcs = [];
+    internal static readonly List<Player> IgnoreHumanTarget = [];
 
     /// <summary>
     /// Creates a normal dummy.
@@ -50,6 +51,19 @@ public static class NpcSystem
     /// </summary>
     /// <param name="npc">Player that is no longer an NPC</param>
     public static void UnregisterNpc(Player npc) => Npcs.Remove(npc);
+
+    /// <summary>
+    /// Makes the NPC be ignored from the LastHumanTracker.
+    /// </summary>
+    /// <param name="npc">Player that needs to be ignored</param>
+
+    public static void AddIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Add(npc);
+
+    /// <summary>
+    /// Makes the NPC not be ignored from the LastHumanTracker.
+    /// </summary>
+    /// <param name="npc">Player that no longer needs to be ignored</param>
+    public static void RemoveIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Add(npc);
 
     private class FakeConnection : NetworkConnectionToClient
     {

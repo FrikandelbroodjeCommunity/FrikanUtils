@@ -111,6 +111,7 @@ public class UtilitiesPlugin : Plugin<Config>
         CustomKeycard.CustomKeycards.Clear();
         RainbowKeycardHandler.Keycards.Clear();
         NpcSystem.Npcs.Clear();
+        NpcSystem.IgnoreHumanTarget.Clear();
         TeamUtilities.PlayerTeams.Clear();
         MaxMovementSpeedPatch.NpcModules.Clear();
     }

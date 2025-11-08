@@ -39,6 +39,25 @@ public abstract class BaseNpc
     public bool IgnoreTarget = true;
 
     /// <summary>
+    /// When enabled, this NPC will be completely ignored during the check for if there is a last player alive.
+    /// </summary>
+    public bool IgnoreLastTarget
+    {
+        get => NpcSystem.IgnoreHumanTarget.Contains(Dummy);
+        set
+        {
+            if (value)
+            {
+                NpcSystem.AddIgnoreHumanTarget(Dummy);
+            }
+            else
+            {
+                NpcSystem.RemoveIgnoreHumanTarget(Dummy);
+            }
+        }
+    }
+
+    /// <summary>
     /// When enabled, the NPC can safely look at SCP-096
     /// </summary>
     public bool IgnoreScp096 = true;
@@ -70,6 +89,7 @@ public abstract class BaseNpc
         Dummy = dummy;
         Dummy.IsSpectatable = false;
         NpcSystem.RegisterNpc(Dummy);
+        NpcSystem.AddIgnoreHumanTarget(Dummy);
 
         MaxMovementSpeedPatch.NpcModules.Add(Dummy.ReferenceHub);
         NpcsMapped[Dummy] = this;
