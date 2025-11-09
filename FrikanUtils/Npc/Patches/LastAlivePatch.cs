@@ -32,7 +32,6 @@ internal static class LastAlivePatch
         {
             if (passedOne)
             {
-                Logger.Warn($"Operand: {instruction.operand.GetType()} | {instruction.operand}");
                 reference = instruction.operand;
                 break;
             }
