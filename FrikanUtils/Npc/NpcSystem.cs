@@ -57,13 +57,13 @@ public static class NpcSystem
     /// </summary>
     /// <param name="npc">Player that needs to be ignored</param>
 
-    public static void AddIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Add(npc);
+    public static void AddIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.AddIfNotContains(npc);
 
     /// <summary>
     /// Makes the NPC not be ignored from the LastHumanTracker.
     /// </summary>
     /// <param name="npc">Player that no longer needs to be ignored</param>
-    public static void RemoveIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Add(npc);
+    public static void RemoveIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Remove(npc);
 
     private class FakeConnection : NetworkConnectionToClient
     {
