@@ -63,4 +63,14 @@ public static class PlayerUtilities
             }
         });
     }
+
+    /// <summary>
+    /// Add a message to the admin chat for this player.
+    /// </summary>
+    /// <param name="player">Player to send message to</param>
+    /// <param name="message">Message to send to the player</param>
+    public static void SendAdminChat(this Player player, string message)
+    {
+        player.ReferenceHub.encryptedChannelManager.TrySendMessageToClient($"0!{message}", EncryptedChannelManager.EncryptedChannel.AdminChat);
+    }
 }
