@@ -65,6 +65,13 @@ public static class NpcSystem
     /// <param name="npc">Player that no longer needs to be ignored</param>
     public static void RemoveIgnoreHumanTarget(Player npc) => IgnoreHumanTarget.Remove(npc);
 
+    /// <summary>
+    /// Check whether the NPC is ignored from the LastHumanTracker.
+    /// </summary>
+    /// <param name="npc">Player to check</param>
+    /// <returns>Whether it is ignored</returns>
+    public static bool IsIgnoredHumanTarget(Player npc) => IgnoreHumanTarget.Contains(npc);
+
     private class FakeConnection : NetworkConnectionToClient
     {
         public readonly bool GiveUserId;
