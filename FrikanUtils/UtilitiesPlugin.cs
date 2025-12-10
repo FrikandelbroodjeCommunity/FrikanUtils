@@ -1,4 +1,5 @@
 ﻿using System;
+using FrikanUtils.CustomItems;
 using FrikanUtils.FileSystem;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
@@ -66,6 +67,7 @@ public class UtilitiesPlugin : Plugin<Config>
         // Register events
         ServerEvents.WaitingForPlayers += Reset;
         ServerEvents.RoundStarted += RoundStarted;
+        CustomItemHandler.RegisterEvents();
         CustomKeycardEventHandler.RegisterEvents();
         NpcEventHandler.RegisterEvents();
         if (Config.UseServerSpecificSettings) SSSEventHandler.RegisterEvents();
@@ -95,6 +97,7 @@ public class UtilitiesPlugin : Plugin<Config>
         // Unregister events
         ServerEvents.WaitingForPlayers -= Reset;
         ServerEvents.RoundStarted -= RoundStarted;
+        CustomItemHandler.UnregisterEvents();
         CustomKeycardEventHandler.UnregisterEvents();
         NpcEventHandler.UnregisterEvents();
         SSSEventHandler.UnregisterEvents();

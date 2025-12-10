@@ -92,6 +92,8 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Config.cs"/>
+        <Compile Include="CustomItems\CustomItem.cs" />
+        <Compile Include="CustomItems\CustomItemHandler.cs" />
         <Compile Include="FileSystem\FileHandler.cs" />
         <Compile Include="FileSystem\BaseFileProvider.cs" />
         <Compile Include="FileSystem\LocalFileProvider.cs" />
@@ -158,6 +160,14 @@
         <Compile Include="ServerSpecificSettings\Settings\ValueSettingsBase.cs" />
         <Compile Include="ServerSpecificSettings\SSSEventHandler.cs" />
         <Compile Include="ServerSpecificSettings\SSSHandler.cs" />
+        <Compile Include="Spawnpoints\DoorSpawnPoint.cs" />
+        <Compile Include="Spawnpoints\ISpawnPoint.cs" />
+        <Compile Include="Spawnpoints\LootSpawn\LootPoint.cs" />
+        <Compile Include="Spawnpoints\LootSpawn\LootPointData.cs" />
+        <Compile Include="Spawnpoints\LootSpawn\LootSpawnPoint.cs" />
+        <Compile Include="Spawnpoints\LootSpawn\LootSpawnPointUtilities.cs" />
+        <Compile Include="Spawnpoints\RoomSpawnPoint.cs" />
+        <Compile Include="Spawnpoints\SpawnLocation.cs" />
         <Compile Include="UtilitiesPlugin.cs" />
         <Compile Include="Utilities\AsyncUtilities.cs" />
         <Compile Include="Utilities\ColorUtilities.cs" />
