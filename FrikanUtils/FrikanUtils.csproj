@@ -172,6 +172,7 @@
         <Compile Include="Utilities\AsyncUtilities.cs" />
         <Compile Include="Utilities\ColorUtilities.cs" />
         <Compile Include="Utilities\CommandUtilities.cs" />
+        <Compile Include="Utilities\EffectUtilities.cs" />
         <Compile Include="Utilities\HolidayUtilities.cs" />
         <Compile Include="Utilities\KeycardUtilities.cs" />
         <Compile Include="Utilities\ListUtilities.cs" />

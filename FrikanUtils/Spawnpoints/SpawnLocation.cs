@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
-using Logger = LabApi.Features.Console.Logger;
 using Random = System.Random;
 
 namespace FrikanUtils.Spawnpoints;
@@ -44,7 +43,6 @@ public class SpawnLocation
                 random -= point.Chance;
                 if (random >= 0) continue;
 
-                Logger.Info($"Pulled position for an item: {point.GetLocation()}");
                 yield return point.GetLocation();
                 break;
             }
