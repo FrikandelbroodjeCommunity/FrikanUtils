@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using FrikanUtils.Spawnpoints;
+using LabApi.Events.Arguments.PlayerEvents;
+using LabApi.Events.Handlers;
 using LabApi.Features.Wrappers;
 using UnityEngine;
 using Logger = LabApi.Features.Console.Logger;
@@ -73,6 +75,10 @@ public abstract class CustomItem
     /// </summary>
     protected internal virtual void SubscribeEvents()
     {
+        PlayerEvents.PickingUpItem += PickingUp;
+        PlayerEvents.PickedUpItem += PickedUp;
+        PlayerEvents.DroppingItem += Dropping;
+        PlayerEvents.DroppedItem += Dropped;
     }
 
     /// <summary>
@@ -82,39 +88,19 @@ public abstract class CustomItem
     {
     }
 
-    /// <summary>
-    /// Called when a player uses an item of this custom item type.
-    /// </summary>
-    /// <param name="player">The player that used the item</param>
-    /// <param name="item">The item that was used</param>
-    protected internal virtual void OnUsedItem(Player player, UsableItem item)
+    protected virtual void PickingUp(PlayerPickingUpItemEventArgs ev)
     {
     }
 
-    /// <summary>
-    /// Called when a player starts using an item of this custom item type.
-    /// Return false to prevent the actual item from being used.
-    /// </summary>
-    /// <param name="player">The player that is using the item</param>
-    /// <param name="item">The item that is being used</param>
-    /// <returns>Whether the usage is permitted</returns>
-    protected internal virtual bool OnUsingItem(Player player, UsableItem item) => true;
-
-    /// <summary>
-    /// Called when the player cancels their usage of the item.
-    /// </summary>
-    /// <param name="player">The player that cancelled the use</param>
-    /// <param name="item">The item the usage of has been cancelled</param>
-    protected internal virtual void OnCancelUse(Player player, UsableItem item)
+    protected virtual void PickedUp(PlayerPickedUpItemEventArgs ev)
     {
     }
 
-    /// <summary>
-    /// Called when the player picks up an instance of this item.
-    /// </summary>
-    /// <param name="player">The player that picked up the item</param>
-    /// <param name="item">The item that was picked up</param>
-    protected internal virtual void OnPickup(Player player, Item item)
+    protected virtual void Dropping(PlayerDroppingItemEventArgs ev)
+    {
+    }
+
+    protected virtual void Dropped(PlayerDroppedItemEventArgs ev)
     {
     }
 

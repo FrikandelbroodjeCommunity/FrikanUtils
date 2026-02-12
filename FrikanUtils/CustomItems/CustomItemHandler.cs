@@ -60,9 +60,6 @@ public static class CustomItemHandler
     {
         ServerEvents.WaitingForPlayers += OnWaitingForPlayers;
         ServerEvents.RoundStarted += OnRoundStart;
-        PlayerEvents.UsedItem += OnUsedItem;
-        PlayerEvents.UsingItem += OnUsingItem;
-        PlayerEvents.CancelledUsingItem += OnCancelUse;
         PlayerEvents.ChangedItem += OnEquip;
         PlayerEvents.PickedUpItem += OnPickup;
     }
@@ -71,9 +68,6 @@ public static class CustomItemHandler
     {
         ServerEvents.WaitingForPlayers -= OnWaitingForPlayers;
         ServerEvents.RoundStarted -= OnRoundStart;
-        PlayerEvents.UsedItem -= OnUsedItem;
-        PlayerEvents.UsingItem -= OnUsingItem;
-        PlayerEvents.CancelledUsingItem -= OnCancelUse;
         PlayerEvents.ChangedItem -= OnEquip;
         PlayerEvents.PickedUpItem -= OnPickup;
     }
@@ -91,35 +85,6 @@ public static class CustomItemHandler
             {
                 SpawnedItems[id] = item;
             }
-        }
-    }
-
-    private static void OnUsedItem(PlayerUsedItemEventArgs ev)
-    {
-        if (SpawnedItems.TryGetValue(ev.UsableItem.Serial, out var customItem))
-        {
-            customItem.OnUsedItem(ev.Player, ev.UsableItem);
-        }
-    }
-
-    private static void OnUsingItem(PlayerUsingItemEventArgs ev)
-    {
-        if (!ev.IsAllowed)
-        {
-            return;
-        }
-
-        if (SpawnedItems.TryGetValue(ev.UsableItem.Serial, out var customItem))
-        {
-            ev.IsAllowed = customItem.OnUsingItem(ev.Player, ev.UsableItem);
-        }
-    }
-
-    private static void OnCancelUse(PlayerCancelledUsingItemEventArgs ev)
-    {
-        if (SpawnedItems.TryGetValue(ev.UsableItem.Serial, out var customItem))
-        {
-            customItem.OnCancelUse(ev.Player, ev.UsableItem);
         }
     }
 

@@ -94,6 +94,8 @@
         <Compile Include="Config.cs"/>
         <Compile Include="CustomItems\CustomItem.cs" />
         <Compile Include="CustomItems\CustomItemHandler.cs" />
+        <Compile Include="CustomItems\CustomScp1344Item.cs" />
+        <Compile Include="CustomItems\CustomUsableItem.cs" />
         <Compile Include="FileSystem\FileHandler.cs" />
         <Compile Include="FileSystem\BaseFileProvider.cs" />
         <Compile Include="FileSystem\LocalFileProvider.cs" />
