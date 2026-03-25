@@ -33,7 +33,7 @@ internal class HintSender : MonoBehaviour
         var duration = _time * 1.5f;
         foreach (var player in Player.List.Where(x => x.IsPlayer && x.Role != RoleTypeId.Tutorial))
         {
-            var hint = Round.IsRoundStarted
+            var hint = LabApi.Features.Wrappers.Round.IsRoundStarted
                 ? HintHandler.GetGameText(player, color)
                 : HintHandler.GetLobbyText(player, color);
 
