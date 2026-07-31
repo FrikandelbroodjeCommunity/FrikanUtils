@@ -22,7 +22,7 @@ public class PlayerMenu
     internal readonly Player TargetPlayer;
     internal readonly List<SettingsBase> RenderingItems = [];
     internal readonly List<ServerSpecificSettingBase> Rendering = [];
-    internal readonly PlayerIdHandler IDHandler = new();
+    internal readonly FieldIdhandler IDHandler = new();
 
     private bool _isOpen;
     private bool _isDirty;

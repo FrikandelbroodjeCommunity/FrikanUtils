@@ -19,6 +19,11 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     public abstract string Name { get; }
 
     /// <summary>
+    /// The types of file this file provider should download
+    /// </summary>
+    public virtual AllowedFileTypes FileTypes => AllowedFileTypes.GenericFile;
+
+    /// <summary>
     /// Search for the full path on the disk for a target file.
     /// This is an async method, allowing files to be downloaded and written to the drive during execution.
     /// </summary>
@@ -68,13 +73,13 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (ReferenceEquals(this, obj)) return true;
-        if (obj.GetType() != this.GetType()) return false;
+        if (obj.GetType() != GetType()) return false;
         return Equals((BaseFileProvider)obj);
     }
 
     /// <inheritdoc/>
     public override int GetHashCode()
     {
-        return (Name != null ? Name.GetHashCode() : 0);
+        return Name != null ? Name.GetHashCode() : 0;
     }
 }

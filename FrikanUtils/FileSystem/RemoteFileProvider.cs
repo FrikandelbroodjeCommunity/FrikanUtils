@@ -21,6 +21,13 @@ public class RemoteFileProvider : BaseFileProvider
     private static string Url => UtilitiesPlugin.PluginConfig.RemoteFileProviderUrl;
     private static bool UseHolidays => UtilitiesPlugin.PluginConfig.RemoteFileProviderUsesHolidays;
 
+    private readonly HttpClient _httpClient = new();
+
+    ~RemoteFileProvider()
+    {
+        _httpClient.Dispose();
+    }
+
     /// <summary>
     /// Searches for the file on the webserver and downloads it.
     /// The path of the downloaded file will be returned.
@@ -91,10 +98,8 @@ public class RemoteFileProvider : BaseFileProvider
         return json ? JsonSerializer.Deserialize<T>(contents) : YamlConfigParser.Deserializer.Deserialize<T>(contents);
     }
 
-    private static async Task<HttpResponseMessage> DownloadContents(string filename, string folder)
+    private async Task<HttpResponseMessage> DownloadContents(string filename, string folder)
     {
-        using var client = new HttpClient();
-
         if (string.IsNullOrEmpty(folder))
         {
             folder = "default";
@@ -104,7 +109,7 @@ public class RemoteFileProvider : BaseFileProvider
         folder = WebUtility.UrlEncode(folder);
 
         var url = string.Format(Url, filename, folder);
-        var response = await client.GetAsync(url);
+        var response = await _httpClient.GetAsync(url);
         if (response.StatusCode != HttpStatusCode.OK)
         {
             return null;

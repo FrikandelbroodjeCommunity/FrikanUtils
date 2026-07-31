@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using FrikanUtils.Utilities;
 using LabApi.Features.Console;
@@ -12,7 +13,7 @@ namespace FrikanUtils.FileSystem;
 /// </summary>
 public static class FileHandler
 {
-    private static readonly List<BaseFileProvider> FileProviders =
+    internal static readonly List<BaseFileProvider> FileProviders =
     [
         new LocalFileProvider()
     ];
@@ -44,7 +45,7 @@ public static class FileHandler
     public static async Task<string> SearchFullPath(string filename, string folder = null,
         Action<string> onResult = null)
     {
-        foreach (var provider in FileProviders)
+        foreach (var provider in FileProviders.Where(x => x.FileTypes.HasFlag(AllowedFileTypes.GenericFile)))
         {
             try
             {
@@ -84,12 +85,14 @@ public static class FileHandler
     /// <param name="folder">The folder the file should be in</param>
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <param name="onResult">Executed on the main thread after a result is gotten</param>
+    /// <param name="fileType">The file type that is being retrieved</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <c>T</c>, or <c>null</c></returns>
-    public static async Task<T> SearchFile<T>(string filename, string folder, bool json, Action<T> onResult = null)
+    public static async Task<T> SearchFile<T>(string filename, string folder, bool json, Action<T> onResult = null,
+        AllowedFileTypes fileType = AllowedFileTypes.GenericFile)
         where T : class
     {
-        foreach (var provider in FileProviders)
+        foreach (var provider in FileProviders.Where(x => x.FileTypes.HasFlag(fileType)))
         {
             try
             {

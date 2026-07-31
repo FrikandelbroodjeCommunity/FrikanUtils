@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using MapGeneration.Holidays;
 
 #pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
 
-namespace FrikanUtils;
+namespace FrikanUtils.Config;
 
-public class Config
+public class PluginConfig
 {
     [Description("Whether to show debug messages")]
     public bool Debug { get; set; }
@@ -56,10 +55,7 @@ public class Config
 
     [Description("The text to display when the Server Specific Settings for a user is empty")]
     public string NoSettingsText { get; set; } = "It appears there is currently nothing to show you here.";
-
-    [Description("Holiday override for debugging purposes. Makes the server think the event is currently running.")]
-    public HolidayType OverrideHoliday { get; set; }
-
+    
     [Description("URL to use for the remote file provider. Before using this, read the owner manual" +
                  "(https://github.com/FrikandelbroodjeCommunity/FrikanUtils/wiki/Using-the-File-System)")]
     public string RemoteFileProviderUrl { get; set; } = "";
@@ -68,10 +64,9 @@ public class Config
                  "This may cause additional requests if no holiday file exists and it needs to search for the original file.")]
     public bool RemoteFileProviderUsesHolidays { get; set; } = false;
 
-    [Description("[Automatically generated] List of Server Specific Settings menus to assist in getting IDs")]
-    public List<string> ServerSettingMenus { get; set; } = [];
+    [Description("Folder the config sync uses to retrieve files from")]
+    public string ConfigFolder { get; set; } = "Config";
 
-    [Description("[Automatically generated] List of Global Client settings, " +
-                 "ensuring they are always given the same ID")]
-    public List<string> GlobalClientSettings { get; set; } = [];
+    [Description("The exact names of plugins that should not have their config be synced using config sync")]
+    public string[] ConfigSyncBlacklist { get; set; } = ["FrikanUtils"];
 }
