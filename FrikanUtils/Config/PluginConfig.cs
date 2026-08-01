@@ -68,5 +68,5 @@ public class PluginConfig
     public string ConfigFolder { get; set; } = "Config";
 
     [Description("The exact names of plugins that should not have their config be synced using config sync")]
-    public string[] ConfigSyncBlacklist { get; set; } = ["FrikanUtils"];
+    public string[] ConfigSyncBlacklist { get; set; } = [];
 }
