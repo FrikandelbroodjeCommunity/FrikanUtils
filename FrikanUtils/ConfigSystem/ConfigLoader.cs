@@ -32,7 +32,7 @@ internal static class ConfigLoader
                 var configProperty = type.GetProperty(nameof(Plugin<>.Config));
                 if (configProperty == null)
                 {
-                    Logger.Debug($"Skipped {plugin.Name}, no Config property", UtilitiesPlugin.PluginConfig.Debug);
+                    Logger.Debug($"Skipped {plugin.Name}, no \"Config\" property", UtilitiesPlugin.PluginConfig.Debug);
                     continue;
                 }
 
@@ -41,7 +41,7 @@ internal static class ConfigLoader
 
                 if (config == null)
                 {
-                    Logger.Warn($"Failed to sync config for {plugin.Name}, no config found");
+                    Logger.Warn($"Failed to sync config for {plugin.Name}, no config object found");
                     continue;
                 }
 
@@ -83,8 +83,9 @@ internal static class ConfigLoader
             UtilitiesPlugin.PluginConfig.Debug);
 
         foreach (var provider in FileHandler.FileProviders
-                     .OrderByDescending(x => x.FileTypes.HasFlag(AllowedFileTypes.Config))
-                     .Where(x => x.FileTypes.HasFlag(AllowedFileTypes.Config)))
+                     .Where(x => x.FileTypes.HasFlag(AllowedFileTypes.Config))
+                     .OrderByDescending(x => x is BaseConfigFileProvider)
+                     .ThenBy(x => x.LoadPriority))
         {
             try
             {
@@ -111,9 +112,11 @@ internal static class ConfigLoader
 
                 if (CompareClasses(result, config))
                 {
-                    return;
+                    return; // Config was not changed, so no need to update anything
                 }
 
+                // Update the config, some values may immediately update, but other require a server restart
+                // Queue a soft restart on the next round end
                 typedPlugin.Config = result;
                 typedPlugin.SaveConfig();
                 _triggerRoundRestart = true;

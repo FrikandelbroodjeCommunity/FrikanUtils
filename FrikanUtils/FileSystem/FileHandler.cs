@@ -15,7 +15,8 @@ public static class FileHandler
 {
     internal static readonly List<BaseFileProvider> FileProviders =
     [
-        new LocalFileProvider()
+        new LocalFileProvider(),
+        new BackupFileProvider()
     ];
 
     /// <summary>
@@ -31,6 +32,7 @@ public static class FileHandler
         }
 
         FileProviders.AddIfNotContains(provider);
+        FileProviders.Sort();
         Logger.Debug($"Registered file provider {provider.Name}", UtilitiesPlugin.PluginConfig.Debug);
     }
 
@@ -41,11 +43,12 @@ public static class FileHandler
     /// <param name="filename">The name of the file</param>
     /// <param name="folder">The folder the file should be in</param>
     /// <param name="onResult">Executed on the main thread after a result is gotten</param>
+    /// <param name="fileType">The file type that is being retrieved</param>
     /// <returns>The full path to the file or <c>null</c></returns>
     public static async Task<string> SearchFullPath(string filename, string folder = null,
-        Action<string> onResult = null)
+        Action<string> onResult = null, AllowedFileTypes fileType = AllowedFileTypes.GenericFile)
     {
-        foreach (var provider in FileProviders.Where(x => x.FileTypes.HasFlag(AllowedFileTypes.GenericFile)))
+        foreach (var provider in FileProviders.Where(x => x.FileTypes.HasFlag(fileType)))
         {
             try
             {

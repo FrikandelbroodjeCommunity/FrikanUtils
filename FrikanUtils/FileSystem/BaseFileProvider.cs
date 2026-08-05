@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using LabApi.Loader.Constants;
 using MapGeneration.Holidays;
 
 namespace FrikanUtils.FileSystem;
@@ -11,12 +12,20 @@ namespace FrikanUtils.FileSystem;
 ///
 /// It allows for asynchronous functions, this way a provider has full control over how files are found.
 /// </summary>
-public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
+public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparable<BaseFileProvider>
 {
     /// <summary>
     /// The name of the file provider, used for logging and making sure the provider is only registered once.
     /// </summary>
     public abstract string Name { get; }
+
+    /// <summary>
+    /// Sets the priority for the file provider. A lower priority will be attempted first.
+    /// The default is <see cref="Priority.Medium"/>.
+    ///
+    /// See also: <see cref="Priority"/>
+    /// </summary>
+    public virtual byte LoadPriority => Priority.Medium;
 
     /// <summary>
     /// The types of file this file provider should download
@@ -50,6 +59,15 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     /// <param name="filename">The original filename</param>
     /// <returns>All holiday filenames</returns>
     protected static IEnumerable<string> GetHolidayFilenames(string filename)
+        => GetHolidayFilenames(filename, null);
+
+    /// <summary>
+    /// Helper method to get all holiday variants of a filename.
+    /// </summary>
+    /// <param name="filename">The original filename</param>
+    /// <param name="allowedTypes">The holidays that are allowed to be detected. When given null, it will allow all holiday types.</param>
+    /// <returns>All holiday filenames</returns>
+    protected static IEnumerable<string> GetHolidayFilenames(string filename, HolidayType[] allowedTypes)
     {
         foreach (HolidayType type in Enum.GetValues(typeof(HolidayType)))
         {
@@ -81,5 +99,11 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>
     public override int GetHashCode()
     {
         return Name != null ? Name.GetHashCode() : 0;
+    }
+    
+    public int CompareTo(BaseFileProvider other)
+    {
+        if (Equals(other)) return 0;
+        return other is null ? 1 : LoadPriority.CompareTo(other.LoadPriority);
     }
 }
