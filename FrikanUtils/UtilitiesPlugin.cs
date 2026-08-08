@@ -1,8 +1,8 @@
 ﻿using System;
 using FrikanUtils.Config;
-using FrikanUtils.ConfigSystem;
 using FrikanUtils.CustomItems;
 using FrikanUtils.FileSystem;
+using FrikanUtils.FileSystem.Providers;
 using FrikanUtils.GlobalSettings;
 using FrikanUtils.HintSystem;
 using FrikanUtils.Keycard;
@@ -118,8 +118,6 @@ public class UtilitiesPlugin : Plugin<PluginConfig>
 
     private static void Reset()
     {
-        _ = ConfigLoader.SyncConfigs();
-        
         CustomKeycard.CustomKeycards.Clear();
         RainbowKeycardHandler.Keycards.Clear();
         NpcSystem.Npcs.Clear();

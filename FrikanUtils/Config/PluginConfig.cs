@@ -63,10 +63,4 @@ public class PluginConfig
     [Description("Whether the remote file provider should attempt to find holiday files. " +
                  "This may cause additional requests if no holiday file exists and it needs to search for the original file.")]
     public bool RemoteFileProviderUsesHolidays { get; set; } = false;
-
-    [Description("Folder the config sync uses to retrieve files from")]
-    public string ConfigFolder { get; set; } = "Config";
-
-    [Description("The exact names of plugins that should not have their config be synced using config sync")]
-    public string[] ConfigSyncBlacklist { get; set; } = [];
 }

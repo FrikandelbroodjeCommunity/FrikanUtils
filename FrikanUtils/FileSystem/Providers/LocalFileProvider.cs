@@ -4,7 +4,7 @@ using LabApi.Loader;
 using LabApi.Loader.Features.Yaml;
 using Utf8Json;
 
-namespace FrikanUtils.FileSystem;
+namespace FrikanUtils.FileSystem.Providers;
 
 /// <summary>
 /// Provider for local files that are available on the drive of the server.

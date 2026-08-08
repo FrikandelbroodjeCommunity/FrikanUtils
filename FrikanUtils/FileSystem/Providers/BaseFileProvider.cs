@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using LabApi.Loader.Constants;
+using LabApi.Loader.Features.Yaml;
 using MapGeneration.Holidays;
+using Utf8Json;
 
-namespace FrikanUtils.FileSystem;
+namespace FrikanUtils.FileSystem.Providers;
 
 /// <summary>
 /// Represents a file provider used by the <see cref="FileHandler"/>.
@@ -26,12 +29,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparab
     /// See also: <see cref="Priority"/>
     /// </summary>
     public virtual byte LoadPriority => Priority.Medium;
-
-    /// <summary>
-    /// The types of file this file provider should download
-    /// </summary>
-    public virtual AllowedFileTypes FileTypes => AllowedFileTypes.GenericFile;
-
+    
     /// <summary>
     /// Search for the full path on the disk for a target file.
     /// This is an async method, allowing files to be downloaded and written to the drive during execution.
@@ -40,6 +38,20 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparab
     /// <param name="folder">The folder the file should be in</param>
     /// <returns>The full path to the file or <c>null</c></returns>
     public abstract Task<string> SearchFullPath(string filename, string folder);
+
+    /// <summary>
+    /// Search for the file and read its contents.
+    /// Will return <c>null</c> if the file was not found.
+    /// This is an async method, allowing files to be downloaded.
+    /// </summary>
+    /// <param name="filename">The name of the file</param>
+    /// <param name="folder">The folder the file should be in</param>
+    /// <returns>The contents of the file, or <c>null</c></returns>
+    public virtual async Task<string> SearchFileContents(string filename, string folder)
+    {
+        var path = await SearchFullPath(filename, folder);
+        return string.IsNullOrEmpty(path) ? null : File.ReadAllText(path);
+    }
 
     /// <summary>
     /// Search for the file and convert it into the data as needed.
@@ -51,7 +63,18 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparab
     /// <param name="json">Whether to read it as JSON or YAML</param>
     /// <typeparam name="T">The type the contents should be parsed to</typeparam>
     /// <returns>The file contents as <c>T</c>, or <c>null</c></returns>
-    public abstract Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class;
+    public virtual async Task<T> SearchFile<T>(string filename, string folder, bool json) where T : class
+    {
+        var contents = await SearchFileContents(filename, folder);
+        if (string.IsNullOrEmpty(contents))
+        {
+            return null;
+        }
+
+        return json
+            ? JsonSerializer.Deserialize<T>(contents)
+            : YamlConfigParser.Deserializer.Deserialize<T>(contents);
+    }
 
     /// <summary>
     /// Helper method to get all holiday variants of a filename.
@@ -71,7 +94,7 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparab
     {
         foreach (HolidayType type in Enum.GetValues(typeof(HolidayType)))
         {
-            if (!HolidayUtils.IsHolidayActive(type) || type == HolidayType.None) continue;
+            if (!HolidayUtils.IsHolidayActive(type) || type == HolidayType.None || !allowedTypes.Contains(type)) continue;
             yield return $"{type}-{filename}";
         }
 

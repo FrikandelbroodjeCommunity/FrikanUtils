@@ -12,7 +12,7 @@ using LabApi.Loader.Features.Yaml;
 using MapGeneration.Holidays;
 using Utf8Json;
 
-namespace FrikanUtils.FileSystem;
+namespace FrikanUtils.FileSystem.Providers;
 
 /// <summary>
 /// The <see cref="BackupFileProvider"/> will allow plugins to register a URL to download the file from, when all other file providers fail.

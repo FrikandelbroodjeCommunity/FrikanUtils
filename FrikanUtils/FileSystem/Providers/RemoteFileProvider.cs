@@ -7,7 +7,7 @@ using LabApi.Loader.Features.Paths;
 using LabApi.Loader.Features.Yaml;
 using Utf8Json;
 
-namespace FrikanUtils.FileSystem;
+namespace FrikanUtils.FileSystem.Providers;
 
 /// <summary>
 /// Provider to gather files from remote servers. Uses config to determine the URL.
@@ -74,11 +74,10 @@ public class RemoteFileProvider : BaseFileProvider
 
     /// <summary>
     /// Searches for the file on the webserver and downloads it.
-    /// The parsed contents of the file will be returned.
     /// Will return <c>null</c> if the file could not be downloaded.
     /// </summary>
     /// <inheritdoc/>
-    public override async Task<T> SearchFile<T>(string filename, string folder, bool json)
+    public override async Task<string> SearchFileContents(string filename, string folder)
     {
         string contents = null;
         foreach (var name in GetHolidayFilenames(filename))
@@ -90,12 +89,7 @@ public class RemoteFileProvider : BaseFileProvider
             }
         }
 
-        if (string.IsNullOrEmpty(contents))
-        {
-            return null;
-        }
-
-        return json ? JsonSerializer.Deserialize<T>(contents) : YamlConfigParser.Deserializer.Deserialize<T>(contents);
+        return contents;
     }
 
     private async Task<HttpResponseMessage> DownloadContents(string filename, string folder)
