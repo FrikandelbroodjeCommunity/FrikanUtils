@@ -35,6 +35,9 @@ public class BackupFileProvider : BaseFileProvider
     private static readonly Dictionary<string, BackupInfo> Backups = new();
     private readonly HttpClient _httpClient = new();
 
+    /// <summary>
+    /// Disposes the HTTP client when shutting down.
+    /// </summary>
     ~BackupFileProvider()
     {
         _httpClient.Dispose();
@@ -112,7 +115,7 @@ public class BackupFileProvider : BaseFileProvider
     /// If the file cannot be found elsewhere, it will be downloaded from the given URL.
     /// The filename and folder must match exactly for the backup to work.<br/>
     /// <br/>
-    /// To change files during holidays, the holidays that are supported must be set in the <see cref="holidayTypes"/>.
+    /// To change files during holidays, the holidays that are supported must be set in the <c>holidayTypes</c>.
     /// </summary>
     /// <param name="plugin">The instance of this plugin</param>
     /// <param name="filename">The name of the file</param>
@@ -127,7 +130,7 @@ public class BackupFileProvider : BaseFileProvider
     /// If the file cannot be found elsewhere, it will be downloaded from the given URL.
     /// The filename and folder must match exactly for the backup to work.<br/>
     /// <br/>
-    /// To change files during holidays, the holidays that are supported must be set in the <see cref="holidayTypes"/>.
+    /// To change files during holidays, the holidays that are supported must be set in the <c>holidayTypes</c>.
     /// </summary>
     /// <param name="version">The current version of the plugin</param>
     /// <param name="filename">The name of the file</param>

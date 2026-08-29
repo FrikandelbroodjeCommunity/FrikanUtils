@@ -62,6 +62,9 @@ public class FollowingNpc : BaseNpc
     /// </summary>
     public OutOfRangeAction OutOfRangeAction = OutOfRangeAction.Teleport;
 
+    /// <summary>
+    /// The current state of the NPC pathfinding.
+    /// </summary>
     public NpcState State { get; internal set; } = NpcState.Paused;
 
     /// <summary>

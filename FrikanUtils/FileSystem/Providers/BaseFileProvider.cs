@@ -123,7 +123,8 @@ public abstract class BaseFileProvider : IEquatable<BaseFileProvider>, IComparab
     {
         return Name != null ? Name.GetHashCode() : 0;
     }
-    
+
+    /// <inheritdoc />
     public int CompareTo(BaseFileProvider other)
     {
         if (Equals(other)) return 0;

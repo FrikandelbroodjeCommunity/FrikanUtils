@@ -23,6 +23,9 @@ public class RemoteFileProvider : BaseFileProvider
 
     private readonly HttpClient _httpClient = new();
 
+    /// <summary>
+    /// Disposes the HTTP client when shutting down.
+    /// </summary>
     ~RemoteFileProvider()
     {
         _httpClient.Dispose();
