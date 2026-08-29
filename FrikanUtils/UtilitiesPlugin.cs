@@ -29,7 +29,7 @@ public class UtilitiesPlugin : Plugin<PluginConfig>
     /// <summary>
     /// The version of the current assembly.
     /// </summary>
-    public const string CurrentVersion = "1.1.4";
+    public const string CurrentVersion = "1.1.4.0";
 
     /// <inheritdoc />
     public override string Name => "FrikanUtils";
