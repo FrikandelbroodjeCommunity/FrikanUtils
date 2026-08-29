@@ -13,6 +13,11 @@ namespace FrikanUtils.Audio;
 public abstract class AudioPlayerBase
 {
     /// <summary>
+    /// Default folder used to search for audio files.
+    /// </summary>
+    public const string DefaultAudioFolder = "Audio";
+    
+    /// <summary>
     /// Whether the player should loop the files its given.
     /// </summary>
     public bool Looping;
@@ -88,11 +93,12 @@ public abstract class AudioPlayerBase
     /// </summary>
     /// <param name="files">The full filenames to load</param>
     /// <param name="autoPlay">Whether to start playing immediately after the queue is loaded</param>
-    public async Task Queue(IEnumerable<string> files, bool autoPlay)
+    /// <param name="folder">Folder to search the files in</param>
+    public async Task Queue(IEnumerable<string> files, bool autoPlay, string folder = DefaultAudioFolder)
     {
         foreach (var file in files)
         {
-            var path = await FileHandler.SearchFullPath(file, "Audio");
+            var path = await FileHandler.SearchFullPath(file, folder);
             if (path != null)
             {
                 // Chances of modifying at the same time are very low, but this makes sure nothing can go wrong by accident

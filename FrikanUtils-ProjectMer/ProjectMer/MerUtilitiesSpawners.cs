@@ -25,7 +25,7 @@ public static partial class MerUtilities
     /// <param name="folder">Folder to search for the file in</param>
     /// <param name="ignoreHoliday">Whether to ignore the holiday filter</param>
     public static async void FindAndSpawnSchematic(string file, Vector3 position,
-        Quaternion rotation, Action<SchematicObject> action = null, string folder = "Maps", bool ignoreHoliday = false)
+        Quaternion rotation, Action<SchematicObject> action = null, string folder = DefaultSchematicFolder, bool ignoreHoliday = false)
     {
         var data = await LoadSchematicData(file, folder);
         if (data == null)
@@ -53,7 +53,7 @@ public static partial class MerUtilities
     /// <param name="folder">Folder to search for the file in</param>
     /// <param name="ignoreHoliday">Whether to ignore the holiday filter</param>
     public static async void FindAndSpawnFullSchematic(string schematic, Vector3 position,
-        Quaternion rotation, Action<SchematicObject> action = null, string folder = "Maps", bool ignoreHoliday = false)
+        Quaternion rotation, Action<SchematicObject> action = null, string folder = DefaultSchematicFolder, bool ignoreHoliday = false)
     {
         var data = await LoadFullSchematic(schematic, folder);
         if (data == null)

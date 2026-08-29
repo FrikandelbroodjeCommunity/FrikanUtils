@@ -23,7 +23,7 @@ public static partial class MerUtilities
     /// <param name="action">Action executed on the main thread after spawning</param>
     /// <param name="folder">Folder to search for the file in</param>
     /// <returns>The schematic data</returns>
-    public static async Task<SchematicObjectDataList> LoadSchematicData(string file, string folder = "Maps",
+    public static async Task<SchematicObjectDataList> LoadSchematicData(string file, string folder = DefaultSchematicFolder,
         Action<SchematicObjectDataList> action = null)
     {
         var data = await FileHandler.SearchFile<SchematicObjectDataList>(file, folder, true);
@@ -51,7 +51,7 @@ public static partial class MerUtilities
     /// <param name="folder">Folder to search for the file in</param>
     /// <param name="action">Action executed on the main thread after spawning</param>
     /// <returns>The schematic data</returns>
-    public static async Task<SchematicObjectDataList> LoadFullSchematic(string schematic, string folder = "Maps",
+    public static async Task<SchematicObjectDataList> LoadFullSchematic(string schematic, string folder = DefaultSchematicFolder,
         Action<SchematicObjectDataList> action = null)
     {
         var zipPath = await FileHandler.SearchFullPath($"{schematic}.zip", folder);

@@ -27,6 +27,11 @@ namespace FrikanUtils.ProjectMer;
 /// </summary>
 public static partial class MerUtilities
 {
+    /// <summary>
+    /// Default folder used to search for schematics.
+    /// </summary>
+    public const string DefaultSchematicFolder = "Maps";
+    
     internal static readonly List<Interactable> RegisteredPickups = [];
 
     /// <summary>
