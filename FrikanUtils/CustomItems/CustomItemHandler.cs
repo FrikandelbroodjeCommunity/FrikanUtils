@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using LabApi.Events.Arguments.PlayerEvents;
 using LabApi.Events.Handlers;
-using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
 using Utils.NonAllocLINQ;
 

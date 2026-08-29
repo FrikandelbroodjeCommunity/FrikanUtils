@@ -11,6 +11,10 @@ namespace FrikanUtils.CustomItems;
 
 /// <summary>
 /// Represents an item with custom functionality.
+///
+/// Within any events, you should use one of the <c>check</c> functions to make sure the item the event triggers for, is this custom item.
+/// There are already basic events added, <c>check</c> should still be used.
+/// Additional events can be added by overriding <see cref="SubscribeEvents"/> and <see cref="UnsubscribeEvents"/>.
 /// </summary>
 public abstract class CustomItem
 {
@@ -86,20 +90,40 @@ public abstract class CustomItem
     /// </summary>
     protected internal virtual void UnsubscribeEvents()
     {
+        PlayerEvents.PickingUpItem -= PickingUp;
+        PlayerEvents.PickedUpItem -= PickedUp;
+        PlayerEvents.DroppingItem -= Dropping;
+        PlayerEvents.DroppedItem -= Dropped;
     }
 
+    /// <summary>
+    /// Default function that is triggered when picking up any item.
+    /// </summary>
+    /// <param name="ev">The event info</param>
     protected virtual void PickingUp(PlayerPickingUpItemEventArgs ev)
     {
     }
 
+    /// <summary>
+    /// Default function that is triggered when a player picked up any item.
+    /// </summary>
+    /// <param name="ev">The event info</param>
     protected virtual void PickedUp(PlayerPickedUpItemEventArgs ev)
     {
     }
 
+    /// <summary>
+    /// Default functions that is triggered when dropping any item.
+    /// </summary>
+    /// <param name="ev">The event info</param>
     protected virtual void Dropping(PlayerDroppingItemEventArgs ev)
     {
     }
 
+    /// <summary>
+    /// Default functions that is triggered when a player dropped any item.
+    /// </summary>
+    /// <param name="ev">The event info</param>
     protected virtual void Dropped(PlayerDroppedItemEventArgs ev)
     {
     }

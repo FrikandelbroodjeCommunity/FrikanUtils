@@ -4,6 +4,9 @@ using Scp1344Item = LabApi.Features.Wrappers.Scp1344Item;
 
 namespace FrikanUtils.CustomItems;
 
+/// <summary>
+/// Custom goggles item. Already contains methods to detect when a player equips/dequips the goggles.
+/// </summary>
 public abstract class CustomScp1344Item : CustomUsableItem
 {
     /// <inheritdoc />
@@ -23,10 +26,20 @@ public abstract class CustomScp1344Item : CustomUsableItem
         Scp1344NetworkHandler.OnStatusChanged -= StatusChanged;
     }
 
+    /// <summary>
+    /// Triggered when a player starts wearing the goggles.
+    /// </summary>
+    /// <param name="player">The player that is wearing the goggles</param>
+    /// <param name="goggles">The item instance of the goggles that are equipped</param>
     protected virtual void OnWearGoggles(Player player, Scp1344Item goggles)
     {
     }
 
+    /// <summary>
+    /// Triggered when a player removes the goggles.
+    /// </summary>
+    /// <param name="player">The player that removed the goggles</param>
+    /// <param name="goggles">The item instance of the goggles that are removed</param>
     protected virtual void OnRemovedGoggles(Player player, Scp1344Item goggles)
     {
     }
