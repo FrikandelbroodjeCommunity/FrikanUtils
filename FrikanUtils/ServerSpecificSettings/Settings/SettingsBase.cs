@@ -1,5 +1,6 @@
 ﻿using FrikanUtils.ServerSpecificSettings.Helpers;
 using FrikanUtils.ServerSpecificSettings.Menus;
+using LabApi.Events;
 using LabApi.Features.Wrappers;
 using UserSettings.ServerSpecific;
 
@@ -49,6 +50,8 @@ public abstract class SettingsBase : IServerSpecificSetting
         set => Base.SendHintUpdate(value, true, UpdateFilter);
     }
 
+    public event SettingEventHandler SettingTriggered;
+    
     internal Player Player;
 
     internal int Id
@@ -105,5 +108,10 @@ public abstract class SettingsBase : IServerSpecificSetting
     protected bool UpdateFilter(ReferenceHub player)
     {
         return Player.ReferenceHub == player;
+    }
+
+    internal void Trigger()
+    {
+        SettingTriggered?.Invoke(this);
     }
 }

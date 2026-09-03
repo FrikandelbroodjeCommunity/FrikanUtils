@@ -46,6 +46,8 @@ internal static class SSSEventHandler
 
     internal static void OnValueReceived(Player player, SettingsBase field, NetworkReaderPooled reader)
     {
+        field.Trigger();
+        
         if (field is Button button)
         {
             field.Base.DeserializeValue(reader);

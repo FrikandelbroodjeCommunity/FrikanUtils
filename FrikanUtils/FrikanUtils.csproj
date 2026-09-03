@@ -146,6 +146,7 @@
         <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingBasePatch.cs" />
         <Compile Include="ServerSpecificSettings\Patches\ServerSpecificSettingSyncPatch.cs" />
         <Compile Include="ServerSpecificSettings\FieldIdhandler.cs" />
+        <Compile Include="ServerSpecificSettings\SettingEventHandler.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Button.cs" />
         <Compile Include="ServerSpecificSettings\Settings\Dropdown.cs" />
         <Compile Include="ServerSpecificSettings\Settings\GroupHeader.cs" />
