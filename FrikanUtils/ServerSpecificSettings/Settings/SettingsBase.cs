@@ -108,6 +108,11 @@ public abstract class SettingsBase : IServerSpecificSetting
         MenuOwner = menu.Name;
         playerMenu.RenderingItems.Add(this);
         playerMenu.Rendering.Add(Base);
+
+        if (menu.CollectionId.HasValue)
+        {
+            CollectionId = menu.CollectionId.Value;
+        }
     }
 
     /// <summary>
