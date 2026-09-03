@@ -33,6 +33,8 @@ public class PlayerMenu
     private readonly List<MenuBase> _shownMenus = [];
     private readonly List<string> _selectorOptions = [];
 
+    private ServerSpecificSettingBase[] _settingsOverride;
+
     internal PlayerMenu(Player user)
     {
         TargetPlayer = user;
@@ -46,6 +48,7 @@ public class PlayerMenu
 
     internal void Update(bool force, ServerSpecificSettingBase[] settingOverride = null)
     {
+        _settingsOverride = settingOverride;
         if (!force && !_isOpen)
         {
             _isDirty = true;
@@ -90,7 +93,7 @@ public class PlayerMenu
             }
         }
 
-        foreach (var item in settingOverride ?? ServerSpecificSettingsSync.DefinedSettings)
+        foreach (var item in _settingsOverride ?? ServerSpecificSettingsSync.DefinedSettings)
         {
             Rendering.Add(item);
         }
@@ -131,7 +134,8 @@ public class PlayerMenu
 
         if (status && _isDirty)
         {
-            Update(true);
+            // Pass settings override to make sure we use it after the use was delayed
+            Update(true, _settingsOverride);
         }
     }
 

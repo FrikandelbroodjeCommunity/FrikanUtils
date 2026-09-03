@@ -4,6 +4,7 @@ using FrikanUtils.ServerSpecificSettings.Menus;
 using FrikanUtils.ServerSpecificSettings.Settings;
 using LabApi.Features.Console;
 using LabApi.Features.Wrappers;
+using UserSettings.ServerSpecific;
 
 namespace FrikanUtils.ServerSpecificSettings;
 
@@ -108,6 +109,22 @@ public static class SSSHandler
         }
     }
 
+    /// <summary>
+    /// Update the settings for a specific player. Overriding the base game settings with the given settings.
+    /// 
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
+    /// </summary>
+    /// <param name="player">Player to update the menu for</param>
+    /// <param name="settings">The settings to use instead of the base game settings</param>
+    /// <param name="force">Whether to force the update</param>
+    public static void UpdatePlayerWithOverride(Player player, ServerSpecificSettingBase[] settings, bool force)
+    {
+        if (PlayerMenus.TryGetValue(player, out var playerMenu))
+        {
+            playerMenu.Update(force, settings);
+        }
+    }
+    
     /// <summary>
     /// Get a list of all players that have the given menu open. Can be used for soft-refreshing.
     /// If the menu is not registered, no players will be given.
