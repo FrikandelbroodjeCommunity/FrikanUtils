@@ -44,7 +44,7 @@ public class PlayerMenu
         return _shownItems.TryGetValue(id, out var value) ? value as T : null;
     }
 
-    internal void Update(bool force)
+    internal void Update(bool force, ServerSpecificSettingBase[] settingOverride = null)
     {
         if (!force && !_isOpen)
         {
@@ -62,7 +62,10 @@ public class PlayerMenu
             return;
         }
 
+        RenderingItems.Clear();
+        Rendering.Clear(); // Clear all the previous instances.
         IDHandler.Reset();
+        
         RenderForcedDynamicMenus();
         RenderDynamicMenus();
         RenderStaticMenus();
@@ -87,8 +90,14 @@ public class PlayerMenu
             }
         }
 
+        foreach (var item in settingOverride ?? ServerSpecificSettingsSync.DefinedSettings)
+        {
+            Rendering.Add(item);
+        }
+
         ServerSpecificSettingsSync.SendToPlayer(TargetPlayer.ReferenceHub, Rendering.ToArray());
-        Rendering.Clear(); // Clear after, as we don't need references anymore
+        ServerSpecificSettingsSync.ReceivedUserSettings[TargetPlayer.ReferenceHub] = Rendering;
+        
         RenderingItems.Clear();
     }
 

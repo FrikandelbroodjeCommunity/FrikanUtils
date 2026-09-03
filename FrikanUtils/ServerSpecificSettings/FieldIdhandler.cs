@@ -6,6 +6,8 @@ internal class FieldIdhandler
 {
     private int _internalIdCounter = SSSHandler.LowestReservedId;
 
+    private const ushort MenuOffset = 1; // Reserve IDs (prefix 0) 0 - 65535 for base game settings
+
     public int GetId(string menuId, ushort? fieldId)
     {
         if (!fieldId.HasValue)
@@ -27,7 +29,7 @@ internal class FieldIdhandler
             UtilitiesPlugin.Save();
         }
 
-        return menuIndex << 16 | fieldId.Value;
+        return (menuIndex + MenuOffset) << 16 | fieldId.Value;
     }
 
     public void Reset()

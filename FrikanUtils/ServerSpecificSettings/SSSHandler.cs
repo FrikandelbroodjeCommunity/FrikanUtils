@@ -49,6 +49,20 @@ public static class SSSHandler
     }
 
     /// <summary>
+    /// Update the settings for all players. Any player who can see this menu will have their menu updated.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
+    /// </summary>
+    /// <param name="force">Whether to force the update</param>
+    public static void UpdateAll(bool force)
+    {
+        foreach (var playerMenu in PlayerMenus.Values)
+        {
+            playerMenu.Update(force);
+        }
+    }
+    
+    /// <summary>
     /// Update the given menu for all players. Any player who can see this menu will have their menu updated.
     ///
     /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
@@ -60,6 +74,21 @@ public static class SSSHandler
         foreach (var playerMenu in PlayerMenus.Values)
         {
             playerMenu.TryUpdate(menu, force);
+        }
+    }
+    
+    /// <summary>
+    /// Update the settings for a specific player.
+    ///
+    /// When using force the menu will be updated immediately, otherwise the menu will be updated once the player opens the menu again.
+    /// </summary>
+    /// <param name="player">Player to update the menu for</param>
+    /// <param name="force">Whether to force the update</param>
+    public static void UpdatePlayer(Player player, bool force)
+    {
+        if (PlayerMenus.TryGetValue(player, out var playerMenu))
+        {
+            playerMenu.Update(force);
         }
     }
 

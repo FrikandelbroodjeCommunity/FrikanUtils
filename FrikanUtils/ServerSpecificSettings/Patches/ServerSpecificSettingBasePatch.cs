@@ -14,13 +14,12 @@ internal static class ServerSpecificSettingBasePatch
     }
 
     [HarmonyPatch(nameof(ServerSpecificSettingBase.OriginalDefinition), MethodType.Getter)]
-    [HarmonyPrefix]
+    [HarmonyPostfix]
     // ReSharper disable once InconsistentNaming
-    public static bool OnGetOriginalDefinition(ServerSpecificSettingBase __instance,
+    public static void OnGetOriginalDefinition(ServerSpecificSettingBase __instance,
         // ReSharper disable once InconsistentNaming
         ref ServerSpecificSettingBase __result)
     {
-        __result = __instance;
-        return false;
+        __result ??= __instance;
     }
 }
