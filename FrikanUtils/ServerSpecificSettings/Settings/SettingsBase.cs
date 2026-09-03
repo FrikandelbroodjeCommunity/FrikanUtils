@@ -119,8 +119,8 @@ public abstract class SettingsBase : IServerSpecificSetting
         return Player.ReferenceHub == player;
     }
 
-    internal void Trigger()
+    internal void Trigger(Player player)
     {
-        SettingTriggered?.Invoke(this);
+        SettingTriggered?.Invoke(player, this);
     }
 }
