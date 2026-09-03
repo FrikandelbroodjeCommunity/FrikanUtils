@@ -18,6 +18,15 @@ public abstract class SettingsBase : IServerSpecificSetting
     public ushort? SettingId { get; }
 
     /// <summary>
+    /// When set (to a value smaller than 20), it will sync this setting between servers with the same IP address.
+    /// </summary>
+    public byte CollectionId
+    {
+        get => Base.CollectionId;
+        set=> Base.CollectionId = value;
+    }
+
+    /// <summary>
     /// The <see cref="MenuBase.Name"/> of the menu that owns this setting.
     /// </summary>
     public string MenuOwner { get; private set; }
